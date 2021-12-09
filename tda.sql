@@ -1,5 +1,5 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
-/***************** TDA FECHA_RANGO *****************/
+--  TDA FECHA_RANGO 
 /
 CREATE OR REPLACE TYPE FECHA_RANGO AS OBJECT(
 fechaInicio DATE,
@@ -40,10 +40,10 @@ IS
         END IF;
     END;
 END;
-/***************** FIN TDA FECHA_RANGO *****************/
+-- FIN TDA FECHA_RANGO 
 /
 
-/***************** TDA DATOS_USUARIO *****************/
+--  TDA DATOS_USUARIO 
 /
 CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT(
   nombre VARCHAR2(30),
@@ -133,9 +133,9 @@ IS
         RETURN;
     END;
 END;
-/***************** FIN TDA DATOS_USUARIO *****************/
+--  FIN TDA DATOS_USUARIO 
 /
-/***************** TDA BALANCE *****************/
+--  TDA BALANCE 
 CREATE OR REPLACE TYPE BALANCE AS OBJECT(
   egreso DECIMAL(10,2),
   existencia NUMBER, 
@@ -198,8 +198,7 @@ IS
         RETURN;
     END;
 END;
-
-/***************** FIN TDA BALANCE *****************/
+--  FIN TDA BALANCE 
 /
 
 
