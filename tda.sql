@@ -82,13 +82,13 @@ IS
 STATIC FUNCTION validarDNI(dni VARCHAR2) RETURN VARCHAR2
 IS
     BEGIN
-      IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0
-        RAISE_APPLICATION_ERROR(-20002,'Ya existe un Cliente con este DNI');
-      IF (dni LIKE 'V-%')THEN
-        return dni;
-      ELSE
-        RAISE_APPLICATION_ERROR(-20001,'Formato de dni inválido');
-      END IF;
+        IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0
+            RAISE_APPLICATION_ERROR(-20002,'Ya existe un Cliente con este DNI');
+        IF ((dni LIKE 'V-%') OR (dni LIKE 'E-%'))THEN
+            return dni;
+        ELSE
+            RAISE_APPLICATION_ERROR(-20001,'Formato de dni inválido');
+        END IF;
     END;
 
 STATIC FUNCTION validarTelefono(telefono VARCHAR2) RETURN VARCHAR2
@@ -96,10 +96,9 @@ IS
     BEGIN
         IF (telefono IS NULL) THEN
             RAISE_APPLICATION_ERROR(-20401,'El teléfono no puede ser null');
-        ELSIF (LENGTH(telefono) < 10) THEN
-            RAISE_APPLICATION_ERROR(-20402,'El teléfono es invalido');
-
-        return telefono;
+        ELSIF (REGEXP_LIKE(telefono, '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')) THEN
+            return telefono;
+        RAISE_APPLICATION_ERROR(-20402,'El teléfono es invalido');
     END;
 CONSTRUCTOR FUNCTION DATOS_USUARIO (
     SELF IN OUT NOCOPY DATOS_USUARIO,
