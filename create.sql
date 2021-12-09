@@ -53,7 +53,7 @@ CREATE TABLE SERVICIO (
     CONSTRAINT FK_DESTINO FOREIGN KEY (destino_id)
     REFERENCES DESTINO(id_destino),
     CONSTRAINT FK_ALIANZA FOREIGN KEY (alianza_id, proveedor_id)
-    REFERENCES ALIANZA(id_alianza, proveedor_id),
+    REFERENCES ALIANZA(id_alianza, proveedor_id)
 );
 
 /
@@ -193,7 +193,7 @@ CREATE TABLE MPAGO(
     detFactura_paquete_id NUMBER NOT NULL,
     CONSTRAINT FK_DETFACTURA FOREIGN KEY (detFactura_id, detFactura_factura_id, detFactura_paquete_id)
     REFERENCES DETFACTURA(id_detFactura, factura_id, paquete_id),
-    CONSTRAINT FK_FACTURA PRIMARY KEY (id_mpago, detFactura_factura_id, detFactura_paquete_id, detFactura_id)
+    CONSTRAINT PK_MPAGO PRIMARY KEY (id_mpago, detFactura_factura_id, detFactura_paquete_id, detFactura_id)
 );
 
 /
