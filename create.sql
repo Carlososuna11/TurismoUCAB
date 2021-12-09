@@ -47,12 +47,13 @@ CREATE TABLE SERVICIO (
     crucero_id NUMBER,
     destino_id NUMBER NOT NULL,
     alianza_id NUMBER,
+    proveedor_id NUMBER,
     CONSTRAINT FK_CRUCERO FOREIGN KEY (crucero_id)
     REFERENCES CRUCERO(id_crucero),
     CONSTRAINT FK_DESTINO FOREIGN KEY (destino_id)
     REFERENCES DESTINO(id_destino),
-    CONSTRAINT FK_ALIANZA FOREIGN KEY (alianza_id)
-    REFERENCES ALIANZA(id_alianza)
+    CONSTRAINT FK_ALIANZA FOREIGN KEY (alianza_id, proveedor_id)
+    REFERENCES ALIANZA(id_alianza, proveedor_id),
 );
 
 /
@@ -190,8 +191,8 @@ CREATE TABLE MPAGO(
     detFactura_id NUMBER NOT NULL,
     detFactura_factura_id NUMBER NOT NULL,
     detFactura_paquete_id NUMBER NOT NULL,
-    CONSTRAINT FK_DETFACTURA FOREIGN KEY (detFactura_id)
-    REFERENCES DETFACTURA(id_detFactura),
+    CONSTRAINT FK_DETFACTURA FOREIGN KEY (detFactura_id, detFactura_factura_id, detFactura_paquete_id)
+    REFERENCES DETFACTURA(id_detFactura, factura_id, paquete_id),
     CONSTRAINT FK_FACTURA PRIMARY KEY (id_mpago, detFactura_factura_id, detFactura_paquete_id, detFactura_id)
 );
 
@@ -216,8 +217,8 @@ CREATE TABLE VENTA(
 
 CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\yuli_\Documents\carlos\BD\proyecto\media\images';
 CREATE OR REPLACE DIRECTORY VIDEOS AS 'C:\Users\yuli_\Documents\carlos\BD\proyecto\media\videos';
-GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
-GRANT READ, WRITE ON DIRECTORY VIDEOS TO system;
+-- GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
+-- GRANT READ, WRITE ON DIRECTORY VIDEOS TO system;
 
 
 
