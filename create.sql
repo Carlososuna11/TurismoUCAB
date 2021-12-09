@@ -192,7 +192,7 @@ CREATE TABLE MPAGO(
     detFactura_paquete_id NUMBER NOT NULL,
     CONSTRAINT FK_DETFACTURA FOREIGN KEY (detFactura_id)
     REFERENCES DETFACTURA(id_detFactura),
-    CONSTRAINT FK_FACTURA FOREIGN KEY (id_mpago, detFactura_factura_id, detFactura_paquete_id, detFactura_id)
+    CONSTRAINT FK_FACTURA PRIMARY KEY (id_mpago, detFactura_factura_id, detFactura_paquete_id, detFactura_id)
 );
 
 /
@@ -212,6 +212,14 @@ CREATE TABLE VENTA(
     REFERENCES COMPETENCIA(id_competencia),
     CONSTRAINT pk_venta PRIMARY KEY (fecha_mes, competencia_id)
 );
+
+
+CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\yuli_\Documents\carlos\BD\proyecto\media\images';
+CREATE OR REPLACE DIRECTORY VIDEOS AS 'C:\Users\yuli_\Documents\carlos\BD\proyecto\media\videos';
+GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
+GRANT READ, WRITE ON DIRECTORY VIDEOS TO system;
+
+
 
 --------------------------------------------------------para poder crear blobs, despues del AS deben poner la direccion --------
 -------------------------------------------------------donde tienen la imagen---------------------------------------------------
