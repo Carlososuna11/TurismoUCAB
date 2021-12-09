@@ -1,10 +1,11 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
 BEGIN 
+    dbms_output.enable;
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Argentina',EMPTY_BLOB(),'Argentino') RETURNING foto INTO V_blob;
     V_bfile := BFILENAME('IMAGES', 'argentina.jpg');
@@ -14,7 +15,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -28,7 +29,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -42,7 +43,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -56,7 +57,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -70,7 +71,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -84,7 +85,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -98,7 +99,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -112,7 +113,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -126,7 +127,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -140,7 +141,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -154,7 +155,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -168,7 +169,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -182,7 +183,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -196,7 +197,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON;
+SET serveroutput ON
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -439,7 +440,7 @@ VALUES (SYSDATE,FLOOR(RAND()),15);
 
 -- DESTINOS ------------------------
 
--- SET serveroutput ON;
+-- SET serveroutput ON
 -- DECLARE 
 --     V_blob BLOB;
 --     V2_blob BLOB;
