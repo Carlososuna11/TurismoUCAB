@@ -76,13 +76,13 @@ IS
         IF (fechaNacimiento IS NULL) THEN
             RAISE_APPLICATION_ERROR(-20401,'La fecha de nacimiento no puede ser null');
         
-        return FLOOR(MONTHS_BETWEEN(fechaNacimiento, SYSDATE) / 12)
+        return FLOOR(MONTHS_BETWEEN(fechaNacimiento, SYSDATE) / 12);
 
     END;
 STATIC FUNCTION validarDNI(dni VARCHAR2) RETURN VARCHAR2
 IS
     BEGIN
-        IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0
+        IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0 THEN
             RAISE_APPLICATION_ERROR(-20002,'Ya existe un Cliente con este DNI');
         IF ((dni LIKE 'V-%') OR (dni LIKE 'E-%'))THEN
             return dni;
