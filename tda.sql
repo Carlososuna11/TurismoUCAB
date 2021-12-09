@@ -84,6 +84,7 @@ IS
     BEGIN
         IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0 THEN
             RAISE_APPLICATION_ERROR(-20002,'Ya existe un Cliente con este DNI');
+        END IF;
         IF ((dni LIKE 'V-%') OR (dni LIKE 'E-%'))THEN
             return dni;
         ELSE
@@ -98,6 +99,7 @@ IS
             RAISE_APPLICATION_ERROR(-20401,'El teléfono no puede ser null');
         ELSIF (REGEXP_LIKE(telefono, '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')) THEN
             return telefono;
+        END IF;
         RAISE_APPLICATION_ERROR(-20402,'El teléfono es invalido');
     END;
 CONSTRUCTOR FUNCTION DATOS_USUARIO (
