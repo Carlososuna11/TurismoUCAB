@@ -77,7 +77,7 @@ IS
             RAISE_APPLICATION_ERROR(-20401,'La fecha de nacimiento no puede ser null');
         
         return FLOOR(MONTHS_BETWEEN(fechaNacimiento, SYSDATE) / 12);
-
+        END IF;
     END;
 STATIC FUNCTION validarDNI(dni VARCHAR2) RETURN VARCHAR2
 IS
