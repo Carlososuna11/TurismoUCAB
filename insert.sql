@@ -1,6 +1,6 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -14,7 +14,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -28,7 +28,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -42,7 +42,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -56,7 +56,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -70,7 +70,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -84,7 +84,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -98,7 +98,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -112,7 +112,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -126,7 +126,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -140,7 +140,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -154,7 +154,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -168,7 +168,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -182,7 +182,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -196,7 +196,7 @@ BEGIN
     COMMIT;
 END;
 /
-SET serveroutput ON
+SET serveroutput ON;
 DECLARE 
     V_blob BLOB;
     V_bfile BFILE;
@@ -439,7 +439,7 @@ VALUES (SYSDATE,FLOOR(RAND()),15);
 
 -- DESTINOS ------------------------
 
--- SET serveroutput ON
+-- SET serveroutput ON;
 -- DECLARE 
 --     V_blob BLOB;
 --     V2_blob BLOB;
