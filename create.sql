@@ -120,10 +120,11 @@ CREATE TABLE PAQUETE (
 CREATE TABLE SUBSCRIPCION (
     paquete_id NUMBER NOT NULL,
     disponibilidad_id NUMBER NOT NULL,
+    disponibilidad_id_servicio NUMBER NOT NULL,
     CONSTRAINT FK_PAQUETE_SUBSCRIPCION FOREIGN KEY (paquete_id)
     REFERENCES PAQUETE(id_paquete),
-    CONSTRAINT FK_DISPONIBILIDAD_SUBSCRIPCION FOREIGN KEY (disponibilidad_id)
-    REFERENCES DISPONIBILIDAD(id_disponibilidad),
+    CONSTRAINT FK_DISPONIBILIDAD_SUBSCRIPCION FOREIGN KEY (disponibilidad_id, disponibilidad_id_servicio)
+    REFERENCES DISPONIBILIDAD(id_disponibilidad, id_servicio),
     CONSTRAINT pk_subscripcion PRIMARY KEY (paquete_id, disponibilidad_id)
 );
 
