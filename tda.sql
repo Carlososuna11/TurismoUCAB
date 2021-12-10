@@ -85,7 +85,7 @@ IS
         IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0 THEN
             RAISE_APPLICATION_ERROR(-20002,'Ya existe un Cliente con este DNI');
         END IF;
-        IF ((dni LIKE 'V-%') OR (dni LIKE 'E-%'))THEN
+        IF ((dni LIKE 'V-%') OR (dni LIKE 'E-%')) THEN
             return dni;
         ELSE
             RAISE_APPLICATION_ERROR(-20001,'Formato de dni inválido');
@@ -126,10 +126,12 @@ IS
 
         SELF.nombre = nombre;
         SELF.segundoNombre = segundoNombre;
-        SELF.dni = DATOS_USUARIO.validarDNI(dni);
+        SELF.dni = dni;
+        -- SELF.dni = DATOS_USUARIO.validarDNI(dni);
         SELF.apellido = apellido;
         SELF.segundoApellido = segundoApellido;
-        SELF.telefono = DATOS_USUARIO.validarTelefono(telefono);
+        SELF.telefono = telefono;
+        -- SELF.telefono = DATOS_USUARIO.validarTelefono(telefono);
         SELF.fechaNacimiento = fechaNacimiento;
 
         RETURN;
