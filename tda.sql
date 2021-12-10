@@ -57,7 +57,6 @@ CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT(
   STATIC FUNCTION validarDNI(dni VARCHAR2) RETURN VARCHAR2,
   STATIC FUNCTION validarTelefono(telefono VARCHAR2) RETURN VARCHAR2,
   CONSTRUCTOR FUNCTION DATOS_USUARIO(
-    SELF IN OUT NOCOPY DATOS_USUARIO,
     nombre VARCHAR2,
     segundoNombre VARCHAR2, 
     dni VARCHAR2, 
@@ -103,7 +102,6 @@ IS
         RAISE_APPLICATION_ERROR(-20402,'El teléfono es invalido');
     END;
 CONSTRUCTOR FUNCTION DATOS_USUARIO (
-    SELF IN OUT NOCOPY DATOS_USUARIO,
     nombre VARCHAR2,
     segundoNombre VARCHAR2, 
     dni VARCHAR2, 
@@ -126,12 +124,11 @@ IS
 
         SELF.nombre = nombre;
         SELF.segundoNombre = segundoNombre;
-        SELF.dni = dni;
-        -- SELF.dni = DATOS_USUARIO.validarDNI(dni);
+        SELF.dni = DATOS_USUARIO.validarDNI(dni);
         SELF.apellido = apellido;
         SELF.segundoApellido = segundoApellido;
         SELF.telefono = telefono;
-        -- SELF.telefono = DATOS_USUARIO.validarTelefono(telefono);
+        SELF.telefono = DATOS_USUARIO.validarTelefono(telefono);
         SELF.fechaNacimiento = fechaNacimiento;
 
         RETURN;
