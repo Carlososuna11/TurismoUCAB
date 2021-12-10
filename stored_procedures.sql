@@ -1,11 +1,9 @@
 CREATE OR REPLACE PROCEDURE INSERTAR_PAIS(
     id NUMBER,
-    nombre VARCHAR(50), 
-    foto VARCHAR(50), 
-    nacionalidad VARCHAR(50))
+    nombre VARCHAR2, 
+    foto VARCHAR2, 
+    nacionalidad VARCHAR2)
 IS 
-BEGIN
-    DECLARE
     V_bfile BFILE;
     V_blob BLOB;
 BEGIN
@@ -16,5 +14,4 @@ BEGIN
     DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
     DBMS_LOB.CLOSE(V_bfile);
     COMMIT;
-    END;
 END;
