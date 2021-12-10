@@ -1,214 +1,123 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN 
-    dbms_output.enable;
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Argentina',EMPTY_BLOB(),'Argentino') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'argentina.jpg');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'argentina.jpg');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Brasil',EMPTY_BLOB(),'Brasilero') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'brasil.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'brasil.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Chile',EMPTY_BLOB(),'Chileno') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'chile.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'chile.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Colombia',EMPTY_BLOB(),'Colombiano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'colombia.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'colombia.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Ecuador',EMPTY_BLOB(),'Ecuatoriano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'ecuador.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'ecuador.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Peru',EMPTY_BLOB(),'Peruano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'peru.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'peru.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Uruguay',EMPTY_BLOB(),'Uruguayo') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'uruguay.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'uruguay.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Venezuela',EMPTY_BLOB(),'Venezolano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'venezuela.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'venezuela.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Bolivia',EMPTY_BLOB(),'Boliviano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'bolivia.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'bolivia.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Paraguay',EMPTY_BLOB(),'Paraguayo') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'paraguay.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'paraguay.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Italia',EMPTY_BLOB(),'Italiano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'italia.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'italia.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Alemania',EMPTY_BLOB(),'Aleman') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'alemania.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'alemania.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Francia',EMPTY_BLOB(),'Frances') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'francia.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'francia.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Mexico',EMPTY_BLOB(),'Mexicano') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'mexico.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'mexico.png');
 END;
 /
-SET serveroutput ON
 DECLARE 
     V_blob BLOB;
-    V_bfile BFILE;
 BEGIN
     INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
     VALUES (id_pais.nextVal,'Belgica',EMPTY_BLOB(),'Belga') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'belgica.png');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
+    CALL INSERTAR_BLOB(V_blob, 'belgica.png');
 END;
 
 -- CLIENTES --

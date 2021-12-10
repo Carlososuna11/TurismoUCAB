@@ -214,34 +214,3 @@ CREATE TABLE VENTA(
     REFERENCES COMPETENCIA(id_competencia),
     CONSTRAINT pk_venta PRIMARY KEY (fecha_mes, competencia_id)
 );
-
-
--- CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\yuli_\Documents\carlos\BD\proyecto\media\images';
--- CREATE OR REPLACE DIRECTORY VIDEOS AS 'C:\Users\yuli_\Documents\carlos\BD\proyecto\media\videos';
--- GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
--- GRANT READ, WRITE ON DIRECTORY VIDEOS TO system;
-
-
-
---------------------------------------------------------para poder crear blobs, despues del AS deben poner la direccion --------
--------------------------------------------------------donde tienen la imagen---------------------------------------------------
-
---CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\Usuario\Documents\Universidad\septimo\Base de Datos 2\proyecto\images';
---CREATE OR REPLACE DIRECTORY VIDEOS AS 'C:\Users\Usuario\Documents\Universidad\septimo\Base de Datos 2\proyecto\videos';
---GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
-
-------------------------------------------prueba insertando una imagen en una tabla que ya no existe----------------------------
---------------------------------------------la prueba funciono asi se insertan blob en la bd------------------------------------
---SET serveroutput ON
---DECLARE 
-    --V_blob BLOB;
-    --V_bfile BFILE;
---BEGIN 
-    --INSERT INTO MODELO VALUES (3,'PRUEBA','A',EMPTY_BLOB()) RETURNING foto INTO V_blob;
-    --V_bfile := BFILENAME('IMAGES', 'boeing737max9.jpg');
-    --DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    --DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
-   --COMMIT;
---END;
-
---------------------------------------------fin de prueba----------------------------------------------------------------------
