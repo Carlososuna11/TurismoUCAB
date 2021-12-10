@@ -1,21 +1,23 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
 
-CALL INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
+begin
+    INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
+    INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
+    INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
+    INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
+    INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
+    INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
+    INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
+    INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
+    INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
+    INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
+    INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
+    INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
+    INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
+    INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
+    INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
+end;
 
 -- CLIENTES --
 -- cliente 1
