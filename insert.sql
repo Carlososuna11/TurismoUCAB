@@ -243,7 +243,7 @@ VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),14);
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
 VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),15);
 
-
+/
 
 -- INICIO DESTINOS ------------------------
 BEGIN
