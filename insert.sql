@@ -250,7 +250,7 @@ BEGIN
     INSERTAR_DESTINO(
     id_destino.nextVal,
     'JuanGriego',
-    'Paraíso idílico y hermoso, es la Bahía de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los más intensos y adornada por pelícanos que posan sobre los botes de los pescadores de la región.',
+    'Paraiso idilico y hermoso, es la Bahia de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los mas intensos y adornada por pelicanos que posan sobre los botes de los pescadores de la region.',
     'juangriego.jpeg',
     'Margarita.mp4'
     );
