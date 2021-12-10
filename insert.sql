@@ -1,124 +1,21 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
-DECLARE 
-    V_blob BLOB;
-BEGIN 
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Argentina',EMPTY_BLOB(),'Argentino') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'argentina.jpg');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Brasil',EMPTY_BLOB(),'Brasilero') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'brasil.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Chile',EMPTY_BLOB(),'Chileno') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'chile.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Colombia',EMPTY_BLOB(),'Colombiano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'colombia.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Ecuador',EMPTY_BLOB(),'Ecuatoriano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'ecuador.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Peru',EMPTY_BLOB(),'Peruano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'peru.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Uruguay',EMPTY_BLOB(),'Uruguayo') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'uruguay.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Venezuela',EMPTY_BLOB(),'Venezolano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'venezuela.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Bolivia',EMPTY_BLOB(),'Boliviano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'bolivia.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Paraguay',EMPTY_BLOB(),'Paraguayo') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'paraguay.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Italia',EMPTY_BLOB(),'Italiano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'italia.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Alemania',EMPTY_BLOB(),'Aleman') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'alemania.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Francia',EMPTY_BLOB(),'Frances') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'francia.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Mexico',EMPTY_BLOB(),'Mexicano') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'mexico.png');
-END;
-/
-DECLARE 
-    V_blob BLOB;
-BEGIN
-    INSERT INTO PAIS (id_pais,nombre,foto,nacionalidad) 
-    VALUES (id_pais.nextVal,'Belgica',EMPTY_BLOB(),'Belga') RETURNING foto INTO V_blob;
-    CALL INSERTAR_BLOB(V_blob, 'belgica.png');
-END;
+
+CALL INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
+CALL INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
 
 -- CLIENTES --
 -- cliente 1
