@@ -44,19 +44,17 @@ END;
 /
 
 --  TDA DATOS_USUARIO 
-/
-CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT(
-  nombre VARCHAR2(30),
-  segundoNombre VARCHAR2(30), 
-  dni VARCHAR2(30), 
-  apellido VARCHAR2(30), 
-  segundoApellido VARCHAR2(30), 
-  telefono VARCHAR2(30), 
-  fechaNacimiento DATE, 
-  STATIC FUNCTION calcularEdad(fechaNacimiento DATE) RETURN INTEGER,
-  STATIC FUNCTION validarDNI(dni VARCHAR2) RETURN VARCHAR2,
-  STATIC FUNCTION validarTelefono(telefono VARCHAR2) RETURN VARCHAR2,
-  CONSTRUCTOR FUNCTION DATOS_USUARIO(
+CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT (
+    nombre VARCHAR2(30),
+    segundoNombre VARCHAR2(30), 
+    dni VARCHAR2(30), 
+    apellido VARCHAR2(30), 
+    segundoApellido VARCHAR2(30), 
+    telefono VARCHAR2(30), 
+    fechaNacimiento DATE, 
+    STATIC FUNCTION obtenerEdad (fecha_nacimiento DATE) RETURN NUMBER,
+    CONSTRUCTOR FUNCTION DATOS_USUARIO (
+    self IN OUT NOCOPY DATOS_USUARIO,
     nombre VARCHAR2,
     segundoNombre VARCHAR2, 
     dni VARCHAR2, 
@@ -64,74 +62,47 @@ CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT(
     segundoApellido VARCHAR2, 
     telefono VARCHAR2, 
     fechaNacimiento DATE
-  ) RETURN SELF AS RESULT
+    ) RETURN SELF AS RESULT
 );
-
 /
 CREATE OR REPLACE TYPE BODY DATOS_USUARIO AS
-STATIC FUNCTION calcularEdad(fechaNacimiento DATE) RETURN INTEGER
-IS
+
+    STATIC FUNCTION obtenerEdad (fecha_nacimiento DATE) RETURN NUMBER
+    IS
     BEGIN
-        IF (fechaNacimiento IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401,'La fecha de nacimiento no puede ser null');
-        
-        return FLOOR(MONTHS_BETWEEN(fechaNacimiento, SYSDATE) / 12);
-        END IF;
+        RETURN floor(months_between(SYSDATE, fecha_nacimiento) /12);
     END;
-STATIC FUNCTION validarDNI(dni VARCHAR2) RETURN VARCHAR2
-IS
+    
+    CONSTRUCTOR FUNCTION DATOS_USUARIO (
+        self IN OUT NOCOPY DATOS_USUARIO,
+        nombre VARCHAR2,
+        segundoNombre VARCHAR2, 
+        dni VARCHAR2, 
+        apellido VARCHAR2, 
+        segundoApellido VARCHAR2, 
+        telefono VARCHAR2, 
+        fechaNacimiento DATE
+    ) RETURN SELF AS RESULT
+    IS
     BEGIN
-        IF (SELECT count(*) FROM CLIENTE cliente WHERE cliente.datos.dni = dni) > 0 THEN
-            RAISE_APPLICATION_ERROR(-20002,'Ya existe un Cliente con este DNI');
-        END IF;
-        IF ((dni LIKE 'V-%') OR (dni LIKE 'E-%')) THEN
-            return dni;
+        dbms_output.put_line('#####  DATOS #####');
+        IF((fechaNacimiento > SYSDATE) OR (floor(months_between(SYSDATE, fechaNacimiento) /12) >= 130)) THEN
+            RAISE_APPLICATION_ERROR(-20011,'Error. Fecha de nacimiento invalida');
+        ELSIF NOT((REGEXP_LIKE(telefono, '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$'))) THEN
+            RAISE_APPLICATION_ERROR(-20010,'Error. Formato de telefono invalido');
+        ELSIf (NOT((dni LIKE 'V-%') OR (dni LIKE 'E-%'))) THEN
+            RAISE_APPLICATION_ERROR(-20003,'Error. Formato de DNI INCORRECTO');
         ELSE
-            RAISE_APPLICATION_ERROR(-20001,'Formato de dni inválido');
+            dbms_output.put_line('##### PASO VERIFICACION DE DATOS #####');
+            SELF.nombre := INITCAP(nombre);
+            SELF.segundoNombre := INITCAP(segundoNombre);
+            SELF.dni := dni;
+            SELF.apellido := INITCAP(apellido);
+            SELF.segundoApellido := INITCAP(segundoApellido);
+            SELF.telefono := telefono;
+            SELF.fechaNacimiento := fechaNacimiento;
+            RETURN;
         END IF;
-    END;
-
-STATIC FUNCTION validarTelefono(telefono VARCHAR2) RETURN VARCHAR2
-IS
-    BEGIN
-        IF (telefono IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401,'El teléfono no puede ser null');
-        ELSIF (REGEXP_LIKE(telefono, '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')) THEN
-            return telefono;
-        END IF;
-        RAISE_APPLICATION_ERROR(-20402,'El teléfono es invalido');
-    END;
-CONSTRUCTOR FUNCTION DATOS_USUARIO (
-    nombre VARCHAR2,
-    segundoNombre VARCHAR2, 
-    dni VARCHAR2, 
-    apellido VARCHAR2, 
-    segundoApellido VARCHAR2, 
-    telefono VARCHAR2, 
-    fechaNacimiento DATE
-  ) RETURN SELF AS RESULT
-IS
-    BEGIN
-        IF (nombre IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'El nombre no puede ser nulo');
-        ELSIF (apellido IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'El apellido no puede ser nulo');
-        ELSIF (dni IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'El DNI no puede ser nulo');
-        ELSIF (fechaNacimiento IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'La fecha de nacimiento no puede ser nulo');
-        END IF;
-
-        SELF.nombre = nombre;
-        SELF.segundoNombre = segundoNombre;
-        SELF.dni = DATOS_USUARIO.validarDNI(dni);
-        SELF.apellido = apellido;
-        SELF.segundoApellido = segundoApellido;
-        SELF.telefono = telefono;
-        SELF.telefono = DATOS_USUARIO.validarTelefono(telefono);
-        SELF.fechaNacimiento = fechaNacimiento;
-
-        RETURN;
     END;
 END;
 --  FIN TDA DATOS_USUARIO 
