@@ -1,5 +1,3 @@
-ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
--- Paises
 
 BEGIN
     INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
@@ -28,7 +26,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Osuna',
     'Piñero',
     '+(58)-414-878-9234',
-    '07-09-2001'
+    TO_DATE('07-09-2001','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 2
@@ -40,7 +38,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Osuna',
     'Piñero',
     '+(58)-426-745-4265',
-    '03-11-2003'
+    TO_DATE('03-11-2003','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 3
@@ -52,7 +50,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Osuna',
     'Sanabria',
     '+(58)-416-523-2434',
-    '03-01-1962'
+    TO_DATE('03-01-1962','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 4
@@ -64,7 +62,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Ortiz',
     'Gonzalez',
     '+(1)-35-515-1425',
-    '12-10-1998'
+    TO_DATE('12-10-1998','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 5
@@ -76,7 +74,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Saco',
     'Sanchez',
     '+(34)-657-171-545',
-    '05-10-1998'
+    TO_DATE('05-10-1998','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 6
@@ -88,7 +86,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Vargas',
     'Campos',
     '+(15)-845-878-9234',
-    '04-05-1999'
+    TO_DATE('04-05-1999','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 7
@@ -100,7 +98,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Vargas',
     'Campos',
     '+(15)-845-878-9244',
-    '01-03-2000'
+    TO_DATE('01-03-2000','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 8
@@ -112,7 +110,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Vargas',
     'Campos',
     '+(15)-845-876-9734',
-    '01-02-1990'
+    TO_DATE('01-02-1990','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 9
@@ -124,7 +122,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Gonzalez',
     'Salazar',
     '+(58)-426-489-1736',
-    '05-07-2001'
+    TO_DATE('05-07-2001','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 10
@@ -136,7 +134,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Di Pietro',
     'Zambrano',
     '+(58)-414-817-5234',
-    '17-08-2001'
+    TO_DATE('17-08-2001','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 11
@@ -148,7 +146,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     'Sanchez',
     '+(58)-414-782-6781',
-    '12-08-2000'
+    TO_DATE('12-08-2000','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 12
@@ -160,7 +158,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     'Sanchez',
     '+(58)-412-865-7834',
-    '11-07-2003'
+    TO_DATE('11-07-2003' ,'DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 13
@@ -172,7 +170,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Arriaga',
     'Darmiano',
     '+(58)-412-785-6354',
-    '24-06-2000'
+    TO_DATE('24-06-2000','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 14
@@ -184,7 +182,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Piñero',
     'Contreras',
     '+(58)-416-245-7676',
-    '10-06-1978'
+    TO_DATE('10-06-1978','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 15
@@ -196,7 +194,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Roldan',
     'Mendez',
     '+(54)-654-654-834',
-    '4-11-1996'
+    TO_DATE('4-11-1996','DD-MM-YYYY')
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- PCR ------------------------
@@ -245,326 +243,310 @@ VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),14);
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
 VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),15);
 
--- DESTINOS ------------------------
 
--- SET serveroutput ON
--- DECLARE 
---     V_blob BLOB;
---     V2_blob BLOB;
---     V_bfile BFILE;
---     V2_bfile BFILE;
--- BEGIN 
---     INSERT INTO DESTINO (id_destino,nombre,descripcion,foto,video)
---     VALUES (
---         id_destino.nextVal,
---         'JuanGriego'
---         'Paraíso idílico y hermoso, es la Bahía de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los más intensos y adornada por pelícanos que posan sobre los botes de los pescadores de la región. 
-
--- La Bahía de Juan Griego se encuentra perfectamente refugiada de los fuertes vientos, y los lugareños suelen anclar sus embarcaciones en ella. El lugar posee servicios turísticos como las cómodas sillas de extensión, sombrillas y establecimientos de comida. 
- 
--- Esta playa presenta mayor afluencia de lugareños. La localidad de Juan Griego extiende sus brazos para recibir a miles de turistas anualmente, debido a la fuerte atracción de los establecimientos comerciales ubicados frente al preciado mar. Allí encontrarán cafés y un fabuloso bulevar que recorre toda la extensión de la playa.
-
--- Los turistas viajan a diversas partes de la isla para contar sus experiencias; no cabe duda que una magnífica opción la ofrece El Fondadero, donde bajo una churuata en compañía de un divino coctel podrán observar el panorama bellísimo que les brinda la playa.
- 
--- El atractivo principal de Juan Griego es el fortín. Desde ese punto podrás disfrutar de un paisaje completo de la ciudad y de La Galera. Por lo general este lugar es uno de los más visitados, pues no se puede perder el extraordinario ocaso que sencillamente lo dejará sin aliento. En El Fortín se encuentran niños, los cuales le preguntarán si desea conocer la historia; al responderles de manera afirmativa y por una pequeña propina les será contada la historia que relata el por qué del nombre de Juan Griego y la famosa Batalla de Matasiete.
- 
--- Podrás ubicar a Juan Griego al extremo noreste de la isla, en la ciudad de Juan Griego, entre los poblados de La Galera y Taguantar.',
---         EMPTY_BLOB(),
---         EMPTY_BLOB()
---     ) RETURNING foto,video INTO V_blob,V2_blob;
---     V_bfile := BFILENAME('IMAGES', 'Hesperia.png');
---     DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
---     DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
---     DBMS_LOB.CLOSE(V_bfile);
---     V2_bfile := BFILENAME('VIDEOS', 'Margarita.mp4');
---     DBMS_LOB.OPEN(V2_bfile, DBMS_LOB.LOB_READONLY);
---     DBMS_LOB.LOADFROMFILE(V2_blob, V2_bfile, SYS.DBMS_LOB.GETLENGTH(V2_bfile));
---     DBMS_LOB.CLOSE(V2_bfile);
---     COMMIT;
--- END;
 
 -- INICIO DESTINOS ------------------------
+BEGIN
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'JuanGriego',
+    'Paraíso idílico y hermoso, es la Bahía de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los más intensos y adornada por pelícanos que posan sobre los botes de los pescadores de la región.',
+    'juangriego.jpeg',
+    'Margarita.mp4'
+    );
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'JuanGriego','Paraíso idílico y hermoso, es la Bahía de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los más intensos y adornada por pelícanos que posan sobre los botes de los pescadores de la región.',
--- 'juangriego.jpeg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Pampatar',
+    'La ciudad de Pampatar es la capital del municipio Maneiro, en la isla de Margarita, estado Nueva Esparta (Venezuela). Su antiguo nombre era Pampatare o Mampatar. Pampatar es voz indígena que significa «casa de sal».',
+    'pampatar.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Pampatar','La ciudad de Pampatar es la capital del municipio Maneiro, en la isla de Margarita, estado Nueva Esparta (Venezuela). Su antiguo nombre era Pampatare o Mampatar. Pampatar es voz indígena que significa «casa de sal».',
--- 'pampatar.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Porlamar',
+    'Porlamar, es una ciudad ubicada al sureste de la Isla de Margarita, Nueva Esparta, Venezuela; capital del municipio Mariño, es el principal centro urbano y económico de la isla.',
+    'porlamar.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Porlamar','Porlamar, es una ciudad ubicada al sureste de la Isla de Margarita, Nueva Esparta, Venezuela; capital del municipio Mariño, es el principal centro urbano y económico de la isla.',
--- 'porlamar.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Isla de Coche',
+    'La Isla de Coche es una isla ubicada en el estado Nueva Esparta, Venezuela, en la costa occidental de la República Bolivariana de Venezuela. Su nombre original era Coche, y fue cambiado en el año 2000 por la Isla de Margarita, debido a que la isla de Coche se encuentra en el lugar donde se encuentra la capital del municipio Mariño.',
+    'coche.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Isla de Coche','La Isla de Coche es una isla ubicada en el estado Nueva Esparta, Venezuela, en la costa occidental de la República Bolivariana de Venezuela. Su nombre original era Coche, y fue cambiado en el año 2000 por la Isla de Margarita, debido a que la isla de Coche se encuentra en el lugar donde se encuentra la capital del municipio Mariño.',
--- 'coche.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Los Roques',
+    'El Archipielago de Los Roques ubicado en el mar Caribe contiene más de 300 islas y cayos que rodean una laguna de 400 km cuadrados.',
+    'los_roques.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Los Roques','El Archipielago de Los Roques ubicado en el mar Caribe contiene más de 300 islas y cayos que rodean una laguna de 400 km cuadrados.',
--- 'los_roques.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Isla La Tortuga ',
+    'La Tortuga es una isla en el Mar Caribe conformada por una isla mayor y varios islotes y cayos más pequeños.',
+    'tortuga.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Isla La Tortuga ','La Tortuga es una isla en el Mar Caribe conformada por una isla mayor y varios islotes y cayos más pequeños.',
--- 'tortuga.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Morrocoy',
+    'El Parque Nacional Morrocoy es una isla protegida y una reserva marina en la costa caribeña de Venezuela. Se encuentra en el estado Falcón y es conocida por sus manglares, sus playas y sus cayos, como el Cayo Sombrero.',
+    'morrocoy.jpg',
+    'Margarita.mp4'
+    );
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Morrocoy','El Parque Nacional Morrocoy es una isla protegida y una reserva marina en la costa caribeña de Venezuela. Se encuentra en el estado Falcón y es conocida por sus manglares, sus playas y sus cayos, como el Cayo Sombrero.',
--- 'morrocoy.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(
+    id_destino.nextVal,
+    'Morrocoy',
+    'El Parque Nacional Morrocoy es una isla protegida y una reserva marina en la costa caribeña de Venezuela. Se encuentra en el estado Falcón y es conocida por sus manglares, sus playas y sus cayos, como el Cayo Sombrero.',
+    'morrocoy.jpg',
+    'Margarita.mp4'
+    );
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Morrocoy','El Parque Nacional Morrocoy es una isla protegida y una reserva marina en la costa caribeña de Venezuela. Se encuentra en el estado Falcón y es conocida por sus manglares, sus playas y sus cayos, como el Cayo Sombrero.',
--- 'morrocoy.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Bahia de Cata','La bahía de Cata es una playa del estado Aragua, de gran extensión, finísima arena, aguas cristalinas y adornadas por la sombra de erguidos cocoteros.',
+    'bahia_cata.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Bahia de Cata','La bahía de Cata es una playa del estado Aragua, de gran extensión, finísima arena, aguas cristalinas y adornadas por la sombra de erguidos cocoteros.',
--- 'bahia_cata.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Choroní','Choroní tiene varias playas hermosas, Playa Grande, Tipire, El Diario, Valle seco, Chuao y varios lugaros para visitar con lancha',
+    'choroni.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Choroní','Choroní tiene varias playas hermosas, Playa Grande, Tipire, El Diario, Valle seco, Chuao y varios lugaros para visitar con lancha',
--- 'choroni.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Lecheria','Lecheria tiene varias playas hermosas y varios lugares para visitar.',
+    'lecheria.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Lecheria','Lecheria tiene varias playas hermosas y varios lugares para visitar.',
--- 'lecheria.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Mochima','Mochima es uno de los destinos turísticos más espectaculares de Venezuela. Playa Colorada es mundialmente famosa por su fina arena de color dorado, casi rojizo, que da nombre al lugar.',
+    'mochima.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Mochima','Mochima es uno de los destinos turísticos más espectaculares de Venezuela. Playa Colorada es mundialmente famosa por su fina arena de color dorado, casi rojizo, que da nombre al lugar.',
--- 'mochima.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Cuyagua','Cuyagua es un pueblo ubicado en la costa de Aragua, Venezuela. Entre sus ríos se encuentran el Pozo de Arena y el Pozo San Pedro. Tiene una playa que posee un fuerte oleaje donde se practica el surf y el bodyboard',
+    'cuyagua.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Cuyagua','Cuyagua es un pueblo ubicado en la costa de Aragua, Venezuela. Entre sus ríos se encuentran el Pozo de Arena y el Pozo San Pedro. Tiene una playa que posee un fuerte oleaje donde se practica el surf y el bodyboard',
--- 'cuyagua.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Cayo Sombrero','Cayo Sombrero​ es el nombre de una isla del mar Caribe que pertenece al parque nacional Morrocoy​.',
+    'cayo_sombrero.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Cayo Sombrero','Cayo Sombrero​ es el nombre de una isla del mar Caribe que pertenece al parque nacional Morrocoy​.',
--- 'cayo_sombrero.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Urama','Urama es un pueblo en el estado Vargas, tiene varias playas hermosas y rios para visitar.',
+    'urama.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Urama','Urama es un pueblo en el estado Vargas, tiene varias playas hermosas y rios para visitar.',
--- 'urama.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Los Frailes','Uno de los lugares menos visitados en Margarita son las islas de Los Frailes. Son esas islas que se ven a lo lejos desde las playas de Guacuco, El Tirano, Parguito o El Agua.',
+    'los_frailes.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Los Frailes','Uno de los lugares menos visitados en Margarita son las islas de Los Frailes. Son esas islas que se ven a lo lejos desde las playas de Guacuco, El Tirano, Parguito o El Agua.',
--- 'los_frailes.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Los Testigos','El Archipiélago Los Testigos es de clima cálido, semi-árido y con un tiempo suave y agradable durante la mayoría del año, un clima muy parecido al vecino Archipiélago de Los Frailes.',
+    'los_testigos.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Los Testigos','El Archipiélago Los Testigos es de clima cálido, semi-árido y con un tiempo suave y agradable durante la mayoría del año, un clima muy parecido al vecino Archipiélago de Los Frailes.',
--- 'los_testigos.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'La Orchila','Isla la Orchila es una isla en la costa de Venezuela. Tiene numerosas playas, incluida una donde la arena es notablemente rosada.',
+    'la_orchila.jpg',
+    'Margarita.mp4');
 
--- INSERT_DESTINO(id_destino.nextVal,
--- 'La Orchila','Isla la Orchila es una isla en la costa de Venezuela. Tiene numerosas playas, incluida una donde la arena es notablemente rosada.',
--- 'la_orchila.jpg',
--- 'Margarita.mp4');
-
--- INSERT_DESTINO(id_destino.nextVal,
--- 'Las Aves','Es una pequeña y remota isla venezolana, lugar de descanso y reproducción para las aves marinas y para la tortuga verde.',
--- 'las_aves.jpg',
--- 'Margarita.mp4');
+    INSERTAR_DESTINO(id_destino.nextVal,
+    'Las Aves','Es una pequeña y remota isla venezolana, lugar de descanso y reproducción para las aves marinas y para la tortuga verde.',
+    'las_aves.jpg',
+    'Margarita.mp4');
 
 -- FIN DESTINOS ------------------------
 
 -- INICIO PROVEEDORES ------------------------
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Hesperia',
---     'Hesperia_logo.png',
---     'Hesperia_hotel.jpg'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Hesperia',
+        'Hesperia_logo.png',
+        'Hesperia_hotel.jpg'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Unik Hotel',
---     'unik_logo.png',
---     'unik_hotel.jpg'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Unik Hotel',
+        'unik_logo.png',
+        'unik_hotel.jpg'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Margarita Dynasty Hotel & Suites',
---     'dynasty_logo.png',
---     'dynasty_hotel.jpg'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Margarita Dynasty Hotel & Suites',
+        'dynasty_logo.png',
+        'dynasty_hotel.jpg'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Proxima Ruta Venezuela',
---     'proxima_ruta_logo.png',
---     'proxima_ruta_feed.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Proxima Ruta Venezuela',
+        'proxima_ruta_logo.png',
+        'proxima_ruta_feed.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Mochileros Venezuela',
---     'mochileros_venezuela.jpg',
---     'mochileros_venezuela_feed.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Mochileros Venezuela',
+        'mochileros_venezuela.jpg',
+        'mochileros_venezuela_feed.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Ruta Extrema',
---     'ruta_extrema.png',
---     'ruta_extrema_feed.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Ruta Extrema',
+        'ruta_extrema.png',
+        'ruta_extrema_feed.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Fundación Azul Ambientalistas',
---     'fundacion_azul.jpg',
---     'fundacion_azul_foto.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Fundación Azul Ambientalistas',
+        'fundacion_azul.jpg',
+        'fundacion_azul_foto.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Fundación Tierra Viva',
---     'fundacion_tierra_viva.jpg',
---     'tierra_viva_foto.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Fundación Tierra Viva',
+        'fundacion_tierra_viva.jpg',
+        'tierra_viva_foto.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Recreación Bululu',
---     'bululu_logo.png',
---     'bululu_foto.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Recreación Bululu',
+        'bululu_logo.png',
+        'bululu_foto.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Sendero cojedes',
---     'sendero_cojedes_logo.jpg',
---     'sendero_cojedes_feed.jpg'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Sendero cojedes',
+        'sendero_cojedes_logo.jpg',
+        'sendero_cojedes_feed.jpg'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Rutas Mochileras',
---     'rutas_mochileras_logo.png',
---     'rutas_mochileras_feed.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Rutas Mochileras',
+        'rutas_mochileras_logo.png',
+        'rutas_mochileras_feed.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Suites Cristina',
---     'suites_cristina.png',
---     'suites_cristina_hotel.jpg'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Suites Cristina',
+        'suites_cristina.png',
+        'suites_cristina_hotel.jpg'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Woi-Kaa',
---     'woikaa_logo.jpg',
---     'woikaa_feed.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Woi-Kaa',
+        'woikaa_logo.jpg',
+        'woikaa_feed.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Marriot',
---     'marriot_logo.png',
---     'marriot_hotel.png'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Marriot',
+        'marriot_logo.png',
+        'marriot_hotel.png'
+    );
 
--- INSERT_PROVEEDOR(
---     id_proveedor.nextVal,
---     'Eurobuilding Express',
---     'eurobuilding_logo.png',
---     'eurobuilding_hotel.jpg'
--- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Eurobuilding Express',
+        'eurobuilding_logo.png',
+        'eurobuilding_hotel.jpg'
+    );
 
 -- FIN PROVEEDORES ------------------------
 
 -- INICIO CRUCEROS ------------------------
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero1.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero1.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero2.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero2.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero3.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero3.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero1.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero1.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero2.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero2.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero3.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero3.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero1.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero1.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero2.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero2.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero3.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero3.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero1.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero1.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero2.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero2.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero3.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero3.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero1.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero1.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero2.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero2.jpg',
+    );
 
--- INSERT_CRUCERO(
---    id_crucero.nextVal,
---    'crucero3.jpg',
--- );
+    INSERTAR_CRUCERO(
+    id_crucero.nextVal,
+    'crucero3.jpg',
+    );
 
+END;
