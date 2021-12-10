@@ -283,3 +283,15 @@ VALUES (SYSDATE,FLOOR(RAND()),15);
 --     DBMS_LOB.CLOSE(V2_bfile);
 --     COMMIT;
 -- END;
+
+-- INSERT_DESTINO(id_destino.nextVal,
+-- 'JuanGriego','Paraíso idílico y hermoso, es la Bahía de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los más intensos y adornada por pelícanos que posan sobre los botes de los pescadores de la región.',
+-- 'juangriego.jpeg',
+-- 'Margarita.mp4');
+
+-- INSERT_PROVEEDOR(
+--     id_proveedor.nextVal,
+--     'Hesperia',
+--     'Hesperia.png',
+--     'Hesperia.mp4'
+-- );
