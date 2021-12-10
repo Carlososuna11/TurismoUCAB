@@ -2,21 +2,21 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
 
 
-CALL INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
-CALL INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
+EXEC INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
 
 -- CLIENTES --
 -- cliente 1
@@ -29,7 +29,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Piñero',
     '+(58)-414-878-9234',
     '07-09-2001'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 2
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -41,7 +41,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Piñero',
     '+(58)-426-745-4265',
     '03-11-2003'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 3
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -53,7 +53,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanabria',
     '+(58)-416-523-2434',
     '03-01-1962'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 4
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -65,7 +65,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Gonzalez',
     '+(1)-35-515-1425',
     '12-10-1998'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 5
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -77,7 +77,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     '+(34)-657-171-545',
     '05-10-1998'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 6
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -89,7 +89,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Campos',
     '+(15)-845-878-9234',
     '04-05-1999'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 7
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -101,7 +101,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Campos',
     '+(15)-845-878-9244',
     '01-03-2000'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 8
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -113,7 +113,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Campos',
     '+(15)-845-876-9734',
     '01-02-1990'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 9
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -125,7 +125,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Salazar',
     '+(58)-426-489-1736',
     '05-07-2001'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 10
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -137,7 +137,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Zambrano',
     '+(58)-414-817-5234',
     '17-08-2001'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 11
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -149,7 +149,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     '+(58)-414-782-6781',
     '12-08-2000'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 12
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -161,7 +161,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     '+(58)-412-865-7834',
     '11-07-2003'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 13
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -173,7 +173,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Darmiano',
     '+(58)-412-785-6354',
     '24-06-2000'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 14
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -185,7 +185,7 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Contreras',
     '+(58)-416-245-7676',
     '10-06-1978'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 15
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id)
@@ -197,53 +197,53 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Mendez',
     '+(54)-654-654-834',
     '4-11-1996'
-),FLOOR(RAND()),NULL);
+),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- PCR ------------------------
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),1);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),1);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),2);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),2);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),3);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),3);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),4);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),4);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),5);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),5);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),6);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),6);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),7);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),7);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),8);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),8);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),9);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),9);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),10);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),10);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),11);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),11);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),12);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),12);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),13);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),13);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),14);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),14);
 
 INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
-VALUES (SYSDATE,FLOOR(RAND()),15);
+VALUES (SYSDATE,round(DBMS_RANDOM.VALUE (0, 1)),15);
 
 -- DESTINOS ------------------------
 
