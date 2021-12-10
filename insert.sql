@@ -1,8 +1,20 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
-
-
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
+/
+DECLARE
+    V_bfile BFILE;
+    V_blob BLOB;
+BEGIN
+    DBMS_OUTPUT.enable;
+    INSERT INTO PAIS VALUES (id_pais.nextVal, 'Argentina', EMPTY_BLOB(), 'Argentino') RETURNING foto INTO V_blob;
+    V_bfile := BFILENAME('ORACLECLRDIR', 'argentina.jpg');
+    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, DBMS_LOB.GETLENGTH(V_bfile));
+    DBMS_LOB.CLOSE(V_bfile);
+    COMMIT;
+END;
+/
+-- EXEC INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
 EXEC INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
 EXEC INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
 EXEC INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
