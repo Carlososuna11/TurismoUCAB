@@ -1,35 +1,23 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 -- Paises
-/
-DECLARE
-    V_bfile BFILE;
-    V_blob BLOB;
-BEGIN
-    DBMS_OUTPUT.enable;
-    INSERT INTO PAIS VALUES (id_pais.nextVal, 'Argentina', EMPTY_BLOB(), 'Argentino') RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('ORACLECLRDIR', 'argentina.jpg');
-    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, DBMS_LOB.GETLENGTH(V_bfile));
-    DBMS_LOB.CLOSE(V_bfile);
-    COMMIT;
-END;
-/
--- EXEC INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
-EXEC INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
 
+BEGIN
+    INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
+    INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
+    INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
+    INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
+    INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
+    INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
+    INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
+    INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
+    INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
+    INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
+    INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
+    INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
+    INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
+    INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
+    INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
+END;
 -- CLIENTES --
 -- cliente 1
 INSERT INTO CLIENTE (id_cliente,datos,vacunado,pais_id) 
