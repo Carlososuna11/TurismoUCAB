@@ -1,3 +1,5 @@
+SET SERVEROUTPUT ON;
+
 CREATE OR REPLACE PROCEDURE INSERTAR_PAIS(
     id NUMBER,
     nombre VARCHAR2, 
@@ -7,6 +9,7 @@ IS
     V_bfile BFILE;
     V_blob BLOB;
 BEGIN
+    DBMS_OUTPUT.enable;
     INSERT INTO pais(id_pais, nombre, foto, nacionalidad)
     VALUES (id, nombre, EMPTY_BLOB(), nacionalidad) RETURNING foto INTO V_blob;
     V_bfile := BFILENAME('ORACLECLRDIR', foto);
