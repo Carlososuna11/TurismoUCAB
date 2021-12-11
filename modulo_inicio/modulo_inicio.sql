@@ -63,7 +63,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
     PROCEDURE GENERAR_SERVICIOS(id_alianza NUMBER) IS
         CURSOR c_ali IS
             SELECT * FROM ALIANZA;
-            WHERE al.id_alianza=id_alianza OR id_alianza IS NULL;
+            -- WHERE al.id_alianza=id_alianza OR id_alianza IS NULL;
         ali ALIANZA%ROWTYPE;
         dest DESTINO%ROWTYPE;
     BEGIN
