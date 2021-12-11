@@ -4,6 +4,7 @@ CREATE OR REPLACE PROCEDURE INSERTAR_PAIS(
     foto VARCHAR2, 
     nacionalidad VARCHAR2)
 IS 
+DECLARE
     V_bfile BFILE;
     V_blob BLOB;
 BEGIN
@@ -16,6 +17,7 @@ BEGIN
     COMMIT;
 END;
 
+/
 CREATE OR REPLACE PROCEDURE INSERTAR_DESTINO(
     id NUMBER,
     nombre VARCHAR2, 
@@ -23,6 +25,7 @@ CREATE OR REPLACE PROCEDURE INSERTAR_DESTINO(
     foto VARCHAR2,
     video VARCHAR2)
 IS
+DECLARE
     V_bfile_video BFILE;
     V_blob_video BLOB;
     V_bfile_foto BFILE;
@@ -41,7 +44,7 @@ BEGIN
     DBMS_LOB.CLOSE(V_bfile_video);
     COMMIT;
 END;
-
+/
 CREATE OR REPLACE PROCEDURE INSERTAR_PROVEEDOR(
     id NUMBER,
     nombre VARCHAR2,
@@ -49,6 +52,7 @@ CREATE OR REPLACE PROCEDURE INSERTAR_PROVEEDOR(
     foto VARCHAR2
 )
 IS
+DECLARE
     V_bfile_logo BFILE;
     V_blob_logo BLOB;
     V_bfile_foto BFILE;
@@ -68,12 +72,13 @@ BEGIN
     COMMIT;
 END;
 
-
+/
 CREATE OR REPLACE PROCEDURE INSERTAR_CRUCERO(
     id NUMBER,
     foto VARCHAR2
 )
 IS
+DECLARE
     V_bfile_foto BFILE;
     V_blob_foto BLOB;
 BEGIN
@@ -85,3 +90,4 @@ BEGIN
     DBMS_LOB.CLOSE(V_bfile_foto);
     COMMIT;
 END;
+/

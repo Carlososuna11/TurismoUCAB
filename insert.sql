@@ -476,77 +476,77 @@ BEGIN
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero1.jpg',
+    'crucero1.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero2.jpg',
+    'crucero2.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero3.jpg',
+    'crucero3.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero1.jpg',
+    'crucero1.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero2.jpg',
+    'crucero2.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero3.jpg',
+    'crucero3.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero1.jpg',
+    'crucero1.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero2.jpg',
+    'crucero2.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero3.jpg',
+    'crucero3.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero1.jpg',
+    'crucero1.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero2.jpg',
+    'crucero2.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero3.jpg',
+    'crucero3.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero1.jpg',
+    'crucero1.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero2.jpg',
+    'crucero2.jpg'
     );
 
     INSERTAR_CRUCERO(
     id_crucero.nextVal,
-    'crucero3.jpg',
+    'crucero3.jpg'
     );
 
 END;
