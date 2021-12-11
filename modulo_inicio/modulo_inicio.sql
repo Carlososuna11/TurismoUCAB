@@ -54,7 +54,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
             LOOP
                 fecha_inicio=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
                 dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||alianza_aux.nombre||' el Dia '||fecha_inicio);
-                INSERT INTO ALIANZA VALUES (id_alianza.nextVal,FECHA_RANGO(fecha_inicio,NULL),c_alianza.proveedor_id);
+                INSERT INTO ALIANZA VALUES (id_alianza.nextVal,FECHA_RANGO(fecha_inicio,NULL),alianza_aux.proveedor_id);
                 FETCH c_alianza into alianza_aux;
             END LOOP;
         CLOSE c_alianza;
