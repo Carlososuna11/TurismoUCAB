@@ -87,3 +87,20 @@ IS
 BEGIN
     RETURN dbms_random.value < probabilidadSi;
 END;
+/
+CREATE OR REPLACE FUNCTION RANDOM_DATE(fechaInicio Date,fechaFin Date) RETURN DATE
+IS
+BEGIN
+    RETURN TO_DATE(
+                TRUNC(
+                    DBMS_RANDOM.VALUE(
+                        TO_CHAR(
+                            fechaInicio,
+                            'J'),
+                        TO_CHAR(
+                            fechaFin,
+                            'J')
+                        )
+                    ),
+                'J');
+END;

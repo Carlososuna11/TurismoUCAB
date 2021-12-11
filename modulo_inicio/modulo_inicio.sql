@@ -18,7 +18,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         FETCH cli into cli_aux;
         WHILE cli%FOUND
             LOOP
-                IF aceptar_o_rechazar(0.3) THEN
+                IF aceptar_o_rechazar(0.5) THEN
                     dbms_output.put_line('Asignando pais Venezuela al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
                     UPDATE CLIENTE 
                     SET pais_id = 10 
@@ -40,18 +40,25 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         CLOSE cli;
     END;
 
-    -- PROCEDURE GENERAR_ALIANZAS IS
-    --     fecha_inicio_random DATE;
-    -- BEGIN
-    --     FOR pro IN (
-    --         SELECT * FROM PROVEEDOR
-    --         ORDER BY DBMS_RANDOM.RANDOM ASC
-    --         LIMIT 10;
-    --     )
-    --     LOOP
-    --         dbms_output.put_line('Estrella Caribeña generó una Alianza con '||pro.nombre||'El dia'||fecha_inicio_random);
-    --     END LOOP;
-    -- END;
+    PROCEDURE GENERAR_ALIANZAS IS
+        CURSOR c_alianza IS
+            SELECT * FROM ALIANZA
+            ORDER BY DBMS_RANDOM.RANDOM ASC
+            FETCH FIRST (round(DBMS_RANDOM.VALUE (7, 12))) ROWS ONLY;
+        alianza_aux ALIANZA%ROWTYPE;
+        fecha_inicio DATE;
+    BEGIN
+        OPEN c_alianza;
+        FETCH c_alianza into alianza_aux;
+        WHILE c_alianza%FOUND
+            LOOP
+                fecha_inicio=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
+                dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||alianza_aux.nombre||' el Dia '||fecha_inicio);
+                INSERT INTO ALIANZA VALUES (id_alianza.nextVal,FECHA_RANGO(fecha_inicio,NULL),c_alianza.proveedor_id);
+                FETCH c_alianza into alianza_aux;
+            END LOOP;
+        CLOSE c_alianza;
+    END;
 
 
     PROCEDURE INICIO IS
@@ -65,5 +72,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         dbms_output.put_line('');
         dbms_output.put_line('Asignandole los Paises a los Clientes');
         ASIGNAR_PAISES;
+        dbms_output.put_line('Generando Alianzas con los Proveedores');
+        GENERAR_ALIANZAS;
     END;
 END;
