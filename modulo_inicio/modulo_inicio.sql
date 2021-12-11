@@ -26,7 +26,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                 FROM PAIS 
                 WHERE id_pais != 10 
                 ORDER BY DBMS_RANDOM.RANDOM ASC
-                LIMIT 1;
+                FETCH FIRST 1 ROWS ONLY;
                 dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli.datos.nombre||' '||cli.datos.apellido);
                 UPDATE CLIENTE 
                 SET pais_id = id_pais_random
