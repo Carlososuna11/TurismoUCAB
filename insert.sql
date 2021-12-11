@@ -260,86 +260,78 @@ BEGIN
     'Pampatar',
     'La ciudad de Pampatar es la capital del municipio Maneiro, en la isla de Margarita, estado Nueva Esparta (Venezuela). Su antiguo nombre era Pampatare o Mampatar. Pampatar es voz indígena que significa «casa de sal».',
     'pampatar.jpg',
-    'Margarita.mp4');
+    'pampatar.mp4');
 
     INSERTAR_DESTINO(
     id_destino.nextVal,
     'Porlamar',
     'Porlamar, es una ciudad ubicada al sureste de la Isla de Margarita, Nueva Esparta, Venezuela; capital del municipio Mariño, es el principal centro urbano y económico de la isla.',
     'porlamar.jpg',
-    'Margarita.mp4');
+    'porlamar.mp4');
 
     INSERTAR_DESTINO(
     id_destino.nextVal,
     'Isla de Coche',
     'La Isla de Coche es una isla ubicada en el estado Nueva Esparta, Venezuela, en la costa occidental de la República Bolivariana de Venezuela. Su nombre original era Coche, y fue cambiado en el año 2000 por la Isla de Margarita, debido a que la isla de Coche se encuentra en el lugar donde se encuentra la capital del municipio Mariño.',
     'coche.jpg',
-    'Margarita.mp4');
+    'isla_de_coche.mp4');
 
     INSERTAR_DESTINO(
     id_destino.nextVal,
     'Los Roques',
     'El Archipielago de Los Roques ubicado en el mar Caribe contiene más de 300 islas y cayos que rodean una laguna de 400 km cuadrados.',
     'los_roques.jpg',
-    'Margarita.mp4');
+    'los_roques.mp4');
 
     INSERTAR_DESTINO(
     id_destino.nextVal,
     'Isla La Tortuga ',
     'La Tortuga es una isla en el Mar Caribe conformada por una isla mayor y varios islotes y cayos más pequeños.',
     'tortuga.jpg',
-    'Margarita.mp4');
+    'isla_la_tortuga.mp4');
 
     INSERTAR_DESTINO(
     id_destino.nextVal,
     'Morrocoy',
     'El Parque Nacional Morrocoy es una isla protegida y una reserva marina en la costa caribeña de Venezuela. Se encuentra en el estado Falcón y es conocida por sus manglares, sus playas y sus cayos, como el Cayo Sombrero.',
     'morrocoy.jpg',
-    'Margarita.mp4'
-    );
-
-    INSERTAR_DESTINO(
-    id_destino.nextVal,
-    'Morrocoy',
-    'El Parque Nacional Morrocoy es una isla protegida y una reserva marina en la costa caribeña de Venezuela. Se encuentra en el estado Falcón y es conocida por sus manglares, sus playas y sus cayos, como el Cayo Sombrero.',
-    'morrocoy.jpg',
-    'Margarita.mp4'
+    'morrocoy.mp4'
     );
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Bahia de Cata','La bahía de Cata es una playa del estado Aragua, de gran extensión, finísima arena, aguas cristalinas y adornadas por la sombra de erguidos cocoteros.',
     'bahia_cata.jpg',
-    'Margarita.mp4');
+    'bahia_de_cata.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Choroní','Choroní tiene varias playas hermosas, Playa Grande, Tipire, El Diario, Valle seco, Chuao y varios lugaros para visitar con lancha',
     'choroni.jpg',
-    'Margarita.mp4');
+    'choroni.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Lecheria','Lecheria tiene varias playas hermosas y varios lugares para visitar.',
     'lecheria.jpg',
-    'Margarita.mp4');
+    'lecheria.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Mochima','Mochima es uno de los destinos turísticos más espectaculares de Venezuela. Playa Colorada es mundialmente famosa por su fina arena de color dorado, casi rojizo, que da nombre al lugar.',
     'mochima.jpg',
-    'Margarita.mp4');
+    'mochima.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Cuyagua','Cuyagua es un pueblo ubicado en la costa de Aragua, Venezuela. Entre sus ríos se encuentran el Pozo de Arena y el Pozo San Pedro. Tiene una playa que posee un fuerte oleaje donde se practica el surf y el bodyboard',
     'cuyagua.jpg',
-    'Margarita.mp4');
+    'cuyagua.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Cayo Sombrero','Cayo Sombrero​ es el nombre de una isla del mar Caribe que pertenece al parque nacional Morrocoy​.',
     'cayo_sombrero.jpg',
-    'Margarita.mp4');
+    'cayo_sombrero.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Urama','Urama es un pueblo en el estado Vargas, tiene varias playas hermosas y rios para visitar.',
     'urama.jpg',
-    'Margarita.mp4');
+    'urama.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Los Frailes','Uno de los lugares menos visitados en Margarita son las islas de Los Frailes. Son esas islas que se ven a lo lejos desde las playas de Guacuco, El Tirano, Parguito o El Agua.',
