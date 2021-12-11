@@ -41,23 +41,23 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
     END;
 
     PROCEDURE GENERAR_ALIANZAS IS
-        CURSOR c_alianza IS
-            SELECT * FROM ALIANZA
+        CURSOR c_prov IS
+            SELECT * FROM PROVEEDOR
             ORDER BY DBMS_RANDOM.RANDOM ASC
             FETCH FIRST (round(DBMS_RANDOM.VALUE (7, 12))) ROWS ONLY;
-        alianza_aux ALIANZA%ROWTYPE;
+        prov PROVEEDOR%ROWTYPE;
         fecha_inicio DATE;
     BEGIN
-        OPEN c_alianza;
-        FETCH c_alianza into alianza_aux;
-        WHILE c_alianza%FOUND
+        OPEN c_prov;
+        FETCH c_prov into prov;
+        WHILE c_prov%FOUND
             LOOP
                 fecha_inicio=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
-                dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||alianza_aux.nombre||' el Dia '||fecha_inicio);
-                INSERT INTO ALIANZA VALUES (id_alianza.nextVal,FECHA_RANGO(fecha_inicio,NULL),alianza_aux.proveedor_id);
-                FETCH c_alianza into alianza_aux;
+                dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||prov.nombre||' el Dia '||fecha_inicio);
+                INSERT INTO ALIANZA VALUES (id_alianza.nextVal,FECHA_RANGO(fecha_inicio,NULL),prov.id_proveedor);
+                FETCH c_prov into prov;
             END LOOP;
-        CLOSE c_alianza;
+        CLOSE c_prov;
     END;
 
 
