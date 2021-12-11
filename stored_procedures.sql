@@ -23,22 +23,21 @@ CREATE OR REPLACE PROCEDURE INSERTAR_DESTINO(
     foto VARCHAR2,
     video VARCHAR2)
 IS
-    V_bfile_video BFILE;
+    V_bfile BFILE;
     V_blob_video BLOB;
-    V_bfile_foto BFILE;
     V_blob_foto BLOB;
 BEGIN
     DBMS_OUTPUT.enable;
     INSERT INTO DESTINO VALUES (id, nombre, descripcion, EMPTY_BLOB(), EMPTY_BLOB()) RETURNING foto,video INTO V_blob_foto,V_blob_video;
-    V_bfile_foto := BFILENAME('ORACLECLRDIR', foto);
-    DBMS_LOB.OPEN(V_bfile_foto, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob_foto, V_bfile_foto, DBMS_LOB.GETLENGTH(V_bfile_foto));
-    DBMS_LOB.CLOSE(V_bfile_foto);
+    V_bfile := BFILENAME('ORACLECLRDIR', foto);
+    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob_foto, V_bfile, DBMS_LOB.GETLENGTH(V_bfile));
+    DBMS_LOB.CLOSE(V_bfile);
     COMMIT;
-    V_bfile_video := BFILENAME('ORACLECLRDIR', video);
-    DBMS_LOB.OPEN(V_bfile_video, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob_video, V_bfile_video, DBMS_LOB.GETLENGTH(V_bfile_video));
-    DBMS_LOB.CLOSE(V_bfile_video);
+    V_bfile := BFILENAME('ORACLECLRDIR', video);
+    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob_video, V_bfile, DBMS_LOB.GETLENGTH(V_bfile));
+    DBMS_LOB.CLOSE(V_bfile);
     COMMIT;
 END;
 /
