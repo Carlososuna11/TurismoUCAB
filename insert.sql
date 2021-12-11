@@ -431,8 +431,8 @@ BEGIN
     INSERTAR_PROVEEDOR(
         id_proveedor.nextVal,
         'Sendero cojedes',
-        'sendero_cojedes_logo.jpg',
-        'sendero_cojedes_feed.jpg'
+        'senderos_cojedes_logo.jpg',
+        'senderos_cojedes_feed.jpg'
     );
 
     INSERTAR_PROVEEDOR(
