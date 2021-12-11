@@ -578,7 +578,7 @@ VALUES (id_medio.nextVal,'Instagram',1.3);
 
 -- Inserts de Servicios de Cruceros
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     1,
@@ -587,7 +587,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     2,
@@ -596,7 +596,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     3,
@@ -605,7 +605,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     4,
@@ -614,7 +614,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     5,
@@ -623,7 +623,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     6,
@@ -632,7 +632,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     7,
@@ -641,7 +641,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     8,
@@ -650,7 +650,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     9,
@@ -659,7 +659,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     10,
@@ -668,7 +668,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     11,
@@ -677,7 +677,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     12,
@@ -686,7 +686,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     13,
@@ -695,7 +695,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     14,
@@ -704,7 +704,7 @@ INSERT INTO SERVICIO VALUES(
     NULL
 );
 INSERT INTO SERVICIO VALUES(
-    id_servicio.nextVal,
+    id_servicio_s.nextVal,
     'Paseos a crucero',
     0,
     15,

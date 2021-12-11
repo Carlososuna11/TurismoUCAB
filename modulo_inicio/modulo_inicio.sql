@@ -19,7 +19,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
             WHILE cli%FOUND
                 LOOP
                     IF aceptar_o_rechazar(0.5) THEN
-                        dbms_output.put_line('Asignando pais Venezuela al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
+                        dbms_output.put_line('Asignando pais Venezuela al Cliente '||cli_aux.datos.nombre' '||cli_aux.datos.apellido);
                         UPDATE CLIENTE 
                         SET pais_id = 10 
                         WHERE id_cliente=cli_aux.id_cliente;
@@ -30,7 +30,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                         WHERE id_pais != 10 
                         ORDER BY DBMS_RANDOM.RANDOM ASC
                         FETCH FIRST 1 ROWS ONLY;
-                        dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
+                        dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli_aux.datos.nombre' '||cli_aux.datos.apellido);
                         UPDATE CLIENTE 
                         SET pais_id = id_pais_random
                         WHERE id_cliente=cli_aux.id_cliente;
@@ -53,7 +53,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
             WHILE c_prov%FOUND
                 LOOP
                     fecha_inicio:=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
-                    dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||prov.nombre||' el Dia '||fecha_inicio);
+                    dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||prov.nombre' el Dia '||fecha_inicio);
                     INSERT INTO ALIANZA VALUES (id_alianza_s.nextVal,FECHA_RANGO(fecha_inicio,NULL),prov.id_proveedor);
                     FETCH c_prov into prov;
                 END LOOP;
@@ -78,9 +78,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                 LOOP
                                     SELECT * INTO dest FROM DESTINO
                                     WHERE id_destino=I;
-                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Alojamiento en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Alojamiento en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de Alojamiento',
                                         0,
                                         NULL,
@@ -88,9 +88,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de paseos por puertos, cayos y playas en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de paseos por puertos, cayos y playas en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de paseos por puertos, cayos y playas',
                                         0,
                                         NULL,
@@ -98,9 +98,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Excursiones Locales en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Excursiones Locales en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -108,9 +108,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Conferencia Ecológica en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Conferencia Ecológica en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferencia Ecológica',
                                         0,
                                         NULL,
@@ -118,9 +118,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Observación de Aves en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Hesperia generó Servicio de Observación de Aves en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Observación de Aves',
                                         0,
                                         NULL,
@@ -136,9 +136,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                 LOOP
                                     SELECT * INTO dest FROM DESTINO
                                     WHERE id_destino=I;
-                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Alojamiento en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Alojamiento en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de Alojamiento',
                                         0,
                                         NULL,
@@ -146,9 +146,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de paseos por puertos, cayos y playas en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de paseos por puertos, cayos y playas en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de paseos por puertos, cayos y playas',
                                         0,
                                         NULL,
@@ -156,9 +156,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Excursiones Locales en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Excursiones Locales en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -166,9 +166,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                     dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Conferencia Ecológica en '||dest.nombre||);
+                                     dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Conferencia Ecológica en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferencia Ecológica',
                                         0,
                                         NULL,
@@ -176,9 +176,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Observación de Aves en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Observación de Aves en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Observación de Aves',
                                         0,
                                         NULL,
@@ -186,9 +186,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Conferecia de Educación Ambiental en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Conferecia de Educación Ambiental en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferecia de Educación Ambiental',
                                         0,
                                         NULL,
@@ -196,9 +196,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Conferecia de Visitas dirigidas a Parques Nacionales en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Unik Hotel generó Servicio de Conferecia de Visitas dirigidas a Parques Nacionales en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -213,9 +213,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                 LOOP
                                     SELECT * INTO dest FROM DESTINO
                                     WHERE id_destino=I;
-                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Alojamiento en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Alojamiento en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de Alojamiento',
                                         0,
                                         NULL,
@@ -223,9 +223,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de paseos por puertos, cayos y playas en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de paseos por puertos, cayos y playas en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de paseos por puertos, cayos y playas',
                                         0,
                                         NULL,
@@ -233,9 +233,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Excursiones Locales en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Excursiones Locales en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -243,9 +243,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Conferencia Ecológica en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Conferencia Ecológica en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferencia Ecológica',
                                         0,
                                         NULL,
@@ -253,9 +253,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Observación de Aves en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Margarita Dynasty Hotel & Suites generó Servicio de Observación de Aves en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Observación de Aves',
                                         0,
                                         NULL,
@@ -271,9 +271,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                 LOOP
                                     SELECT * INTO dest FROM DESTINO
                                     WHERE id_destino=I;
-                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Visitas dirigidas a Parques Nacionales en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Visitas dirigidas a Parques Nacionales en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -282,9 +282,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
-                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -292,9 +292,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Visitas a fincas y haciendas en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Visitas a fincas y haciendas en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas a fincas y haciendas',
                                         0,
                                         NULL,
@@ -302,9 +302,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Campismo en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Campismo en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Campismo',
                                         0,
                                         NULL,
@@ -313,9 +313,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     -- - Montañismo
-                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Montañismo en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Montañismo en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Montañismo',
                                         0,
                                         NULL,
@@ -323,9 +323,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.id_alianza,
                                         ali.proveedor_id
                                     );
-                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Excursiones Locales en '||dest.nombre||);
+                                    dbms_output.put_line('la Alianza con Proxima Ruta Venezuela generó Servicio de Excursiones Locales en '||dest.nombre);
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -339,7 +339,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -349,7 +349,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -358,7 +358,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas a fincas y haciendas',
                                         0,
                                         NULL,
@@ -367,7 +367,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Campismo',
                                         0,
                                         NULL,
@@ -377,7 +377,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Montañismo
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Montañismo',
                                         0,
                                         NULL,
@@ -386,7 +386,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -400,7 +400,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -410,7 +410,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -419,7 +419,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas a fincas y haciendas',
                                         0,
                                         NULL,
@@ -428,7 +428,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Campismo',
                                         0,
                                         NULL,
@@ -438,7 +438,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Montañismo
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Montañismo',
                                         0,
                                         NULL,
@@ -447,7 +447,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -461,7 +461,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferencia Ecológica',
                                         0,
                                         NULL,
@@ -471,7 +471,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Conferecia de Educación Ambiental
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferecia de Educación Ambiental',
                                         0,
                                         NULL,
@@ -480,7 +480,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Observación de Aves',
                                         0,
                                         NULL,
@@ -489,7 +489,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -499,7 +499,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -513,7 +513,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferencia Ecológica',
                                         0,
                                         NULL,
@@ -523,7 +523,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Conferecia de Educación Ambiental
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferecia de Educación Ambiental',
                                         0,
                                         NULL,
@@ -532,7 +532,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Observación de Aves',
                                         0,
                                         NULL,
@@ -541,7 +541,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -551,7 +551,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -565,7 +565,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 5..10
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -574,7 +574,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferencia Ecológica',
                                         0,
                                         NULL,
@@ -584,7 +584,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Conferecia de Educación Ambiental
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Conferecia de Educación Ambiental',
                                         0,
                                         NULL,
@@ -593,7 +593,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas a fincas y haciendas',
                                         0,
                                         NULL,
@@ -607,7 +607,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 7..10
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -617,7 +617,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -626,7 +626,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas a fincas y haciendas',
                                         0,
                                         NULL,
@@ -635,7 +635,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Campismo',
                                         0,
                                         NULL,
@@ -645,7 +645,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Montañismo
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Montañismo',
                                         0,
                                         NULL,
@@ -654,7 +654,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -668,7 +668,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 6..14
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Parques Nacionales',
                                         0,
                                         NULL,
@@ -678,7 +678,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas dirigidas a Refugios de vidas silvestres y otros Áreas Protegidas',
                                         0,
                                         NULL,
@@ -687,7 +687,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Visitas a fincas y haciendas',
                                         0,
                                         NULL,
@@ -696,7 +696,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Campismo',
                                         0,
                                         NULL,
@@ -706,7 +706,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Montañismo
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Montañismo',
                                         0,
                                         NULL,
@@ -715,7 +715,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -729,7 +729,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de Alojamiento',
                                         0,
                                         NULL,
@@ -743,7 +743,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Excursiones Locales',
                                         0,
                                         NULL,
@@ -753,7 +753,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Servicio de paseos por puertos, cayos y playas
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de paseos por puertos, cayos y playas',
                                         0,
                                         NULL,
@@ -762,7 +762,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Campismo',
                                         0,
                                         NULL,
@@ -772,7 +772,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                     );
                                     -- - Montañismo
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Montañismo',
                                         0,
                                         NULL,
@@ -786,7 +786,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de Alojamiento',
                                         0,
                                         NULL,
@@ -800,7 +800,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                             FOR I IN 1..15
                                 LOOP
                                     INSERT INTO SERVICIO VALUES(
-                                        id_servicio.nextVal,
+                                        id_servicio_s.nextVal,
                                         'Servicio de Alojamiento',
                                         0,
                                         NULL,
