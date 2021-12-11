@@ -25,7 +25,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                 INTO id_pais_random,nombre_pais_random 
                 FROM PAIS 
                 WHERE id_pais != 10 
-                ORDER BY DBMS_RANDOM.RANDOM
+                ORDER BY DBMS_RANDOM.RANDOM ASC
                 LIMIT 1;
                 dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli.datos.nombre||' '||cli.datos.apellido);
                 UPDATE CLIENTE 
@@ -34,6 +34,20 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
             END IF; 
         END LOOP;
     END;
+
+    -- PROCEDURE GENERAR_ALIANZAS IS
+    --     fecha_inicio_random DATE;
+    -- BEGIN
+    --     FOR pro IN (
+    --         SELECT * FROM PROVEEDOR
+    --         ORDER BY DBMS_RANDOM.RANDOM ASC
+    --         LIMIT 10;
+    --     )
+    --     LOOP
+    --         dbms_output.put_line('Estrella Caribeña generó una Alianza con '||pro.nombre||'El dia'||fecha_inicio_random);
+    --     END LOOP;
+    -- END;
+
 
     PROCEDURE INICIO IS
     BEGIN
