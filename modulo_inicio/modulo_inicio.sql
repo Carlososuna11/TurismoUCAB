@@ -44,7 +44,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         CURSOR c_prov IS
             SELECT * FROM PROVEEDOR
             ORDER BY DBMS_RANDOM.RANDOM ASC
-            FETCH FIRST (round(DBMS_RANDOM.VALUE (7, 12))) ROWS ONLY;
+            FETCH FIRST 10 ROWS ONLY;
         prov PROVEEDOR%ROWTYPE;
         fecha_inicio DATE;
     BEGIN
@@ -52,7 +52,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         FETCH c_prov into prov;
         WHILE c_prov%FOUND
             LOOP
-                fecha_inicio=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
+                fecha_inicio:=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
                 dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||prov.nombre||' el Dia '||fecha_inicio);
                 INSERT INTO ALIANZA VALUES (id_alianza_s.nextVal,FECHA_RANGO(fecha_inicio,NULL),prov.id_proveedor);
                 FETCH c_prov into prov;
