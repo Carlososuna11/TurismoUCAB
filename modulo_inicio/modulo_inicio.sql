@@ -12,7 +12,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         nombre_pais_random VARCHAR2;
     BEGIN
         FOR cli IN (
-            SELECT * from CLIENTES
+            SELECT * from CLIENTE
         )
         LOOP
             IF aceptar_o_rechazar(0.3) THEN
