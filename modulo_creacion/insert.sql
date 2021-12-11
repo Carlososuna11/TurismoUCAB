@@ -575,3 +575,140 @@ VALUES (id_medio.nextVal,'Whatsapp',1.2);
 -- medio 5
 INSERT INTO MEDIO (id_medio, canal, comision)
 VALUES (id_medio.nextVal,'Instagram',1.3);
+
+-- Inserts de Servicios de Cruceros
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    1,
+    1,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    2,
+    2,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    3,
+    3,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    4,
+    4,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    5,
+    5,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    6,
+    6,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    7,
+    7,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    8,
+    8,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    9,
+    9,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    10,
+    10,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    11,
+    11,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    12,
+    12,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    13,
+    13,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    14,
+    14,
+    NULL,
+    NULL
+);
+INSERT INTO SERVICIO VALUES(
+    id_servicio.nextVal,
+    'Paseos a crucero',
+    0,
+    15,
+    15,
+    NULL,
+    NULL
+);
