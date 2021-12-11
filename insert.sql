@@ -369,7 +369,7 @@ BEGIN
         id_proveedor.nextVal,
         'Hesperia',
         'Hesperia_logo.png',
-        'Hesperia_hotel.jpg'
+        'Hesperia_hotel.png'
     );
 
     INSERTAR_PROVEEDOR(
@@ -403,7 +403,7 @@ BEGIN
     INSERTAR_PROVEEDOR(
         id_proveedor.nextVal,
         'Ruta Extrema',
-        'ruta_extrema.png',
+        'ruta_extrema.jpg',
         'ruta_extrema_feed.png'
     );
 
@@ -411,14 +411,14 @@ BEGIN
         id_proveedor.nextVal,
         'Fundación Azul Ambientalistas',
         'fundacion_azul.jpg',
-        'fundacion_azul_foto.png'
+        'fundacion_azul_foto.jpg'
     );
 
     INSERTAR_PROVEEDOR(
         id_proveedor.nextVal,
         'Fundación Tierra Viva',
         'fundacion_tierra_viva.jpg',
-        'tierra_viva_foto.png'
+        'tierra_viva_foto.jpg'
     );
 
     INSERTAR_PROVEEDOR(
@@ -460,7 +460,7 @@ BEGIN
         id_proveedor.nextVal,
         'Marriot',
         'marriot_logo.png',
-        'marriot_hotel.png'
+        'marriot_hotel.jpg'
     );
 
     INSERTAR_PROVEEDOR(
