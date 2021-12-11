@@ -365,110 +365,110 @@ BEGIN
 
 -- INICIO PROVEEDORES ------------------------
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Hesperia',
-    --     'Hesperia_logo.png',
-    --     'Hesperia_hotel.jpg'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Hesperia',
+        'Hesperia_logo.png',
+        'Hesperia_hotel.jpg'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Unik Hotel',
-    --     'unik_logo.png',
-    --     'unik_hotel.jpg'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Unik Hotel',
+        'unik_logo.png',
+        'unik_hotel.jpg'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Margarita Dynasty Hotel & Suites',
-    --     'dynasty_logo.png',
-    --     'dynasty_hotel.jpg'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Margarita Dynasty Hotel & Suites',
+        'dynasty_logo.png',
+        'dynasty_hotel.jpg'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Proxima Ruta Venezuela',
-    --     'proxima_ruta_logo.png',
-    --     'proxima_ruta_feed.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Proxima Ruta Venezuela',
+        'proxima_ruta_logo.png',
+        'proxima_ruta_feed.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Mochileros Venezuela',
-    --     'mochileros_venezuela.jpg',
-    --     'mochileros_venezuela_feed.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Mochileros Venezuela',
+        'mochileros_venezuela.jpg',
+        'mochileros_venezuela_feed.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Ruta Extrema',
-    --     'ruta_extrema.png',
-    --     'ruta_extrema_feed.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Ruta Extrema',
+        'ruta_extrema.png',
+        'ruta_extrema_feed.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Fundación Azul Ambientalistas',
-    --     'fundacion_azul.jpg',
-    --     'fundacion_azul_foto.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Fundación Azul Ambientalistas',
+        'fundacion_azul.jpg',
+        'fundacion_azul_foto.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Fundación Tierra Viva',
-    --     'fundacion_tierra_viva.jpg',
-    --     'tierra_viva_foto.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Fundación Tierra Viva',
+        'fundacion_tierra_viva.jpg',
+        'tierra_viva_foto.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Recreación Bululu',
-    --     'bululu_logo.png',
-    --     'bululu_foto.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Recreación Bululu',
+        'bululu_logo.png',
+        'bululu_foto.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Sendero cojedes',
-    --     'sendero_cojedes_logo.jpg',
-    --     'sendero_cojedes_feed.jpg'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Sendero cojedes',
+        'sendero_cojedes_logo.jpg',
+        'sendero_cojedes_feed.jpg'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Rutas Mochileras',
-    --     'rutas_mochileras_logo.png',
-    --     'rutas_mochileras_feed.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Rutas Mochileras',
+        'rutas_mochileras_logo.png',
+        'rutas_mochileras_feed.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Suites Cristina',
-    --     'suites_cristina.png',
-    --     'suites_cristina_hotel.jpg'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Suites Cristina',
+        'suites_cristina.png',
+        'suites_cristina_hotel.jpg'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Woi-Kaa',
-    --     'woikaa_logo.jpg',
-    --     'woikaa_feed.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Woi-Kaa',
+        'woikaa_logo.jpg',
+        'woikaa_feed.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Marriot',
-    --     'marriot_logo.png',
-    --     'marriot_hotel.png'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Marriot',
+        'marriot_logo.png',
+        'marriot_hotel.png'
+    );
 
-    -- INSERTAR_PROVEEDOR(
-    --     id_proveedor.nextVal,
-    --     'Eurobuilding Express',
-    --     'eurobuilding_logo.png',
-    --     'eurobuilding_hotel.jpg'
-    -- );
+    INSERTAR_PROVEEDOR(
+        id_proveedor.nextVal,
+        'Eurobuilding Express',
+        'eurobuilding_logo.png',
+        'eurobuilding_hotel.jpg'
+    );
 
 -- FIN PROVEEDORES ------------------------
 

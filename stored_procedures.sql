@@ -47,22 +47,20 @@ CREATE OR REPLACE PROCEDURE INSERTAR_PROVEEDOR(
     foto VARCHAR2
 )
 IS
-    V_bfile_logo BFILE;
+    V_bfile BFILE;
     V_blob_logo BLOB;
-    V_bfile_foto BFILE;
     V_blob_foto BLOB;
 BEGIN
     DBMS_OUTPUT.enable;
     INSERT INTO PROVEEDOR VALUES (id, nombre, EMPTY_BLOB(), EMPTY_BLOB()) RETURNING logo,foto INTO V_blob_logo,V_blob_foto;
-    V_bfile_logo := BFILENAME('ORACLECLRDIR', logo);
-    DBMS_LOB.OPEN(V_bfile_logo, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob_logo, V_bfile_logo, DBMS_LOB.GETLENGTH(V_bfile_logo));
-    DBMS_LOB.CLOSE(V_bfile_logo);
-    COMMIT;
-    V_bfile_foto := BFILENAME('ORACLECLRDIR', foto);
-    DBMS_LOB.OPEN(V_bfile_foto, DBMS_LOB.LOB_READONLY);
-    DBMS_LOB.LOADFROMFILE(V_blob_foto, V_bfile_foto, DBMS_LOB.GETLENGTH(V_bfile_foto));
-    DBMS_LOB.CLOSE(V_bfile_foto);
+    V_bfile := BFILENAME('ORACLECLRDIR', logo);
+    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob_logo, V_bfile, DBMS_LOB.GETLENGTH(V_bfile));
+    DBMS_LOB.CLOSE(V_bfile);
+    V_bfile := BFILENAME('ORACLECLRDIR', foto);
+    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob_foto, V_bfile, DBMS_LOB.GETLENGTH(V_bfile));
+    DBMS_LOB.CLOSE(V_bfile);
     COMMIT;
 END;
 
