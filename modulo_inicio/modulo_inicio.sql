@@ -19,7 +19,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
             WHILE cli%FOUND
                 LOOP
                     IF aceptar_o_rechazar(0.5) THEN
-                        dbms_output.put_line('Asignando pais Venezuela al Cliente '||cli_aux.datos.nombre' '||cli_aux.datos.apellido);
+                        dbms_output.put_line('Asignando pais Venezuela al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
                         UPDATE CLIENTE 
                         SET pais_id = 10 
                         WHERE id_cliente=cli_aux.id_cliente;
@@ -30,7 +30,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                         WHERE id_pais != 10 
                         ORDER BY DBMS_RANDOM.RANDOM ASC
                         FETCH FIRST 1 ROWS ONLY;
-                        dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli_aux.datos.nombre' '||cli_aux.datos.apellido);
+                        dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
                         UPDATE CLIENTE 
                         SET pais_id = id_pais_random
                         WHERE id_cliente=cli_aux.id_cliente;
@@ -53,7 +53,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
             WHILE c_prov%FOUND
                 LOOP
                     fecha_inicio:=RANDOM_DATE(ADD_MONTHS(SYSDATE,-3),SYSDATE );
-                    dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||prov.nombre' el Dia '||fecha_inicio);
+                    dbms_output.put_line('Estrella Caribeña Firmó una Alianza con '||prov.nombre||' el Dia '||fecha_inicio);
                     INSERT INTO ALIANZA VALUES (id_alianza_s.nextVal,FECHA_RANGO(fecha_inicio,NULL),prov.id_proveedor);
                     FETCH c_prov into prov;
                 END LOOP;
@@ -809,7 +809,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                 END LOOP;
-                    END;
+                    END CASE;
                     FETCH c_ali into ali;
                 END LOOP;
         CLOSE c_ali;
