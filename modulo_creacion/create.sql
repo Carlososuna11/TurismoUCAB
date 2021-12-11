@@ -62,6 +62,7 @@ CREATE TABLE DISPONIBILIDAD (
     fecha FECHA_RANGO NOT NULL,
     balance BALANCE NOT NULL,
     id_servicio NUMBER NOT NULL,
+    fecha_creacion DATE NOT NULL,
     CONSTRAINT FK_SERVICIO FOREIGN KEY (id_servicio)
     REFERENCES SERVICIO(id_servicio),
     CONSTRAINT pk_disponibilidad PRIMARY KEY (id_disponibilidad, id_servicio)

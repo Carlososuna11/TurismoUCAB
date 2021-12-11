@@ -1,19 +1,34 @@
 
 BEGIN
+    -- 1
     INSERTAR_PAIS(id_pais.nextVal,'Argentina','argentina.jpg','Argentino');
+    -- 2
     INSERTAR_PAIS(id_pais.nextVal,'Bolivia','bolivia.png','Boliviano');
+    -- 3
     INSERTAR_PAIS(id_pais.nextVal,'Brasil','brasil.png','Brasilero');
+    -- 4
     INSERTAR_PAIS(id_pais.nextVal,'Chile','chile.png','Chileno');
+    -- 5
     INSERTAR_PAIS(id_pais.nextVal,'Colombia','colombia.png','Colombiano');
+    -- 6
     INSERTAR_PAIS(id_pais.nextVal,'Ecuador','ecuador.png','Ecuatoriano');
+    -- 7
     INSERTAR_PAIS(id_pais.nextVal,'Paraguay','paraguay.png','Paraguayo');
+    -- 8
     INSERTAR_PAIS(id_pais.nextVal,'Peru','peru.png','Peruano');
+    -- 9
     INSERTAR_PAIS(id_pais.nextVal,'Uruguay','uruguay.png','Uruguayo');
+    -- 10
     INSERTAR_PAIS(id_pais.nextVal,'Venezuela','venezuela.png','Venezolano');
+    -- 11
     INSERTAR_PAIS(id_pais.nextVal,'Italia','italia.png','Italiano');
+    -- 12
     INSERTAR_PAIS(id_pais.nextVal,'Francia','francia.png','Frances');
+    -- 13
     INSERTAR_PAIS(id_pais.nextVal,'Alemania','alemania.png','Aleman');
+    -- 14
     INSERTAR_PAIS(id_pais.nextVal,'Mexico','mexico.png','Mexicano');
+    -- 15
     INSERTAR_PAIS(id_pais.nextVal,'Belgica','belgica.png','Belga');
 END;
 -- CLIENTES --
@@ -542,3 +557,21 @@ BEGIN
     );
 
 END;
+
+/
+-- Inserts Medios de Pago
+-- medio 1
+INSERT INTO MEDIO (id_medio, canal, comision)
+VALUES (id_medio.nextVal,'Agencia Fisica',0.35);
+-- medio 2
+INSERT INTO MEDIO (id_medio, canal, comision)
+VALUES (id_medio.nextVal,'Aplicacion Movil',1);
+-- medio 3
+INSERT INTO MEDIO (id_medio, canal, comision)
+VALUES (id_medio.nextVal,'Pagina Web',2);
+-- medio 4
+INSERT INTO MEDIO (id_medio, canal, comision)
+VALUES (id_medio.nextVal,'Whatsapp',1.2);
+-- medio 5
+INSERT INTO MEDIO (id_medio, canal, comision)
+VALUES (id_medio.nextVal,'Instagram',1.3);

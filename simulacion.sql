@@ -1,0 +1,3 @@
+begin
+  MODULO_INICIO.INICIO;
+end;
