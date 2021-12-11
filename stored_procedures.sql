@@ -3,8 +3,7 @@ CREATE OR REPLACE PROCEDURE INSERTAR_PAIS(
     nombre VARCHAR2, 
     foto VARCHAR2, 
     nacionalidad VARCHAR2)
-IS 
-DECLARE
+IS
     V_bfile BFILE;
     V_blob BLOB;
 BEGIN
@@ -25,7 +24,6 @@ CREATE OR REPLACE PROCEDURE INSERTAR_DESTINO(
     foto VARCHAR2,
     video VARCHAR2)
 IS
-DECLARE
     V_bfile_video BFILE;
     V_blob_video BLOB;
     V_bfile_foto BFILE;
@@ -52,7 +50,6 @@ CREATE OR REPLACE PROCEDURE INSERTAR_PROVEEDOR(
     foto VARCHAR2
 )
 IS
-DECLARE
     V_bfile_logo BFILE;
     V_blob_logo BLOB;
     V_bfile_foto BFILE;
@@ -78,7 +75,6 @@ CREATE OR REPLACE PROCEDURE INSERTAR_CRUCERO(
     foto VARCHAR2
 )
 IS
-DECLARE
     V_bfile_foto BFILE;
     V_blob_foto BLOB;
 BEGIN
