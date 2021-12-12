@@ -1,5 +1,5 @@
 CREATE OR REPLACE PACKAGE MODULO_SERVICIO IS
-    CREATE PROCEDURE INICIO;
+    CREATE PROCEDURE INICIO_MODULO_SERVICIO;
     CREATE PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE);
 END;
 /
@@ -45,7 +45,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
 
     END;
 
-    CREATE PROCEDURE INICIO IS
+    CREATE PROCEDURE INICIO_MODULO_SERVICIO IS
     BEGIN
         dbms_output.put_line('******************************');
         dbms_output.put_line('*                            *');
