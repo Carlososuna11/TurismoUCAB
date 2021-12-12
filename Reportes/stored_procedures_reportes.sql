@@ -12,9 +12,9 @@ BEGIN
     ON disp.id_servicio = serv.id_servicio
     INNER JOIN DESTINO dest
     ON dest.id_destino = serv.destino_id
-    GROUP BY serv.destino_id
     WHERE (MIN(disp.fecha.fechaInicio) >= fechaInicio OR fechaInicio IS NULL) AND 
     ( MAX(disp.fecha.fechaFin) <= fechaFin OR fechaFin IS NULL) AND
     (LISTAGG(DISTINCT dest.nombre,'') = destino_nombre OR destino_nombre IS NULL) AND
-    (serv.destino_id = destinoID OR destinoID IS NULL);
+    (serv.destino_id = destinoID OR destinoID IS NULL)
+    GROUP BY serv.destino_id;
 END;
