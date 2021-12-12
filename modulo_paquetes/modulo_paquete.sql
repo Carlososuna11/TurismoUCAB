@@ -17,7 +17,10 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
             ) LOOP
                 dbms_output.put_line('Alojamiento: '||disp_alo.id_servicio || ' Fecha Inicio: ' || disp_alo.fecha.fechaInicio || ' Fecha Fin:' || disp_alo.fecha.fechaFin);
                 FOR r_servicio IN (
-                    SELECT * FROM SERVICIO serv WHERE nombre NOT LIKE '%Alojamiento%' AND destino_id=dest_id
+                    SELECT 
+                    DISTINCT serv.nombre,
+                    serv.id_servicio
+                    FROM SERVICIO serv WHERE nombre NOT LIKE '%Alojamiento%' AND destino_id=dest_id ORDER BY DBMS_RANDOM.RANDOM ASC
                 )
                     LOOP
                         FOR disp_serv IN (
