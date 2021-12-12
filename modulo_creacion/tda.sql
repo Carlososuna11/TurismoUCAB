@@ -120,53 +120,48 @@ CREATE OR REPLACE TYPE BALANCE AS OBJECT(
     SELF IN OUT NOCOPY BALANCE,
     egreso DECIMAL,
     existencia NUMBER, 
-    numeroVentas NUMBER, 
     precio_unitario DECIMAL
   ) RETURN SELF AS RESULT
 );
 
 /
-CREATE OR REPLACE TYPE BODY BALANCE AS
-FUNCTION calcularGanancia RETURN DECIMAL
-IS
-    BEGIN
-        return 0.0;
-    END;
-FUNCTION calcularIngreso RETURN DECIMAL
-IS
-    BEGIN
-        return 0.0;
-    END;
-
-FUNCTION calcularPrecioU (fecha DATE, egreso DECIMAL, existencia NUMBER) RETURN DECIMAL
-IS
-    BEGIN
-        return 0.0;
-    END;
-CONSTRUCTOR FUNCTION BALANCE (
+CREATE OR REPLACE TYPE BALANCE AS OBJECT(
+  egreso NUMBER,
+  existencia NUMBER, 
+  numeroVentas NUMBER, 
+  precio_unitario NUMBER,
+  STATIC FUNCTION calcularIngreso(numeroVentas NUMBER,precio_unitario NUMBER) RETURN NUMBER,
+  STATIC FUNCTION calcularGanancia(numeroVentas NUMBER,precio_unitario NUMBER,egreso NUMBER) RETURN NUMBER,
+  CONSTRUCTOR FUNCTION BALANCE(
     SELF IN OUT NOCOPY BALANCE,
-    egreso DECIMAL,
-    existencia NUMBER, 
-    numeroVentas NUMBER, 
-    precio_unitario DECIMAL,
+    egreso NUMBER,
+    existencia NUMBER
+  ) RETURN SELF AS RESULT
+);
+
+/
+CREATE OR REPLACE TYPE BODY BALANCE AS
+STATIC FUNCTION calcularGanancia(numeroVentas NUMBER,precio_unitario NUMBER,egreso NUMBER) RETURN NUMBER
+IS
+    BEGIN
+        return (numeroVentas * precio_unitario) - egreso;
+    END;
+STATIC FUNCTION calcularIngreso(numeroVentas NUMBER,precio_unitario NUMBER) RETURN NUMBER
+IS
+    BEGIN
+        return (numeroVentas * precio_unitario);
+    END;
+CONSTRUCTOR FUNCTION BALANCE(
+    SELF IN OUT NOCOPY BALANCE,
+    egreso NUMBER,
+    existencia NUMBER,
   ) RETURN SELF AS RESULT
 IS
     BEGIN
-        IF (egreso IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'El egreso no puede ser nulo');
-        ELSIF (existencia IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'La existencia no puede ser nulo');
-        ELSIF (numeroVentas IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'El numeroVentas no puede ser nulo');
-        ELSIF (precio_unitario IS NULL) THEN
-            RAISE_APPLICATION_ERROR(-20401, 'El precio unitario no puede ser nulo');
-        END IF;
-
-        SELF.egreso = egreso;
-        SELF.existencia = existencia;
-        SELF.numeroVentas = numeroVentas;
-        SELF.precio_unitario = precio_unitario;
-
+        SELF.egreso := egreso;
+        SELF.existencia := existencia;
+        SELF.numeroVentas := 0;
+        SELF.precio_unitario := egreso / existencia;
         RETURN;
     END;
 END;
