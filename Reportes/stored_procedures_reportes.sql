@@ -1,7 +1,7 @@
 CREATE OR REPLACE PROCEDURE REPORTE_1 (cursorMemoria OUT SYS_REFCURSOR)
 AS
 BEGIN
-    OPEN cursorMemoria MIN(disp.fecha_creacion) "Fecha de Creacion",
+    OPEN cursorMemoria FOR SELECT MIN(disp.fecha_creacion) "Fecha de Creacion",
     MIN(disp.fecha.fechaInicio) "Fecha desde",
     MAX(disp.fecha.fechaFin) "Fecha hasta",
     dest.nombre "Destino",
