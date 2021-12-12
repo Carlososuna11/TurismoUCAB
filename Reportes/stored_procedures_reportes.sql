@@ -18,3 +18,23 @@ BEGIN
     (serv.destino_id = destinoID OR destinoID IS NULL)
     GROUP BY serv.destino_id;
 END;
+
+CREATE OR REPLACE PROCEDURE REPORTE_2 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE)
+AS
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT dest.nombre "Destino Turistico",
+    MIN(disp.fecha.fechaInicio) "Fecha desde",
+    MAX(disp.fecha.fechaFin) "Fecha Hasta",
+    dest.foto "Foto",
+    dest.video "Video",
+    dest.descripcion "Descripción"
+    FROM DESTINO dest
+    INNER JOIN SERVICIO serv
+    ON serv.destino_id = dest.id_destino
+    INNER JOIN DISPONIBILIDAD dis
+    ON disp.id_servicio = serv.id_servicio
+    WHERE (disp.fecha.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
+    ( disp.fecha.fechaFin <= fechaFin OR fechaFin IS NULL)
+    GROUP BY dest.nombre, TO_CHAR(dest.foto), TO_CHAR(dest.video), dest.descripcion;
+END;
