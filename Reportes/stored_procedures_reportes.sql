@@ -32,7 +32,7 @@ BEGIN
     FROM DESTINO dest
     INNER JOIN SERVICIO serv
     ON serv.destino_id = dest.id_destino
-    INNER JOIN DISPONIBILIDAD dis
+    INNER JOIN DISPONIBILIDAD disp
     ON disp.id_servicio = serv.id_servicio
     WHERE (disp.fecha.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
     ( disp.fecha.fechaFin <= fechaFin OR fechaFin IS NULL)
