@@ -9,7 +9,6 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
     fecha_fin_tentativo DATE;
     precio_tentativo NUMBER;
     id_paquete_temp NUMBER;
-    disp_serv_aux DISPONIBILIDAD%ROWTYPE;
     BEGIN
         FOR r_alo IN (SELECT * FROM SERVICIO WHERE nombre LIKE '%Alojamiento%' AND destino_id=dest_id) LOOP
             -- Obteniendo los Alojamientos disponibles para el destino
@@ -17,6 +16,16 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                 SELECT * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_alo.id_servicio AND disp.fecha.fechaInicio >= fecha_creacion_paq AND disp.balance.existencia > 0
             ) LOOP
                 dbms_output.put_line('Alojamiento: '||disp_alo.id_servicio || ' Fecha Inicio: ' || disp_alo.fecha.fechaInicio || ' Fecha Fin:' || disp_alo.fecha.fechaFin);
+                FOR r_servicio IN (
+                    SELECT * FROM SERVICIO serv WHERE nombre NOT LIKE '%Alojamiento%' AND destino_id=dest_id
+                )
+                    LOOP
+                        FOR disp_serv IN (
+                            SELECT * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND disp.fecha.fechaInicio >= fecha_creacion_paq AND disp.fecha.fechaFin <= disp_alo.fecha.fechaFin AND disp.balance.existencia > 0
+                        ) LOOP
+                            dbms_output.put_line('          Servicio: '||r_servicio.nombre || ' Fecha Inicio: ' || disp_serv.fecha.fechaInicio || ' Fecha Fin:' || disp_serv.fecha.fechaFin);
+                        END LOOP;
+                    END LOOP;
             END LOOP;
         END LOOP;
     END;
