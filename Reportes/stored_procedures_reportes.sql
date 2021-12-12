@@ -26,8 +26,8 @@ BEGIN
     SELECT dest.nombre "Destino Turistico",
     MIN(disp.fecha.fechaInicio) "Fecha desde",
     MAX(disp.fecha.fechaFin) "Fecha Hasta",
-    dest.foto "Foto",
-    dest.video "Video",
+    TO_CHAR(dest.foto) "Foto",
+    TO_CHAR(dest.video) "Video",
     dest.descripcion "Descripción"
     FROM DESTINO dest
     INNER JOIN SERVICIO serv
