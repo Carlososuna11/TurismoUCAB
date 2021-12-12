@@ -37,6 +37,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
                         egreso_random,
                         cantidad_random      
                     ),
+                    serv.id_servicio,
                     fecha_creacion
                     );
                 FETCH c_serv INTO serv;
