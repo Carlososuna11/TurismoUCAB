@@ -23,17 +23,13 @@ CREATE OR REPLACE PROCEDURE REPORTE_2 (cursorMemoria OUT SYS_REFCURSOR, fechaIni
 AS
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT dest.nombre "Destino Turistico",
-    t1.col1 "Fecha desde",
-    t1.col2 "Fecha Hasta",
-    dest.foto "Foto",
-    dest.video "Video",
-    dest.descripcion "Descripción"
+    SELECT 
+    *
     FROM DESTINO dest
     INNER JOIN (
-        SELECT dest.id_destino "id_destino", 
-        MIN(disp.fecha.fechaInicio) "min_fecha",
-        MAX(disp.fecha.fechaFin) "max_fecha"
+        SELECT dest.id_destino, 
+        MIN(disp.fecha.fechaInicio),
+        MAX(disp.fecha.fechaFin)
         FROM DESTINO dest
         INNER JOIN SERVICIO serv
         ON serv.destino_id = dest.id_destino
