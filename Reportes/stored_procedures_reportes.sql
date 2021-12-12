@@ -24,12 +24,17 @@ AS
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
-    *
+    dest.nombre "Destino Turistico",
+    aux.fechaDesde "Fecha Desde",
+    aux.fechaHasta "Fecha Hasta",
+    dest.foto "Foto",
+    dest.video "Video",
+    dest.descripcion "Descripción"
     FROM DESTINO dest
     INNER JOIN (
         SELECT dest.id_destino, 
-        MIN(disp.fecha.fechaInicio),
-        MAX(disp.fecha.fechaFin)
+        MIN(disp.fecha.fechaInicio) as fechaDesde,
+        MAX(disp.fecha.fechaFin) as fechaHasta
         FROM DESTINO dest
         INNER JOIN SERVICIO serv
         ON serv.destino_id = dest.id_destino
