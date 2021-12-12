@@ -70,7 +70,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
             dbms_output.put_line('Destino: ' || r_dest.nombre);
             dbms_output.put_line(' ');
             dbms_output.put_line(' ');
-            -- GENERAR_PAQUETES(r_dest.id_destino,SYSDATE-3);
+            GENERAR_PAQUETES(r_dest.id_destino,SYSDATE-3);
         END LOOP;
     END;
 END;
