@@ -24,17 +24,23 @@ AS
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT dest.nombre "Destino Turistico",
-    MIN(disp.fecha.fechaInicio) "Fecha desde",
-    MAX(disp.fecha.fechaFin) "Fecha Hasta",
-    TO_CHAR(dest.foto) "Foto",
-    TO_CHAR(dest.video) "Video",
+    t1.col1 "Fecha desde",
+    t1.col2 "Fecha Hasta",
+    dest.foto "Foto",
+    dest.video "Video",
     dest.descripcion "Descripción"
     FROM DESTINO dest
-    INNER JOIN SERVICIO serv
-    ON serv.destino_id = dest.id_destino
-    INNER JOIN DISPONIBILIDAD disp
-    ON disp.id_servicio = serv.id_servicio
-    WHERE (disp.fecha.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
-    ( disp.fecha.fechaFin <= fechaFin OR fechaFin IS NULL)
-    GROUP BY dest.nombre, TO_CHAR(dest.foto), TO_CHAR(dest.video), dest.descripcion;
+    INNER JOIN (
+        SELECT dest.id_destino "id_destino", 
+        MIN(disp.fecha.fechaInicio) "min_fecha",
+        MAX(disp.fecha.fechaFin) "max_fecha"
+        FROM DESTINO dest
+        INNER JOIN SERVICIO serv
+        ON serv.destino_id = dest.id_destino
+        INNER JOIN DISPONIBILIDAD disp
+        ON disp.id_servicio = serv.id_servicio
+        WHERE (disp.fecha.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
+        ( disp.fecha.fechaFin <= fechaFin OR fechaFin IS NULL)
+        GROUP BY dest.id_destino
+    ) aux ON aux.id_destino =  dest.id_destino;
 END;
