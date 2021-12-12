@@ -4,7 +4,7 @@ CREATE OR REPLACE PACKAGE MODULO_SERVICIO IS
 END;
 /
 CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
-    CREATE PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE)
+    PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE)
     IS
         CURSOR c_serv IS
             SELECT * FROM SERVICIO;
@@ -45,7 +45,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
 
     END;
 
-    CREATE PROCEDURE INICIO_MODULO_SERVICIO IS
+    PROCEDURE INICIO_MODULO_SERVICIO IS
     BEGIN
         dbms_output.put_line('******************************');
         dbms_output.put_line('*                            *');
