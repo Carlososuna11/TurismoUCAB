@@ -21,7 +21,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                 )
                     LOOP
                         FOR disp_serv IN (
-                            SELECT * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND disp.fecha.fechaInicio >= fecha_creacion_paq AND disp.fecha.fechaFin <= disp_alo.fecha.fechaFin AND disp.balance.existencia > 0
+                            SELECT  * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND disp.fecha.fechaInicio >= fecha_creacion_paq AND disp.fecha.fechaFin <= disp_alo.fecha.fechaFin AND disp.balance.existencia > 0 FETCH FIRST 1 ROWS ONLY
                         ) LOOP
                             dbms_output.put_line('          Servicio: '||r_servicio.nombre || ' Fecha Inicio: ' || disp_serv.fecha.fechaInicio || ' Fecha Fin:' || disp_serv.fecha.fechaFin);
                         END LOOP;
