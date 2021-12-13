@@ -35,7 +35,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         dispositivo VARCHAR2(50);
         cant_met NUMBER;
         abono NUMBER := 0;
-        counter_abono := 0;
+        counter_abono NUMBER := 0;
         a_pagar NUMBER := 0;
     BEGIN
         IF (pcr_res = 1) THEN
