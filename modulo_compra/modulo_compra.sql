@@ -31,6 +31,12 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         pcr_res NUMBER := GENERAR_PCR(id_cliente_paq,fecha_compra);
         maximo NUMBER := round(DBMS_RANDOM.VALUE (1, 4));
         cli_paq CLIENTE%ROWTYPE;
+        id_fact_temp NUMBER;
+        dispositivo VARCHAR2(50);
+        cant_met NUMBER;
+        abono NUMBER := 0;
+        counter_abono := 0;
+        a_pagar NUMBER := 0;
     BEGIN
         IF (pcr_res = 1) THEN
             RETURN;
@@ -72,11 +78,46 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                 END IF;
             END IF;
         END LOOP;
-        FOR i IN 1..counter LOOP
-            --TODO: PROCESO DE COMPRA DE PAQUETES
-            SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
-            dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
-        END LOOP;        
+        IF (counter > 0 ) THEN
+            -- crear factura
+            
+            FOR i IN 1..counter LOOP
+                cant_met := round(DBMS_RANDOM.VALUE (1, 3));
+                --TODO: PROCESO DE COMPRA DE PAQUETES
+                SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
+               
+                IF (canal_pago_id > 1) THEN
+                    CASE ROUND(DBMS_RANDOM.VALUE (1, 4))
+                    WHEN 1 THEN
+                        dispositivo := 'IOS';
+                    WHEN 2 THEN
+                        dispositivo := 'ANDROID';
+                    WHEN 3 THEN
+                        dispositivo := 'WINDOWS PC';
+                    WHEN 4 THEN
+                        dispositivo := 'MAC OS';
+                    END CASE;
+                    dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
+                ELSE
+                     dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
+                END IF; 
+                dbms_output.put_line('                      Metodos de Pago');
+                FOR op_metodos IN (SELECT * FROM METODOS_PAGO ORDER BY DBMS_RANDOM.RANDOM ASC) LOOP
+                    counter_abono := counter_abono + 1;
+                    IF (counter_abono = cant_met) THEN
+                        a_pagar := paq_lista(i).precio - abono;
+                        abono := a_pagar + abono;
+                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||abono);
+                        EXIT;
+                    ELSE
+                        a_pagar := paq_lista(i).precio - abono;
+                        a_pagar := DBMS_RANDOM.VALUE (1, a_pagar/2);
+                        abono := a_pagar + abono;
+                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||abono);
+                    END IF;
+                END LOOP;
+            END LOOP;        
+        END IF;
     END;
 
     PROCEDURE INICIO_MODULO_COMPRA IS

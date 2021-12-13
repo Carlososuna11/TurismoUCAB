@@ -215,3 +215,8 @@ CREATE TABLE VENTA(
     REFERENCES COMPETENCIA(id_competencia),
     CONSTRAINT pk_venta PRIMARY KEY (fecha_mes, competencia_id)
 );
+/
+CREATE TABLE METODOS_PAGO(
+    id_metodo NUMBER PRIMARY KEY,
+    nombre VARCHAR2(50) NOT NULL
+);
