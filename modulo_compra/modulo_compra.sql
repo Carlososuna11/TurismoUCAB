@@ -36,33 +36,44 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             RETURN;
         END IF;
         FOR op_paquetes IN (SELECT * FROM PAQUETE paq WHERE paq.fechas.fechaInicio > fecha_compra ORDER BY DBMS_RANDOM.RANDOM ASC) LOOP
-            -- TODO: verificar que las fechas no se solapen
             califica := 1;
-            IF (counter = 0) THEN
-                counter := counter + 1;
-                paq_lista.extend;
-                paq_lista(counter) := op_paquetes;
-            ELSE
-                FOR i IN 1..counter LOOP
-                    IF ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaInicio AND 
-                        paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaInicio) OR 
-                        ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaFin AND 
-                        paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaFin))) THEN
-                            califica := 0;
-                            EXIT;
-                    END IF;
-                END LOOP;
-                IF (califica = 1) THEN
+            FOR prop_paquetes IN (SELECT * FROM PAQUETE paq INNER JOIN PROPIETARIO prop ON prop.paquete_id = paq.id_paquete WHERE prop.cliente_id = id_cliente_paq) LOOP
+                IF ((prop_paquetes.fechas.fechaInicio <= op_paquetes.fechas.fechaInicio AND 
+                    prop_paquetes.fechas.fechaFin >= op_paquetes.fechas.fechaInicio) OR 
+                    ((prop_paquetes.fechas.fechaInicio <= op_paquetes.fechas.fechaFin AND 
+                    prop_paquetes.fechas.fechaFin >= op_paquetes.fechas.fechaFin))) THEN
+                    califica := 0;
+                    EXIT;
+                END IF;
+            END LOOP;
+            IF (califica = 1) THEN
+                IF (counter = 0) THEN
                     counter := counter + 1;
                     paq_lista.extend;
                     paq_lista(counter) := op_paquetes;
+                ELSE
+                    FOR i IN 1..counter LOOP
+                        IF ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaInicio AND 
+                            paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaInicio) OR 
+                            ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaFin AND 
+                            paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaFin))) THEN
+                                califica := 0;
+                                EXIT;
+                        END IF;
+                    END LOOP;
+                    IF (califica = 1) THEN
+                        counter := counter + 1;
+                        paq_lista.extend;
+                        paq_lista(counter) := op_paquetes;
+                    END IF;
                 END IF;
-            END IF;
-            IF (counter = maximo) THEN
-                EXIT;
+                IF (counter = maximo) THEN
+                    EXIT;
+                END IF;
             END IF;
         END LOOP;
         FOR i IN 1..counter LOOP
+            --TODO: PROCESO DE COMPRA DE PAQUETES
             SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
             dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
         END LOOP;        
