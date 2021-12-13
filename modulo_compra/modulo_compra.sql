@@ -24,7 +24,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
 
     PROCEDURE COMPRAR_PAQUETE(id_cliente_paq NUMBER, fecha_compra DATE) IS
         canal_pago_id NUMBER :=round(DBMS_RANDOM.VALUE (1, 5));
-        TYPE paq_list is Varray(5) OF PAQUETE%ROWTYPE;
+        TYPE paq_list is Varray(6) OF PAQUETE%ROWTYPE;
         paq_lista paq_list := paq_list();
         counter NUMBER := 0;
         califica NUMBER(1) := 1; 
@@ -39,10 +39,11 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             -- TODO: verificar que las fechas no se solapen
             califica := 1;
             IF (counter = 0) THEN
-                paq_lista(counter) := op_paquetes;
                 counter := counter + 1;
+                paq_lista.extend;
+                paq_lista(counter) := op_paquetes;
             ELSE
-                FOR i IN 0..counter LOOP
+                FOR i IN 1..counter LOOP
                     IF ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaInicio AND 
                         paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaInicio) OR 
                         ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaFin AND 
@@ -52,15 +53,16 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     END IF;
                 END LOOP;
                 IF (califica = 1) THEN
-                    paq_lista(counter) := op_paquetes;
                     counter := counter + 1;
+                    paq_lista.extend;
+                    paq_lista(counter) := op_paquetes;
                 END IF;
             END IF;
             IF (counter = maximo) THEN
                 EXIT;
             END IF;
         END LOOP;
-        FOR i IN 0..counter LOOP
+        FOR i IN 1..counter LOOP
             SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
             dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
         END LOOP;        
