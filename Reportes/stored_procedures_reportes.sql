@@ -107,7 +107,7 @@ BEGIN
     INNER JOIN (
         SELECT
         det.factura_id,
-        LISTAGG('$ '|| ROUND(map.cantidad,2) ||' - '|| serv.forma ,chr(13) || chr(10) )  WITHIN GROUP (ORDER BY serv.nombre) as forma_pago
+        LISTAGG('$ '|| ROUND(mpa.cantidad,2) ||' - '|| mpa.forma ,chr(13) || chr(10) )  WITHIN GROUP (ORDER BY mpa.cantidad) as forma_pago
         FROM DETFACTURA det
         INNER JOIN MPAGO mpa
         ON mpa.detFactura_id = det.id_detFactura
