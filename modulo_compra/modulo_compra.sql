@@ -173,7 +173,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     NULL,
                     NULL,
                     id_cliente_paq,
-                    paq_lista(i).id_paquete,
+                    paq_lista(i).id_paquete
                 );
             END LOOP;
             precio_total_factura := precio_total_factura + canal_pago.comision;
