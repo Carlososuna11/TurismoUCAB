@@ -15,9 +15,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         VALUES (fecha_pcr,resultado_pcr,id_cliente_pcr);
         SELECT * INTO cli FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente;
         IF resultado_pcr = 1 THEN
-            dbms_output.put_line('El cliente '||cli.nombre||' '||cli.apellido||' Dio positivo Para COVID, por ello no podrá comprar ningun paquete');
+            dbms_output.put_line('El cliente '||cli.datos.nombre||' '||cli.datos.apellido||' Dio positivo Para COVID, por ello no podrá comprar ningun paquete');
         ELSE
-            dbms_output.put_line('El cliente '||cli.nombre||' '||cli.apellido||' Dio negativo Para COVID, por ello podrá comprar paquetes');
+            dbms_output.put_line('El cliente '||cli.datos.nombre||' '||cli.datos.apellido||' Dio negativo Para COVID, por ello podrá comprar paquetes');
         END IF;
         RETURN resultado_pcr;
     END;
@@ -46,7 +46,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     IF ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaInicio AND 
                         paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaInicio) OR 
                         ((paq_lista(i).fechas.fechaInicio <= op_paquetes.fechas.fechaFin AND 
-                        paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaFechaFin))) THEN
+                        paq_lista(i).fechas.fechaFin >= op_paquetes.fechas.fechaFin))) THEN
                             califica := 0;
                             EXIT;
                     END IF;
@@ -62,7 +62,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         END LOOP;
         FOR i IN 1..counter LOOP
             SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
-            dbms_output.put_line('El cliente '||cli_paq.nombre||' ' || cli_paq.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
+            dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
         END LOOP;        
     END;
 
@@ -78,7 +78,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         dbms_output.put_line(' Generando compras aleatorias');
         dbms_output.put_line(' ');
         dbms_output.put_line(' ');
-        FOR cli_aleatorio IN (SELECT * FROM CLIENTE ORDER BY DBMS_RANDOM.RANDOM ASC FETCH FETCH FIRST 5 ROWS ONLY) LOOP
+        FOR cli_aleatorio IN (SELECT * FROM CLIENTE ORDER BY DBMS_RANDOM.RANDOM ASC FETCH FIRST 5 ROWS ONLY) LOOP
             COMPRAR_PAQUETE(cli_aleatorio.id_cliente,SYSDATE);
         END LOOP;
     END;
