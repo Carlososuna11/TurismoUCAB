@@ -28,7 +28,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                 )
                     LOOP
                         FOR disp_serv IN (
-                            SELECT  * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND disp.fecha.fechaInicio >= disp_alo.fecha.fechaFin AND disp.fecha.fechaFin <= disp_alo.fecha.fechaFin AND disp.balance.existencia > 0 FETCH FIRST 1 ROWS ONLY
+                            SELECT  * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND disp.fecha.fechaInicio >= disp_alo.fecha.fechaInicio AND disp.fecha.fechaFin <= disp_alo.fecha.fechaFin AND disp.balance.existencia > 0 FETCH FIRST 1 ROWS ONLY
                         ) LOOP
                             IF aceptar_o_rechazar(0.7) THEN
                                 precio_tentativo := precio_tentativo + disp_serv.balance.precio_unitario;
