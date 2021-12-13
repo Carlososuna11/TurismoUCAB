@@ -97,8 +97,6 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     END CASE;
             ELSE
                 dispositivo := NULL;
-                    -- dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
-                    --  dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
             END IF; 
             SELECT * INTO canal_pago FROM MEDIO WHERE MEDIO.id_medio = canal_pago_id;
             INSERT INTO FACTURA VALUES (
@@ -110,9 +108,9 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             canal_pago.id_medio) RETURNING id_factura INTO id_fact_temp;
             FOR i IN 1..counter LOOP
                 IF (dispositivo IS NULL) THEN
-                    dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
+                    dbms_output.put_line('                  El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
                 ELSE
-                    dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
+                    dbms_output.put_line('                  El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
                 END IF;
                 -- CREAR DETALLE DE FACTURA
                 INSERT INTO DETFACTURA VALUES (
@@ -157,11 +155,29 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     END IF;
                 END LOOP;
                 precio_total_factura := precio_total_factura + abono;
-                -- TODO: POR CADA SERVICIO, ACTUALIZAR EL BALANCE
-                -- TODO: ASIGNAR PROPIETARIO AL PAQUETE
+                FOR op_disp IN (SELECT 
+                                disp.id_disponibilidad,
+                                disp.fecha,
+                                disp.balance,
+                                disp.id_servicio,
+                                disp.fecha_creacion
+                                FROM DISPONIBILIDAD disp 
+                                INNER JOIN SUBSCRIPCION subs 
+                                ON subs.disponibilidad_id = disp.id_disponibilidad 
+                                INNER JOIN PAQUETE paq ON paq.id_paquete = subs.paquete_id 
+                                WHERE paq.id_paquete = paq_lista(i).id_paquete ) LOOP
+                    UPDATE DISPONIBILIDAD disp SET disp.balance.numeroVentas = disp.balance.numeroVentas + 1 WHERE disp.id_disponibilidad = op_disp.id_disponibilidad;
+                END LOOP;
+                -- TODO: COMPRAR PAQUETE A OTRA PERSONA
+                INSERT INTO PROPIETARIO VALUES (
+                    NULL,
+                    NULL,
+                    id_cliente_paq,
+                    paq_lista(i).id_paquete,
+                );
             END LOOP;
             precio_total_factura := precio_total_factura + canal_pago.comision;
-            dbms_output.put_line('                      Total Factura '||ROUND(precio_total_factura,2));   
+            dbms_output.put_line('Total Factura '||ROUND(precio_total_factura,2));   
             UPDATE FACTURA fact SET fact.total = precio_total_factura WHERE fact.id_factura = id_fact_temp;     
         END IF;
     END;
@@ -180,6 +196,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         dbms_output.put_line(' ');
         FOR cli_aleatorio IN (SELECT * FROM CLIENTE ORDER BY DBMS_RANDOM.RANDOM ASC FETCH FIRST 5 ROWS ONLY) LOOP
             COMPRAR_PAQUETE(cli_aleatorio.id_cliente,SYSDATE);
+            dbms_output.put_line(' ');
         END LOOP;
     END;
 END;
