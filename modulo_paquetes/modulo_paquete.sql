@@ -47,6 +47,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                                         disp_alo.id_disponibilidad,
                                         disp_alo.id_servicio
                                     );
+                                    UPDATE DISPONIBILIDAD disp SET disp.balance.existencia = disp.balance.existencia - 1 WHERE disp.id_disponibilidad = disp_alo.id_disponibilidad;
                                 ELSE
                                     UPDATE PAQUETE paq SET paq.precio = precio_tentativo WHERE paq.id_paquete = id_paquete_temp;
                                 END IF; 
@@ -56,6 +57,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                                         disp_serv.id_disponibilidad,
                                         disp_serv.id_servicio
                                 );
+                                UPDATE DISPONIBILIDAD disp SET disp.balance.existencia = disp.balance.existencia - 1 WHERE disp.id_disponibilidad = disp_serv.id_disponibilidad;
                                 contador_servicios_paquete := contador_servicios_paquete + 1;
                             END IF;
                         END LOOP;
