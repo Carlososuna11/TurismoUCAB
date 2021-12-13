@@ -101,7 +101,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                 END IF; 
             SELECT * INTO canal_pago FROM MEDIO WHERE MEDIO.id_medio = canal_pago_id;
             INSERT INTO FACTURA VALUES (
-            id_factura.nextVal,
+            id_factura_s.nextVal,
             fecha_compra,
             0,
             dispositivo,
@@ -110,7 +110,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             FOR i IN 1..counter LOOP
                 -- CREAR DETALLE DE FACTURA
                 INSERT INTO DETFACTURA VALUES (
-                    id_detfactura.nextVal,
+                    id_detfactura_s.nextVal,
                     paq_lista(i).precio,
                     id_fact_temp,
                     paq_lista(i).id_paquete
@@ -126,7 +126,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                         a_pagar := paq_lista(i).precio - abono;
                         abono := a_pagar + abono;
                         INSERT INTO MPAGO VALUES(
-                            id_mpago.nextVal,
+                            id_mpago_s.nextVal,
                             op_metodos.nombre,
                             a_pagar,
                             id_det_fact_temp,
@@ -140,7 +140,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                         a_pagar := DBMS_RANDOM.VALUE (1, a_pagar);
                         abono := a_pagar + abono;
                         INSERT INTO MPAGO VALUES(
-                            id_mpago.nextVal,
+                            id_mpago_s.nextVal,
                             op_metodos.nombre,
                             a_pagar,
                             id_det_fact_temp,
