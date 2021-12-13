@@ -66,7 +66,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         END LOOP;        
     END;
 
-    PROCEDURE INICIO_MODULO_SERVICIO IS
+    PROCEDURE INICIO_MODULO_COMPRA IS
     BEGIN
         dbms_output.put_line('******************************');
         dbms_output.put_line('*                            *');
