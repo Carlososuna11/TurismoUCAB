@@ -13,7 +13,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         resultado_pcr := round(DBMS_RANDOM.VALUE (0, 1));
         INSERT INTO PCR (pcr_fecha,pcr_positivo,cliente_id)
         VALUES (fecha_pcr,resultado_pcr,id_cliente_pcr);
-        SELECT * INTO cli FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente;
+        SELECT * INTO cli FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_pcr;
         IF resultado_pcr = 1 THEN
             dbms_output.put_line('El cliente '||cli.datos.nombre||' '||cli.datos.apellido||' Dio positivo Para COVID, por ello no podrá comprar ningun paquete');
         ELSE
