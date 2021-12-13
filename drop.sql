@@ -41,9 +41,9 @@ DROP SEQUENCE id_observacion;
 DROP SEQUENCE id_paquete;
 DROP SEQUENCE id_pcr;
 DROP SEQUENCE id_medio;
-DROP SEQUENCE id_factura;
-DROP SEQUENCE id_detfactura;
-DROP SEQUENCE id_mpago;
+DROP SEQUENCE id_factura_s;
+DROP SEQUENCE id_detfactura_s;
+DROP SEQUENCE id_mpago_s;
 DROP SEQUENCE id_competencia;
 
 -- PROCEDURES
