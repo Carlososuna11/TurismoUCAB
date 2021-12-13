@@ -95,10 +95,11 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     WHEN 4 THEN
                         dispositivo := 'MAC OS';
                     END CASE;
+            ELSE
+                dispositivo := NULL;
                     -- dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
-                ELSE
                     --  dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
-                END IF; 
+            END IF; 
             SELECT * INTO canal_pago FROM MEDIO WHERE MEDIO.id_medio = canal_pago_id;
             INSERT INTO FACTURA VALUES (
             id_factura_s.nextVal,
