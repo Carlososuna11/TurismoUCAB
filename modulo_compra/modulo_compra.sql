@@ -101,19 +101,22 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                 ELSE
                      dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
                 END IF; 
+                abono:= 0;
                 dbms_output.put_line('                      Metodos de Pago');
                 FOR op_metodos IN (SELECT * FROM METODOS_PAGO ORDER BY DBMS_RANDOM.RANDOM ASC) LOOP
                     counter_abono := counter_abono + 1;
+                    a_pagar := 0;
                     IF (counter_abono = cant_met) THEN
                         a_pagar := paq_lista(i).precio - abono;
                         abono := a_pagar + abono;
-                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||abono);
+                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||a_pagar|| ' Abono Total '||abono);
+
                         EXIT;
                     ELSE
-                        a_pagar := paq_lista(i).precio - abono;
-                        a_pagar := DBMS_RANDOM.VALUE (1, a_pagar/2);
+                        a_pagar := (paq_lista(i).precio - abono)/2;
+                        a_pagar := DBMS_RANDOM.VALUE (1, a_pagar);
                         abono := a_pagar + abono;
-                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||abono);
+                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||a_pagar|| ' Abono Total '||abono);
                     END IF;
                 END LOOP;
             END LOOP;        
