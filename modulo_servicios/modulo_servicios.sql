@@ -22,7 +22,8 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
                 LOOP
                     cantidad_random := ROUND(DBMS_RANDOM.VALUE (1, 3));
                     egreso_random :=  DBMS_RANDOM.VALUE (50, 100) * cantidad_random;
-                    fecha_inicio_random:= RANDOM_DATE(fecha_inicio_tentativo,fecha_inicio_tentativo+ROUND(DBMS_RANDOM.VALUE (1, 15)));
+                    fecha_inicio_random := fecha_inicio_tentativo+ROUND(DBMS_RANDOM.VALUE (1, 15));
+                    fecha_inicio_random:= RANDOM_DATE(fecha_inicio_tentativo,fecha_inicio_random);
                     IF (serv.nombre LIKE '%Alojamiento%') THEN
                         fecha_fin_random:= fecha_inicio_random + ROUND(DBMS_RANDOM.VALUE (1, 5));
                     ELSE
