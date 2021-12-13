@@ -54,7 +54,7 @@ begin
     dest.nombre "Destino Turistico",
     paq.fechas.fechaInicio "Fecha Desde",
     paq.fechas.fechaFin "Fecha Hasta",
-    dest.foto "Foto",
+    dest.foto "Foto"
     -- aux.caracteristicas "Caracteristicas",
     -- '$ '||paq.precio|| ' por persona' "Costo"
     FROM DESTINO dest
