@@ -56,10 +56,10 @@ begin
     paq.fechas.fechaFin "Fecha Hasta",
     dest.foto "Foto",
     -- aux.caracteristicas "Caracteristicas",
-    '$ '||paq.precio|| ' por persona' "Costo"
+    -- '$ '||paq.precio|| ' por persona' "Costo"
     FROM DESTINO dest
     INNER JOIN PAQUETE paq
-    ON paq.destino_id = dest.id_destino
+    ON paq.destino_id = dest.id_destino;
     -- INNER JOIN (
     --     SELECT
     --     dest.id_destino,
@@ -77,8 +77,8 @@ begin
     --     GROUP BY dest.id_destino, paq.id_paquete 
     -- ) aux
     -- ON aux.id_paquete = paq.id_paquete
-    WHERE (paq.fechas.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
-    ( paq.fechas.fechaFin <= fechaFin OR fechaFin IS NULL) AND
-    ( dest.nombre = destino_nombre OR destino_nombre IS NULL) AND
-    (dest.id_destino = destinoID OR destinoID IS NULL);
+    -- WHERE (paq.fechas.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
+    -- ( paq.fechas.fechaFin <= fechaFin OR fechaFin IS NULL) AND
+    -- ( dest.nombre = destino_nombre OR destino_nombre IS NULL) AND
+    -- (dest.id_destino = destinoID OR destinoID IS NULL);
 end;
