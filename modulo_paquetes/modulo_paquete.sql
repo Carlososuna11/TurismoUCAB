@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                                     INSERT INTO PAQUETE VALUES (
                                         id_paquete.nextval,
                                         fecha_creacion_paq,
-                                        NULL,
+                                        0,
                                         precio_tentativo,
                                         FECHA_RANGO(disp_alo.fecha.fechaInicio,disp_alo.fecha.fechaFin),
                                         dest_id
