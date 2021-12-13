@@ -100,10 +100,10 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     --  dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
                 END IF; 
             SELECT * INTO canal_pago FROM MEDIO WHERE MEDIO.id_medio = canal_pago_id;
-            INSERT INTO FACTURA (
+            INSERT INTO FACTURA VALUES (
             id_factura.nextVal,
             fecha_compra,
-            0.0,
+            0,
             dispositivo,
             id_cliente_paq,
             canal_pago.id_medio) RETURNING id_factura INTO id_fact_temp;
