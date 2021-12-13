@@ -188,7 +188,7 @@ CREATE TABLE DETFACTURA(
 /
 CREATE TABLE MPAGO(
     id_mpago NUMBER,
-    forma varchar2(10),
+    forma varchar2(20) NOT NULL,
     cantidad DECIMAL(10,2),
     detFactura_id NUMBER NOT NULL,
     detFactura_factura_id NUMBER NOT NULL,

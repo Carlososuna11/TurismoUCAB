@@ -109,6 +109,11 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             id_cliente_paq,
             canal_pago.id_medio) RETURNING id_factura INTO id_fact_temp;
             FOR i IN 1..counter LOOP
+                IF (dispositivo IS NULL) THEN
+                    dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
+                ELSE
+                    dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
+                END IF;
                 -- CREAR DETALLE DE FACTURA
                 INSERT INTO DETFACTURA VALUES (
                     id_detfactura_s.nextVal,
