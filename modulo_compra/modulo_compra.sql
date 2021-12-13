@@ -82,7 +82,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             -- crear factura
             
             FOR i IN 1..counter LOOP
-                cant_met := round(DBMS_RANDOM.VALUE (1, 3));
+                cant_met := ROUND(DBMS_RANDOM.VALUE (1, 3));
                 --TODO: PROCESO DE COMPRA DE PAQUETES
                 SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
                
@@ -102,6 +102,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                      dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
                 END IF; 
                 abono:= 0;
+                counter_abono := 0;
                 dbms_output.put_line('                      Metodos de Pago');
                 FOR op_metodos IN (SELECT * FROM METODOS_PAGO ORDER BY DBMS_RANDOM.RANDOM ASC) LOOP
                     counter_abono := counter_abono + 1;
@@ -109,14 +110,13 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     IF (counter_abono = cant_met) THEN
                         a_pagar := paq_lista(i).precio - abono;
                         abono := a_pagar + abono;
-                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||a_pagar|| ' Abono Total '||abono);
-
+                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||ROUND(a_pagar,2)|| ' Abono Total '||ROUND(abono,2));
                         EXIT;
                     ELSE
                         a_pagar := (paq_lista(i).precio - abono)/2;
                         a_pagar := DBMS_RANDOM.VALUE (1, a_pagar);
                         abono := a_pagar + abono;
-                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||a_pagar|| ' Abono Total '||abono);
+                        dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||ROUND(a_pagar,2)|| ' Abono Total '||ROUND(abono,2));
                     END IF;
                 END LOOP;
             END LOOP;        
