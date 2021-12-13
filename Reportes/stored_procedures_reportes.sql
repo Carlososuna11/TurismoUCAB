@@ -93,7 +93,7 @@ BEGIN
     paq.fechas.fechaFin "Fecha Hasta",
     dest.foto "Foto",
     CONCAT(CONCAT('$ ',paq.precio),' por persona') "Costo",
-    CONCAT(cli.datos.nombre,' ',cli.datos.apellido) "Cliente",
+    CONCAT(CONCAT(cli.datos.nombre,' '),cli.datos.apellido) "Cliente",
     aux.forma_pago "Forma de Pago",
     paq_medio.canal "Canal Utilizado",
     fac.dispositivo "Dispositivo"
