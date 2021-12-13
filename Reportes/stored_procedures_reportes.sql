@@ -80,5 +80,5 @@ begin
     WHERE (paq.fechas.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
     ( paq.fechas.fechaFin <= fechaFin OR fechaFin IS NULL) AND
     ( dest.nombre = destino_nombre OR destino_nombre IS NULL) AND
-    (dest.id_destino = destinoID OR destinoID IS NULL)
+    (dest.id_destino = destinoID OR destinoID IS NULL);
 end;
