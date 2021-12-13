@@ -32,11 +32,14 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         maximo NUMBER := round(DBMS_RANDOM.VALUE (1, 4));
         cli_paq CLIENTE%ROWTYPE;
         id_fact_temp NUMBER;
+        id_det_fact_temp NUMBER;
         dispositivo VARCHAR2(50);
         cant_met NUMBER;
         abono NUMBER := 0;
         counter_abono NUMBER := 0;
         a_pagar NUMBER := 0;
+        canal_pago MEDIO%ROWTYPE;
+        precio_total_factura NUMBER :=0;
     BEGIN
         IF (pcr_res = 1) THEN
             RETURN;
@@ -80,13 +83,8 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         END LOOP;
         IF (counter > 0 ) THEN
             -- crear factura
-            
-            FOR i IN 1..counter LOOP
-                cant_met := ROUND(DBMS_RANDOM.VALUE (1, 3));
-                --TODO: PROCESO DE COMPRA DE PAQUETES
-                SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
-               
-                IF (canal_pago_id > 1) THEN
+            SELECT * INTO cli_paq FROM CLIENTE WHERE CLIENTE.id_cliente = id_cliente_paq;
+            IF (canal_pago_id > 1) THEN
                     CASE ROUND(DBMS_RANDOM.VALUE (1, 4))
                     WHEN 1 THEN
                         dispositivo := 'IOS';
@@ -97,10 +95,26 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     WHEN 4 THEN
                         dispositivo := 'MAC OS';
                     END CASE;
-                    dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
+                    -- dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio||' con el dispositivo '||dispositivo);
                 ELSE
-                     dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
+                    --  dbms_output.put_line('El cliente '||cli_paq.datos.nombre||' ' || cli_paq.datos.apellido ||' compro el paquete '||paq_lista(i).id_paquete||' por un monto de '||paq_lista(i).precio);
                 END IF; 
+            SELECT * INTO canal_pago FROM MEDIO WHERE MEDIO.id_medio = canal_pago_id;
+            INSERT INTO FACTURA (id_factura.nextVal,
+            fecha_compra,
+            0,
+            dispositivo,
+            id_cliente_paq,
+            canal_pago.id_medio) RETURNING id_factura INTO id_fact_temp;
+            FOR i IN 1..counter LOOP
+                -- CREAR DETALLE DE FACTURA
+                INSERT INTO DETFACTURA VALUES (
+                    id_detfactura.nextVal,
+                    paq_lista(i).precio,
+                    id_fact_temp,
+                    paq_lista(i).id_paquete
+                ) RETURNING id_detFactura INTO id_det_fact_temp;
+                cant_met := ROUND(DBMS_RANDOM.VALUE (1, 3));
                 abono:= 0;
                 counter_abono := 0;
                 dbms_output.put_line('                      Metodos de Pago');
@@ -110,16 +124,38 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
                     IF (counter_abono = cant_met) THEN
                         a_pagar := paq_lista(i).precio - abono;
                         abono := a_pagar + abono;
+                        INSERT INTO MPAGO VALUES(
+                            id_mpago.nextVal,
+                            op_metodos.nombre,
+                            a_pagar,
+                            id_det_fact_temp,
+                            id_fact_temp,
+                            paq_lista(i).id_paquete
+                        );
                         dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||ROUND(a_pagar,2)|| ' Abono Total '||ROUND(abono,2));
                         EXIT;
                     ELSE
                         a_pagar := (paq_lista(i).precio - abono)/2;
                         a_pagar := DBMS_RANDOM.VALUE (1, a_pagar);
                         abono := a_pagar + abono;
+                        INSERT INTO MPAGO VALUES(
+                            id_mpago.nextVal,
+                            op_metodos.nombre,
+                            a_pagar,
+                            id_det_fact_temp,
+                            id_fact_temp,
+                            paq_lista(i).id_paquete
+                        );
                         dbms_output.put_line('                      '||op_metodos.nombre||' Cantidad Abonada '||ROUND(a_pagar,2)|| ' Abono Total '||ROUND(abono,2));
                     END IF;
                 END LOOP;
-            END LOOP;        
+                precio_total_factura := precio_total_factura + abono;
+                -- TODO: POR CADA SERVICIO, ACTUALIZAR EL BALANCE
+                -- TODO: ASIGNAR PROPIETARIO AL PAQUETE
+            END LOOP;
+            precio_total_factura := precio_total_factura + canal_pago.comision;
+            dbms_output.put_line('                      Total Factura '||ROUND(precio_total_factura,2));   
+            UPDATE FACTURA fact SET fact.total = precio_total_factura WHERE fact.id_factura = id_fact_temp;     
         END IF;
     END;
 
