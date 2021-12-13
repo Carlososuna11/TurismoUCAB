@@ -106,14 +106,14 @@ BEGIN
     ON paq_medio.id_medio = fac.medio_id
     INNER JOIN (
         SELECT
-        det.factura_id,
+        det.id_detFactura,
         LISTAGG('$ '|| ROUND(mpa.cantidad,2) ||' - '|| mpa.forma ,chr(13) || chr(10) )  WITHIN GROUP (ORDER BY mpa.cantidad) as forma_pago
         FROM DETFACTURA det
         INNER JOIN MPAGO mpa
         ON mpa.detFactura_id = det.id_detFactura
-        GROUP BY det.factura_id
+        GROUP BY det.id_detFactura
     ) aux 
-    ON aux.factura_id = det.factura_id
+    ON aux.id_detFactura = det.id_detFactura
     INNER JOIN DESTINO dest
     ON dest.id_destino = paq.destino_id
     INNER JOIN PROPIETARIO prop
