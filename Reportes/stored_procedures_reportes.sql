@@ -82,3 +82,42 @@ begin
     ( dest.nombre = destino_nombre OR destino_nombre IS NULL) AND
     (dest.id_destino = destinoID OR destinoID IS NULL);
 end;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_4 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, dispositivo_compra VARCHAR2)
+AS
+BEGIN
+    OPEN cursorMemoria FOR
+    SELECT
+    dest.nombre "Destino Turistico",
+    paq.fechas.fechaInicio "Fecha Desde",
+    paq.fechas.fechaFin "Fecha Hasta",
+    dest.foto "Foto",
+    CONCAT(CONCAT('$ ',paq.precio),' por persona') "Costo",
+    CONCAT(cli.datos.nombre,' ',cli.datos.apellido) "Cliente",
+    aux.forma_pago "Forma de Pago",
+    paq_medio.canal "Canal Utilizado",
+    fac.dispositivo "Dispositivo"
+    FROM DETFACTURA det
+    INNER JOIN FACTURA fac
+    ON fac.id_factura = det.factura_id
+    INNER JOIN PAQUETE paq
+    ON paq.id_paquete = det.paquete_id
+    INNER JOIN MEDIO paq_medio
+    ON paq_medio.id_medio = fac.medio_id
+    INNER JOIN (
+        SELECT
+        det.factura_id,
+        LISTAGG('$ '|| ROUND(map.cantidad,2) ||' - '|| serv.forma ,chr(13) || chr(10) )  WITHIN GROUP (ORDER BY serv.nombre) as forma_pago
+        FROM DETFACTURA det
+        INNER JOIN MPAGO mpa
+        ON mpa.detFactura_id = det.id_detFactura
+        GROUP BY det.factura_id
+    ) aux 
+    ON aux.factura_id = det.factura_id
+    INNER JOIN DESTINO dest
+    ON dest.id_destino = paq.destino_id
+    INNER JOIN PROPIETARIO prop
+    ON prop.paquete_id = paq.id_paquete
+    INNER JOIN CLIENTE cli
+    ON cli.id_cliente = prop.cliente_id
+END;
