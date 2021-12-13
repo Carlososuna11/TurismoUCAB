@@ -24,7 +24,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                     SELECT 
                     DISTINCT serv.nombre,
                     serv.id_servicio
-                    FROM SERVICIO serv WHERE serv.nombre NOT LIKE '%Alojamiento%' AND serv.destino_id=dest_id ORDER BY DBMS_RANDOM.RANDOM ASC
+                    FROM SERVICIO serv WHERE serv.nombre NOT LIKE '%Alojamiento%' AND serv.destino_id=dest_id ORDER BY DBMS_RANDOM.RANDOM ASC FETCH FIRST 10 ROWS ONLY
                 )
                     LOOP
                         FOR disp_serv IN (

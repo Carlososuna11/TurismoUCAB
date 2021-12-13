@@ -45,3 +45,10 @@ BEGIN
         GROUP BY dest.id_destino
     ) aux ON aux.id_destino =  dest.id_destino;
 END;
+/
+-- CREATE OR REPLACE PROCEDURE REPORTE_3 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, destino_nombre VARCHAR2, destinoID NUMBER) 
+-- AS
+-- begin
+--   OPERN cursorMemoria FOR
+--     SELECT
+-- end;
