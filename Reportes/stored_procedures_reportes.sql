@@ -119,5 +119,5 @@ BEGIN
     INNER JOIN PROPIETARIO prop
     ON prop.paquete_id = paq.id_paquete
     INNER JOIN CLIENTE cli
-    ON cli.id_cliente = prop.cliente_id
+    ON cli.id_cliente = prop.cliente_id;
 END;
