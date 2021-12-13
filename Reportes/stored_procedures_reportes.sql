@@ -119,5 +119,8 @@ BEGIN
     INNER JOIN PROPIETARIO prop
     ON prop.paquete_id = paq.id_paquete
     INNER JOIN CLIENTE cli
-    ON cli.id_cliente = prop.cliente_id;
+    ON cli.id_cliente = prop.cliente_id
+    WHERE (paq.fechas.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
+    ( paq.fechas.fechaFin <= fechaFin OR fechaFin IS NULL) AND
+    ( fac.dispositivo = dispositivo_compra OR dispositivo_compra IS NULL);
 END;

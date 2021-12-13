@@ -41,7 +41,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Osuna',
     'Piñero',
     '+(58)-414-878-9234',
-    TO_DATE('07-09-2001','DD-MM-YYYY')
+    TO_DATE('07-09-2001','DD-MM-YYYY'),
+    'carlosalvaroosuna1@yomail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 2
@@ -53,7 +54,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Osuna',
     'Piñero',
     '+(58)-426-745-4265',
-    TO_DATE('03-11-2003','DD-MM-YYYY')
+    TO_DATE('03-11-2003','DD-MM-YYYY'),
+    'yuyiosuna3@outlook.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 3
@@ -65,7 +67,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Osuna',
     'Sanabria',
     '+(58)-416-523-2434',
-    TO_DATE('03-01-1962','DD-MM-YYYY')
+    TO_DATE('03-01-1962','DD-MM-YYYY'),
+    'andresabogado@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 4
@@ -77,7 +80,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Ortiz',
     'Gonzalez',
     '+(1)-35-515-1425',
-    TO_DATE('12-10-1998','DD-MM-YYYY')
+    TO_DATE('12-10-1998','DD-MM-YYYY'),
+    'luisemilioortiz@hotmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 5
@@ -89,7 +93,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Saco',
     'Sanchez',
     '+(34)-657-171-545',
-    TO_DATE('05-10-1998','DD-MM-YYYY')
+    TO_DATE('05-10-1998','DD-MM-YYYY'),
+    'danielsanchez98@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 6
@@ -101,7 +106,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Vargas',
     'Campos',
     '+(15)-845-878-9234',
-    TO_DATE('04-05-1999','DD-MM-YYYY')
+    TO_DATE('04-05-1999','DD-MM-YYYY'),
+    'armarjavier@hotmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 7
@@ -113,7 +119,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Vargas',
     'Campos',
     '+(15)-845-878-9244',
-    TO_DATE('01-03-2000','DD-MM-YYYY')
+    TO_DATE('01-03-2000','DD-MM-YYYY'),
+    'antonio_lorenzo_04@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 8
@@ -125,7 +132,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Vargas',
     'Campos',
     '+(15)-845-876-9734',
-    TO_DATE('01-02-1990','DD-MM-YYYY')
+    TO_DATE('01-02-1990','DD-MM-YYYY'),
+    'mariavargas1990@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 9
@@ -137,7 +145,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Gonzalez',
     'Salazar',
     '+(58)-426-489-1736',
-    TO_DATE('05-07-2001','DD-MM-YYYY')
+    TO_DATE('05-07-2001','DD-MM-YYYY'),
+    'alfredogonzalezsalazar@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 10
@@ -149,7 +158,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Di Pietro',
     'Zambrano',
     '+(58)-414-817-5234',
-    TO_DATE('17-08-2001','DD-MM-YYYY')
+    TO_DATE('17-08-2001','DD-MM-YYYY'),
+    'josedipietro@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 11
@@ -161,7 +171,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     'Sanchez',
     '+(58)-414-782-6781',
-    TO_DATE('12-08-2000','DD-MM-YYYY')
+    TO_DATE('12-08-2000','DD-MM-YYYY'),
+    'mariafernanda1208@hotmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 12
@@ -173,7 +184,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Sanchez',
     'Sanchez',
     '+(58)-412-865-7834',
-    TO_DATE('11-07-2003' ,'DD-MM-YYYY')
+    TO_DATE('11-07-2003' ,'DD-MM-YYYY'),
+    'alejandrojss03@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 13
@@ -185,7 +197,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Arriaga',
     'Darmiano',
     '+(58)-412-785-6354',
-    TO_DATE('24-06-2000','DD-MM-YYYY')
+    TO_DATE('24-06-2000','DD-MM-YYYY'),
+    'carlosarriaga@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 14
@@ -197,7 +210,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Piñero',
     'Contreras',
     '+(58)-416-245-7676',
-    TO_DATE('10-06-1978','DD-MM-YYYY')
+    TO_DATE('10-06-1978','DD-MM-YYYY'),
+    'yuli_car_2@gmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- cliente 15
@@ -209,7 +223,8 @@ VALUES (id_cliente.nextVal,DATOS_USUARIO(
     'Roldan',
     'Mendez',
     '+(54)-654-654-834',
-    TO_DATE('4-11-1996','DD-MM-YYYY')
+    TO_DATE('4-11-1996','DD-MM-YYYY'),
+    'luluroldans@hotmail.com'
 ),round(DBMS_RANDOM.VALUE (0, 1)),NULL);
 
 -- PCR ------------------------

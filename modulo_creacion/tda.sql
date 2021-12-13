@@ -52,6 +52,7 @@ CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT (
     segundoApellido VARCHAR2(30), 
     telefono VARCHAR2(30), 
     fechaNacimiento DATE, 
+    correo VARCHAR2(250),
     STATIC FUNCTION obtenerEdad (fecha_nacimiento DATE) RETURN NUMBER,
     CONSTRUCTOR FUNCTION DATOS_USUARIO (
     self IN OUT NOCOPY DATOS_USUARIO,
@@ -61,7 +62,8 @@ CREATE OR REPLACE TYPE DATOS_USUARIO AS OBJECT (
     apellido VARCHAR2, 
     segundoApellido VARCHAR2, 
     telefono VARCHAR2, 
-    fechaNacimiento DATE
+    fechaNacimiento DATE,
+    correo VARCHAR2
     ) RETURN SELF AS RESULT
 );
 /
@@ -81,7 +83,8 @@ CREATE OR REPLACE TYPE BODY DATOS_USUARIO AS
         apellido VARCHAR2, 
         segundoApellido VARCHAR2, 
         telefono VARCHAR2, 
-        fechaNacimiento DATE
+        fechaNacimiento DATE,
+        correo VARCHAR2
     ) RETURN SELF AS RESULT
     IS
     BEGIN
@@ -101,6 +104,7 @@ CREATE OR REPLACE TYPE BODY DATOS_USUARIO AS
             SELF.segundoApellido := INITCAP(segundoApellido);
             SELF.telefono := telefono;
             SELF.fechaNacimiento := fechaNacimiento;
+            SELF.correo := correo;
             RETURN;
         END IF;
     END;
