@@ -44,8 +44,18 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
         IF (pcr_res = 1) THEN
             RETURN;
         END IF;
-        FOR op_paquetes IN (SELECT * FROM PAQUETE paq WHERE paq.fechas.fechaInicio > fecha_compra ORDER BY DBMS_RANDOM.RANDOM ASC) LOOP
+        FOR op_paquetes IN (SELECT paq.id_paquete,
+            paq.fechaCreacion,
+            paq.vacunado,
+            paq.precio,
+            paq.fechas,
+            paq.destino_id
+         FROM PAQUETE paq LEFT JOIN PROPIETARIO prop
+         ON prop.paquete_id = paq.id_paquete
+         WHERE prop.cliente_id IS NULL AND
+         (paq.fechas.fechaInicio > fecha_compra) ORDER BY DBMS_RANDOM.RANDOM ASC) LOOP
             califica := 1;
+
             FOR prop_paquetes IN (SELECT * FROM PAQUETE paq INNER JOIN PROPIETARIO prop ON prop.paquete_id = paq.id_paquete WHERE prop.cliente_id = id_cliente_paq) LOOP
                 IF ((prop_paquetes.fechas.fechaInicio <= op_paquetes.fechas.fechaInicio AND 
                     prop_paquetes.fechas.fechaFin >= op_paquetes.fechas.fechaInicio) OR 
