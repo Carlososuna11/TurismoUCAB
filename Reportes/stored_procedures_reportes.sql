@@ -94,6 +94,7 @@ BEGIN
     dest.foto "Foto",
     CONCAT(CONCAT('$ ',paq.precio),' por persona') "Costo",
     CONCAT(CONCAT(cli.datos.nombre,' '),cli.datos.apellido) "Cliente",
+    cli.datos.correo "Email",
     aux.forma_pago "Forma de Pago",
     paq_medio.canal "Canal Utilizado",
     fac.dispositivo "Dispositivo"
