@@ -49,7 +49,7 @@ END;
 CREATE OR REPLACE PROCEDURE REPORTE_3 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, destino_nombre VARCHAR2, destinoID NUMBER) 
 AS
 begin
-  OPERN cursorMemoria FOR
+  OPEN cursorMemoria FOR
     SELECT
     dest.nombre "Destino Turistico",
     paq.fechas.fechaInicio "Fecha Desde",
@@ -61,6 +61,7 @@ begin
     INNER JOIN PAQUETE paq
     ON paq.destino_id = dest.id_destino
     INNER JOIN (
+        SELECT
         dest.id_destino,
         paq.id_paquete,
         LISTAGG(DISTINCT '- '|| serv.nombre ,chr(13) || chr(10) )  WITHIN GROUP (ORDER BY serv.nombre) as caracteristicas
