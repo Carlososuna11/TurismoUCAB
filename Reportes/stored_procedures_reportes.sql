@@ -55,7 +55,7 @@ begin
     paq.fechas.fechaInicio "Fecha Desde",
     paq.fechas.fechaFin "Fecha Hasta",
     dest.foto "Foto",
-    -- aux.caracteristicas "Caracteristicas",
+    aux.caracteristicas "Caracteristicas",
     CONCAT(CONCAT('$ ',paq.precio),' por persona') "Costo"
     FROM DESTINO dest
     INNER JOIN PAQUETE paq
