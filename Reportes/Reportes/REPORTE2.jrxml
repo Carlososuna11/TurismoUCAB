@@ -91,7 +91,7 @@ FROM METODOS_PAGO]]>
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="0e35bca1-97b8-4843-be8d-8ddc970c1b35">
+					<datasetRun subDataset="Dataset1" uuid="679a8e62-d34f-47f5-99c1-a4be2fa07c07">
 						<datasetParameter name="FECHA_DESDE">
 							<datasetParameterExpression><![CDATA[$P{FECHA_DESDE}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -172,11 +172,10 @@ FROM METODOS_PAGO]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField textAdjust="StretchHeight">
-								<reportElement x="0" y="0" width="93" height="30" uuid="155e5b50-2f8a-4a50-bb04-39dfd15e6871"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{Video}]]></textFieldExpression>
-							</textField>
+							<image scaleImage="RealSize" hAlign="Center" vAlign="Middle">
+								<reportElement x="0" y="0" width="93" height="30" uuid="497e4d63-010c-4250-9ad3-49aedf2856bd"/>
+								<imageExpression><![CDATA[$F{Video}.getBinaryStream()]]></imageExpression>
+							</image>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="93" uuid="e7307a0c-4325-4135-bb89-3e38f0848e7b">
