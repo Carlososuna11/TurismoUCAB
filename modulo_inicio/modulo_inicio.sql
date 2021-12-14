@@ -3,12 +3,13 @@ CREATE OR REPLACE PACKAGE MODULO_INICIO IS
     PROCEDURE INICIO;
     PROCEDURE ASIGNAR_PAISES;
     PROCEDURE GENERAR_ALIANZAS;
-    PROCEDURE GENERAR_SERVICIOS(id_alianza NUMBER);
+    PROCEDURE GENERAR_SERVICIOS(id_alianza_new NUMBER);
+    PROCEDURE SELECCIONAR_TEMPORALIDAD(tiempo IN NUMBER, fecha_inicio IN OUT DATE, fecha_fin IN OUT DATE);
 END;
 /
 CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
     PROCEDURE ASIGNAR_PAISES IS
-        CURSOR cli IS 
+        CURSOR cli IS
             SELECT * FROM CLIENTE;
         cli_aux CLIENTE%ROWTYPE;
         id_pais_random NUMBER;
@@ -20,21 +21,21 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                 LOOP
                     IF aceptar_o_rechazar(0.5) THEN
                         dbms_output.put_line('Asignando pais Venezuela al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
-                        UPDATE CLIENTE 
-                        SET pais_id = 10 
+                        UPDATE CLIENTE
+                        SET pais_id = 10
                         WHERE id_cliente=cli_aux.id_cliente;
                     ELSE
-                        SELECT id_pais,nombre 
-                        INTO id_pais_random,nombre_pais_random 
-                        FROM PAIS 
-                        WHERE id_pais != 10 
+                        SELECT id_pais,nombre
+                        INTO id_pais_random,nombre_pais_random
+                        FROM PAIS
+                        WHERE id_pais != 10
                         ORDER BY DBMS_RANDOM.RANDOM ASC
                         FETCH FIRST 1 ROWS ONLY;
                         dbms_output.put_line('Asignando pais '|| nombre_pais_random ||' al Cliente '||cli_aux.datos.nombre||' '||cli_aux.datos.apellido);
-                        UPDATE CLIENTE 
+                        UPDATE CLIENTE
                         SET pais_id = id_pais_random
                         WHERE id_cliente=cli_aux.id_cliente;
-                    END IF; 
+                    END IF;
                     FETCH cli into cli_aux;
                 END LOOP;
         CLOSE cli;
@@ -60,10 +61,10 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         CLOSE c_prov;
     END;
 
-    PROCEDURE GENERAR_SERVICIOS(id_alianza NUMBER) IS
+    PROCEDURE GENERAR_SERVICIOS(id_alianza_new NUMBER) IS
         CURSOR c_ali IS
-            SELECT * FROM ALIANZA;
-            -- WHERE al.id_alianza=id_alianza OR id_alianza IS NULL;
+            SELECT * FROM ALIANZA al
+            WHERE (al.id_alianza=id_alianza_new OR id_alianza_new IS NULL);
         ali ALIANZA%ROWTYPE;
         dest DESTINO%ROWTYPE;
     BEGIN
@@ -129,7 +130,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                 END LOOP;
-                            
+
                         -- Unik Hotel
                         WHEN 2 THEN
                             FOR I IN 1..4
@@ -264,7 +265,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
                                         ali.proveedor_id
                                     );
                                 END LOOP;
-                            
+
                         -- Proxima Ruta Venezuela
                         WHEN 4 THEN
                             FOR I IN 1..15
@@ -815,6 +816,34 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         CLOSE c_ali;
     END;
 
+    PROCEDURE SELECCIONAR_TEMPORALIDAD(tiempo IN NUMBER, fecha_inicio IN OUT DATE, fecha_fin IN OUT DATE) IS
+        BEGIN
+            dbms_output.put_line('******************************');
+            dbms_output.put_line('* Seleccione la temporalidad *');
+            dbms_output.put_line('******************************');
+            dbms_output.put_line('1. 3 meses');
+            dbms_output.put_line('2. 6 meses');
+            dbms_output.put_line('3. 12 meses');
+            dbms_output.put_line(' ');
+            dbms_output.put_line(' ');
+            CASE tiempo
+                WHEN 1 THEN
+                    fecha_fin := ADD_MONTHS(fecha_inicio, 3);
+                    dbms_output.put_line('> Se selecciono 3 meses');
+                WHEN 2 THEN
+                    dbms_output.put_line('> Se selecciono 6 meses');
+                    fecha_fin := ADD_MONTHS(fecha_inicio, 6);
+                WHEN 3 THEN
+                    dbms_output.put_line('> Se selecciono 12 meses');
+                    fecha_fin := ADD_MONTHS(fecha_inicio, 12);
+            END CASE;
+            dbms_output.put_line('******************************');
+            dbms_output.put_line('    Fecha de Inicio: '|| TO_DATE(fecha_inicio,'dd/MM/YYYY') ||' ');
+            dbms_output.put_line('    Fecha de Fin:    '|| TO_DATE(fecha_fin,'dd/MM/YYYY') ||' ');
+            dbms_output.put_line('******************************');
+        END;
+
+
     PROCEDURE INICIO IS
     BEGIN
         dbms_output.put_line('******************************');
@@ -824,17 +853,5 @@ CREATE OR REPLACE PACKAGE BODY MODULO_INICIO AS
         dbms_output.put_line('******************************');
         dbms_output.put_line(' ');
         dbms_output.put_line(' ');
-        dbms_output.put_line('Asignandole los Paises a los Clientes');
-        dbms_output.put_line(' ');
-        dbms_output.put_line(' ');
-        ASIGNAR_PAISES;
-        dbms_output.put_line('Generando Alianzas con los Proveedores');
-        dbms_output.put_line(' ');
-        dbms_output.put_line(' ');
-        GENERAR_ALIANZAS;
-        dbms_output.put_line('Generando Servicios con las Alianzas');
-        dbms_output.put_line(' ');
-        dbms_output.put_line(' ');
-        GENERAR_SERVICIOS(NULL);
     END;
 END;

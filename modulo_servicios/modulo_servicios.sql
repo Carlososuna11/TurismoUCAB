@@ -1,13 +1,16 @@
 CREATE OR REPLACE PACKAGE MODULO_SERVICIO IS
     PROCEDURE INICIO_MODULO_SERVICIO;
-    PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE);
+    PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE, alojamiento NUMBER);
 END;
 /
 CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
-    PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE)
+    PROCEDURE GENERAR_DISPONIBILIDAD(fecha_inicio_tentativo DATE, fecha_creacion DATE, alojamiento NUMBER)
     IS
         CURSOR c_serv IS
-            SELECT * FROM SERVICIO;
+            SELECT * FROM SERVICIO serv
+                WHERE (serv.nombre LIKE '%Alojamiento%' or alojamiento IS NULL)
+                ORDER BY DBMS_RANDOM.RANDOM ASC
+                FETCH FIRST 50 ROWS ONLY ;
         serv SERVICIO%ROWTYPE;
         fecha_inicio_random DATE;
         fecha_fin_random DATE;
@@ -29,8 +32,8 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
                     ELSE
                         fecha_fin_random:= fecha_inicio_random;
                     END IF;
-                    dbms_output.put_line('Se ha invertido '||egreso_random|| ' para la disponibilidad de '|| serv.nombre ||' con las siguientes caracteristicas:');
-                    dbms_output.put_line('| Fecha de Inicio: '|| fecha_inicio_random || ' | Fecha Fin: '|| fecha_fin_random || '| cantidad: '|| cantidad_random || 'disponibles |' );
+                    dbms_output.put_line('Se ha invertido '|| ROUND(egreso_random,2)|| ' para la disponibilidad de '|| serv.nombre ||' con las siguientes caracteristicas:');
+                    dbms_output.put_line('| Fecha de Inicio: '|| TO_DATE(fecha_inicio_random,'dd/MM/YYYY') || ' | Fecha Fin: '|| TO_DATE(fecha_fin_random,'dd/MM/YYYY') || '| cantidad: '|| cantidad_random || ' disponibles |' );
                     INSERT INTO DISPONIBILIDAD VALUES
                     (id_disponibilidad_s.nextVal,
                     FECHA_RANGO(fecha_inicio_random,fecha_fin_random),
@@ -57,6 +60,6 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SERVICIO AS
         dbms_output.put_line(' ');
         dbms_output.put_line(' ');
         dbms_output.put_line(' Generando disponibilidades aleatorias');
-        GENERAR_DISPONIBILIDAD(SYSDATE+15,SYSDATE);
+        -- GENERAR_DISPONIBILIDAD(SYSDATE+15,SYSDATE);
     END;
 END;

@@ -14,7 +14,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
         FOR r_alo IN (SELECT * FROM SERVICIO WHERE nombre LIKE '%Alojamiento%' AND destino_id=dest_id) LOOP
             -- Obteniendo los Alojamientos disponibles para el destino
             FOR disp_alo IN (
-                SELECT * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_alo.id_servicio AND disp.fecha.fechaInicio >= fecha_creacion_paq AND disp.balance.existencia > 0
+                SELECT * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_alo.id_servicio AND TO_DATE(disp.fecha.fechaInicio,'dd/MM/YYYY') >= TO_DATE(fecha_creacion_paq,'dd/MM/YYYY') AND disp.balance.existencia > 0
             ) LOOP
                 contador_servicios_paquete := 0;
                 id_paquete_temp := NULL;
@@ -28,7 +28,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_PAQUETE AS
                 )
                     LOOP
                         FOR disp_serv IN (
-                            SELECT  * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND disp.fecha.fechaInicio >= disp_alo.fecha.fechaInicio AND disp.fecha.fechaFin <= disp_alo.fecha.fechaFin AND disp.balance.existencia > 0 FETCH FIRST 1 ROWS ONLY
+                            SELECT  * FROM DISPONIBILIDAD disp WHERE disp.id_servicio = r_servicio.id_servicio AND TO_DATE(disp.fecha.fechaInicio,'dd/MM/YYYY') >= TO_DATE(disp_alo.fecha.fechaInicio,'dd/MM/YYYY') AND TO_DATE(disp.fecha.fechaFin,'dd/MM/YYYY') <= TO_DATE(disp_alo.fecha.fechaFin,'dd/MM/YYYY') AND disp.balance.existencia > 0 FETCH FIRST 1 ROWS ONLY
                         ) LOOP
                             IF aceptar_o_rechazar(0.7) THEN
                                 precio_tentativo := precio_tentativo + disp_serv.balance.precio_unitario;
