@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REPORTE4" pageWidth="1080" pageHeight="792" orientation="Landscape" columnWidth="1040" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b24bd57b-4a8c-4f49-b2aa-e06385f6f4cc">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[Ik1FVE9ET1NfUEFHTyIgLDE1LDE1LDgwMzBiMDRiLTczNTMtNGUwYS1iOTk0LWFmMmE3MWM1YzRm
+Zjs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#0084FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="d2a6cbdf-3d35-4d1f-bac2-053a144b27b8">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle"/>
+		<parameter name="FECHA_INICIO" class="java.util.Date"/>
+		<parameter name="FECHA_FIN" class="java.util.Date"/>
+		<parameter name="DISPOSITIVO_COMPRA" class="java.lang.String"/>
+		<queryString language="plsql">
+			<![CDATA[{CALL REPORTE_4($P{ORACLE_REF_CURSOR},$P{FECHA_INICIO},$P{FECHA_FIN},$P{DISPOSITIVO_COMPRA})}]]>
+		</queryString>
+		<field name="Destino Turistico" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Destino Turistico"/>
+			<property name="com.jaspersoft.studio.field.label" value="Destino Turistico"/>
+		</field>
+		<field name="Fecha Desde" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="Fecha Desde"/>
+			<property name="com.jaspersoft.studio.field.label" value="Fecha Desde"/>
+		</field>
+		<field name="Fecha Hasta" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="Fecha Hasta"/>
+			<property name="com.jaspersoft.studio.field.label" value="Fecha Hasta"/>
+		</field>
+		<field name="Foto" class="java.sql.Blob">
+			<property name="com.jaspersoft.studio.field.name" value="Foto"/>
+			<property name="com.jaspersoft.studio.field.label" value="Foto"/>
+		</field>
+		<field name="Caracteristicas" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Caracteristicas"/>
+			<property name="com.jaspersoft.studio.field.label" value="Caracteristicas"/>
+		</field>
+		<field name="Costo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Costo"/>
+			<property name="com.jaspersoft.studio.field.label" value="Costo"/>
+		</field>
+		<field name="Cliente" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Cliente"/>
+			<property name="com.jaspersoft.studio.field.label" value="Cliente"/>
+		</field>
+		<field name="Email" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Email"/>
+			<property name="com.jaspersoft.studio.field.label" value="Email"/>
+		</field>
+		<field name="Forma de Pago" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Forma de Pago"/>
+			<property name="com.jaspersoft.studio.field.label" value="Forma de Pago"/>
+		</field>
+		<field name="Canal Utilizado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Canal Utilizado"/>
+			<property name="com.jaspersoft.studio.field.label" value="Canal Utilizado"/>
+		</field>
+		<field name="Dispositivo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Dispositivo"/>
+			<property name="com.jaspersoft.studio.field.label" value="Dispositivo"/>
+		</field>
+	</subDataset>
+	<parameter name="FECHA_INICIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA_FIN" class="java.util.Date">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DISPOSITIVO_COMPRA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM "METODOS_PAGO"]]>
+	</queryString>
+	<field name="ID_METODO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ID_METODO"/>
+		<property name="com.jaspersoft.studio.field.label" value="ID_METODO"/>
+	</field>
+	<field name="NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="490" y="30" width="100" height="30" uuid="45835575-1dc8-43d9-919f-be1798ff215c"/>
+				<text><![CDATA[Reporte 4]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="82" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="10" width="1040" height="61" uuid="ecfcc2ec-ac4a-4125-894b-f9fcbe44806d">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="b38c7c8a-62a6-4803-9740-87964e4593d0">
+						<datasetParameter name="DISPOSITIVO_COMPRA">
+							<datasetParameterExpression><![CDATA[$P{DISPOSITIVO_COMPRA}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FECHA_FIN">
+							<datasetParameterExpression><![CDATA[$P{FECHA_FIN}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FECHA_INICIO">
+							<datasetParameterExpression><![CDATA[$P{FECHA_INICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="103" uuid="885a5c3e-b746-4e11-a92a-2bb720de136e">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="103" height="30" uuid="f11c9be2-7261-4475-a95f-19c1975451ca"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Destino Turistico]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="103" height="30" uuid="a3588195-25fe-455b-a16d-baefc78d3343"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Destino Turistico}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="103" uuid="b8590c70-1d2d-426b-bc6e-afc7012cd808">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="103" height="30" uuid="eb2d2b62-2e57-42ce-ba58-fd2e53624621"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Fecha Desde]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="103" height="30" uuid="d5acadf1-8dbd-4667-bcec-19ad9fa1bec2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[DATEFORMAT( $F{Fecha Desde},"dd/MM/YYYY")]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="97" uuid="8276b99c-57f0-4233-9c83-d32d2e64372a">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="97" height="30" uuid="eb074347-d74f-4561-a1a4-263253037a04"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Fecha Hasta]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="97" height="30" uuid="a98b2f8d-aeb7-481d-b9aa-dee9ff7c6e16"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[DATEFORMAT( $F{Fecha Hasta},"dd/MM/YYYY")]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="96" uuid="deabeacb-fecb-4802-a83a-126420882cd8">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="96" height="30" uuid="382dde2f-650f-43df-9cf6-96af6dce2fa5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Foto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<image scaleImage="RealSize" hAlign="Center" vAlign="Middle">
+								<reportElement x="0" y="0" width="96" height="30" uuid="e8ffa59b-a30b-4e74-a8a2-aa656165c8c0"/>
+								<imageExpression><![CDATA[$F{Foto}.getBinaryStream()]]></imageExpression>
+							</image>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="93" uuid="1201090a-cee8-4810-b42e-94394e453ad5">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="93" height="30" uuid="ff864eec-39b3-4462-a53d-d7d00943521a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Caracteristicas]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="93" height="30" uuid="0ff0457b-ad88-406d-988a-b3d73a46df5e"/>
+								<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3"/>
+								<textFieldExpression><![CDATA[$F{Caracteristicas}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="93" uuid="f72f0a76-224a-4b97-8a72-6ad581f85a59">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="93" height="30" uuid="22ba4455-00e6-4f24-a209-2301f1d3033d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Costo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="93" height="30" uuid="02f57df1-e7ad-4640-9f52-eb177832be66"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Costo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="9ef29a98-1a03-4c01-af0b-fe1f89eff4da">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30" uuid="85560753-f825-4556-bdca-dc171685707c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Cliente]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="91" height="30" uuid="8ce072a1-ae2a-4473-a209-cbb9267b0d5f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Cliente}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="4d7d7079-3156-4ca4-bd30-e1df5955b79a">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30" uuid="93e9e851-c7f7-4305-a0fd-c99c8ac60438"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Email]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="91" height="30" uuid="559679d3-e2dd-4259-9a9e-ae1cb88bcd32"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Email}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="994f3b59-bd3e-4663-a9ab-7e52732efe30">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30" uuid="ff6b15b7-9931-4445-b2ae-22c8c8e4f465"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Forma de Pago]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="91" height="30" uuid="25cbf6d3-3f18-4975-b2bf-d3d2799c58db"/>
+								<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3"/>
+								<textFieldExpression><![CDATA[$F{Forma de Pago}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="9e87b3e2-403a-4bc7-8b4d-7549df1c25f2">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30" uuid="21533e69-f3cc-46a1-8a44-ee02d04c3a88"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Canal Utilizado]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="91" height="30" uuid="dc5d861c-4d72-424f-ba45-f937eda583fe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Canal Utilizado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="c68be472-e28e-41c8-946d-d981a8835ee5">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30" uuid="69429b9d-23b8-456d-a7ca-535ad3a37916"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Dispositivo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="91" height="30" uuid="fadf8f67-214b-4dba-a683-3031fb77bbd0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Dispositivo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

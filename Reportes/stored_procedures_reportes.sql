@@ -92,6 +92,7 @@ BEGIN
     paq.fechas.fechaInicio "Fecha Desde",
     paq.fechas.fechaFin "Fecha Hasta",
     dest.foto "Foto",
+    caracteristicas "Caracteristicas",
     CONCAT(CONCAT('$ ',paq.precio),' por persona') "Costo",
     CONCAT(CONCAT(cli.datos.nombre,' '),cli.datos.apellido) "Cliente",
     cli.datos.correo "Email",
@@ -115,6 +116,23 @@ BEGIN
         GROUP BY det.id_detFactura
     ) aux 
     ON aux.id_detFactura = det.id_detFactura
+    INNER JOIN (
+        SELECT
+        dest.id_destino,
+        paq.id_paquete,
+        LISTAGG(DISTINCT '- '|| serv.nombre ,chr(13) || chr(10) )  WITHIN GROUP (ORDER BY serv.nombre) as caracteristicas
+        FROM DESTINO dest
+        INNER JOIN PAQUETE paq
+        ON paq.destino_id = dest.id_destino
+        INNER JOIN SUBSCRIPCION sub
+        ON sub.paquete_id = paq.id_paquete
+        INNER JOIN DISPONIBILIDAD disp
+        ON disp.id_disponibilidad = sub.disponibilidad_id
+        INNER JOIN SERVICIO serv
+        ON serv.id_servicio = disp.id_servicio
+        GROUP BY dest.id_destino, paq.id_paquete 
+    ) aux2
+    ON aux2.id_paquete = paq.id_paquete
     INNER JOIN DESTINO dest
     ON dest.id_destino = paq.destino_id
     INNER JOIN PROPIETARIO prop
