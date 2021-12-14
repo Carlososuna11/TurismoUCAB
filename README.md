@@ -79,4 +79,4 @@ GRANT READ, WRITE ON DIRECTORY ORACLECLRDIR TO <username>;
 
 Luego ejecutar el Script de simulación y habilitar el DBMS_OUTPUT
 
-    1. [simulacion.sql](simulacion.sql)
+- [simulacion.sql](simulacion.sql)
