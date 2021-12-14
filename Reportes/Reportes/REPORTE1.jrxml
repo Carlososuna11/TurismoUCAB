@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REPORTE1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="122bdb5c-90e4-480a-915a-b26450a19d9f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle JDBC"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#0586FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Reporte1" uuid="6fd4b1e9-9673-4f0d-83a5-d9ae0da7e966">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle JDBC"/>
+		<queryString language="SQL">
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="REPORTE_1_DATASET" uuid="8c267fd5-a24f-4883-b049-9b81017e01f4">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Oracle JDBC"/>
+		<parameter name="FECHA_INICIO" class="java.sql.Date"/>
+		<parameter name="FECHA_FIN" class="java.sql.Date"/>
+		<parameter name="DESTINO_NOMBRE" class="java.lang.String"/>
+		<parameter name="DESTINO_ID" class="java.lang.Integer"/>
+		<queryString language="PLSQL">
+			<![CDATA[{CALL REPORTE_1($P{ORACLE_REF_CURSOR},$P{FECHA_INICIO},$P{FECHA_FIN},$P{DESTINO_NOMBRE},$P{DESTINO_ID})}]]>
+		</queryString>
+		<field name="Fecha de Creacion" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="Fecha de Creacion"/>
+			<property name="com.jaspersoft.studio.field.label" value="Fecha de Creacion"/>
+		</field>
+		<field name="Fecha desde" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="Fecha desde"/>
+			<property name="com.jaspersoft.studio.field.label" value="Fecha desde"/>
+		</field>
+		<field name="Fecha hasta" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="Fecha hasta"/>
+			<property name="com.jaspersoft.studio.field.label" value="Fecha hasta"/>
+		</field>
+		<field name="Destino" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Destino"/>
+			<property name="com.jaspersoft.studio.field.label" value="Destino"/>
+		</field>
+		<field name="Servicios Ofrecidos" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Servicios Ofrecidos"/>
+			<property name="com.jaspersoft.studio.field.label" value="Servicios Ofrecidos"/>
+		</field>
+	</subDataset>
+	<parameter name="FECHA_INICIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA_FIN" class="java.util.Date">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DESTINO_NOMBRE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DESTINO_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM METODOS_PAGO]]>
+	</queryString>
+	<field name="ID_METODO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ID_METODO"/>
+		<property name="com.jaspersoft.studio.field.label" value="ID_METODO"/>
+	</field>
+	<field name="NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="253" y="21" width="100" height="30" uuid="f99908e5-2750-44be-8251-608e635763fb"/>
+				<text><![CDATA[REPORTE 1]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="184">
+			<componentElement>
+				<reportElement x="-11" y="40" width="580" height="64" uuid="acc186ac-a602-44e1-9e88-d513f5e59c9f">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="REPORTE_1_DATASET" uuid="61918247-669e-4a0b-ac24-b8d3cf5c1bb3">
+						<datasetParameter name="DESTINO_ID">
+							<datasetParameterExpression><![CDATA[$P{DESTINO_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DESTINO_NOMBRE">
+							<datasetParameterExpression><![CDATA[$P{DESTINO_NOMBRE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FECHA_FIN">
+							<datasetParameterExpression><![CDATA[$P{FECHA_FIN}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FECHA_INICIO">
+							<datasetParameterExpression><![CDATA[$P{FECHA_INICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="116" uuid="8bcfba26-3e48-424d-82ec-b55e0e49d8c7">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="116" height="30" uuid="30852d77-bd28-4784-8535-2c10d7aaafad"/>
+								<text><![CDATA[Fecha de Creacion]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="116" height="30" uuid="eae46f31-0ebb-4047-b706-05a60aa27735"/>
+								<textFieldExpression><![CDATA[DATEFORMAT($F{Fecha de Creacion},"dd/MM/YYYY" )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="116" uuid="4048ad37-7831-4fc7-91fb-dea1d9f600e1">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="116" height="30" uuid="970a3716-1526-4659-8933-0d0c3675e366"/>
+								<text><![CDATA[Fecha desde]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="116" height="30" uuid="3336b525-fe2b-44fb-b659-6c62a6655d04"/>
+								<textFieldExpression><![CDATA[DATEFORMAT($F{Fecha desde}, "dd/MM/YYYY" )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="116" uuid="c5bd84d8-62df-4cc5-8155-78cc9853c6d4">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="116" height="30" uuid="8c8ee8bd-a521-4b8f-9833-0e895e716a7f"/>
+								<text><![CDATA[Fecha hasta]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="116" height="30" uuid="e8bc4b97-37c8-40d8-b17a-48e499313e77"/>
+								<textFieldExpression><![CDATA[DATEFORMAT($F{Fecha hasta},"dd/MM/YYYY" )]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="116" uuid="fcee0452-355a-4bdf-9f40-ddc02357f8e0">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="116" height="30" uuid="ed8cc0ed-3bb2-482b-9833-83523d8c894f"/>
+								<text><![CDATA[Destino]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="116" height="30" uuid="957f2f50-22d2-4fe1-b4a0-47440429422a"/>
+								<textFieldExpression><![CDATA[$F{Destino}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="116" uuid="b4fe190e-760c-4f1a-ae40-40b9308f63ae">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="116" height="30" uuid="aa5a1f0c-4efa-4ca6-a8ac-fade4d87f91d"/>
+								<text><![CDATA[Servicios Ofrecidos]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="116" height="30" uuid="68beeee2-3794-40da-b320-da4819f3261b"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Servicios Ofrecidos}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
