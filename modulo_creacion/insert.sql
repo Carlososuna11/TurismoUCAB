@@ -282,7 +282,7 @@ BEGIN
     'JuanGriego',
     'Paraiso idilico y hermoso, es la Bahia de Juan Griego; colmada de aguas mansas y sin oleaje con un colorido en tonalidades que van desde el azul celeste hasta los mas intensos y adornada por pelicanos que posan sobre los botes de los pescadores de la region.',
     'juangriego.jpeg',
-    'Margarita.mp4'
+    'margarita.mp4'
     );
 
     INSERTAR_DESTINO(
@@ -318,7 +318,7 @@ BEGIN
     'Isla La Tortuga ',
     'La Tortuga es una isla en el Mar Caribe conformada por una isla mayor y varios islotes y cayos más pequeños.',
     'tortuga.jpg',
-    'isla_la_tortuga.mp4');
+    'tortuga.mp4');
 
     INSERTAR_DESTINO(
     id_destino.nextVal,
@@ -331,7 +331,7 @@ BEGIN
     INSERTAR_DESTINO(id_destino.nextVal,
     'Bahia de Cata','La bahía de Cata es una playa del estado Aragua, de gran extensión, finísima arena, aguas cristalinas y adornadas por la sombra de erguidos cocoteros.',
     'bahia_cata.jpg',
-    'bahia_de_cata.mp4');
+    'cata.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Choroní','Choroní tiene varias playas hermosas, Playa Grande, Tipire, El Diario, Valle seco, Chuao y varios lugaros para visitar con lancha',
@@ -366,22 +366,22 @@ BEGIN
     INSERTAR_DESTINO(id_destino.nextVal,
     'Los Frailes','Uno de los lugares menos visitados en Margarita son las islas de Los Frailes. Son esas islas que se ven a lo lejos desde las playas de Guacuco, El Tirano, Parguito o El Agua.',
     'los_frailes.jpg',
-    'Margarita.mp4');
+    'margarita.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Los Testigos','El Archipiélago Los Testigos es de clima cálido, semi-árido y con un tiempo suave y agradable durante la mayoría del año, un clima muy parecido al vecino Archipiélago de Los Frailes.',
     'los_testigos.jpg',
-    'Margarita.mp4');
+    'margarita.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'La Orchila','Isla la Orchila es una isla en la costa de Venezuela. Tiene numerosas playas, incluida una donde la arena es notablemente rosada.',
     'la_orchila.jpg',
-    'Margarita.mp4');
+    'margarita.mp4');
 
     INSERTAR_DESTINO(id_destino.nextVal,
     'Las Aves','Es una pequeña y remota isla venezolana, lugar de descanso y reproducción para las aves marinas y para la tortuga verde.',
     'las_aves.jpg',
-    'Margarita.mp4');
+    'margarita.mp4');
 
 -- FIN DESTINOS ------------------------
 
