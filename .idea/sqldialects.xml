@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Reportes/drop.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/Reportes/stored_procedures_reportes.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/drop.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_compra/drop.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_compra/modulo_compra.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_creacion/create.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_creacion/insert.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_creacion/sequences.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_creacion/stored_procedures.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_creacion/tda.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_inicio/drop.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_inicio/modulo_inicio.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_paquetes/drop.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_paquetes/modulo_paquete.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_servicios/drop.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/modulo_servicios/modulo_servicios.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/simulacion.sql" dialect="Oracle" />
+  </component>
+</project>
