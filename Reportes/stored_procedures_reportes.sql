@@ -40,10 +40,10 @@ BEGIN
         ON serv.destino_id = dest.id_destino
         INNER JOIN DISPONIBILIDAD disp
         ON disp.id_servicio = serv.id_servicio
-        WHERE (disp.fecha.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
-        ( disp.fecha.fechaFin <= fechaFin OR fechaFin IS NULL)
         GROUP BY dest.id_destino
-    ) aux ON aux.id_destino =  dest.id_destino;
+    ) aux ON aux.id_destino =  dest.id_destino
+    WHERE (aux.fechaDesde >= fechaInicio OR fechaInicio IS NULL) AND 
+        ( aux.fechaHasta <= fechaFin OR fechaFin IS NULL);
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_3 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, destino_nombre VARCHAR2, destinoID NUMBER) 
