@@ -42,13 +42,12 @@ BEGIN
         dbms_output.put_line(' ');
 
         -- GENERANDO Disponibilidades de Servicios y Paquetes
-        -- TODO: contador_meses debe ser cero para que se genere la disponibilidad de los servicios al inicio de la simulación
-        IF (contador_meses=3) THEN
+        IF (contador_meses=0) THEN
             dbms_output.put_line('Generando Disponibilidades de Servicios');
             dbms_output.put_line(' ');
             dbms_output.put_line(' ');
-            MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,1);
-            MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,NULL);
+            MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,1,50);
+            MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,NULL,25);
             dbms_output.put_line(' ');
             dbms_output.put_line(' ');
             dbms_output.put_line('Generando Paquetes de Servicios');
@@ -71,7 +70,21 @@ BEGIN
             dbms_output.put_line(' ');
             MODULO_COMPRA.COMPRAR_PAQUETE(cli_aleatorio.id_cliente,fecha_inicio_sim);
         END LOOP;
+        -- llamando al Modulo de Mantenimiento
+        FOR cru IN (SELECT * FROM CRUCERO) LOOP
+            MODULO_MANTENIMIENTO.GENERAR_MANTENIMIENTO(cru.id_crucero,fecha_inicio_sim,fecha_inicio_sim+6);
+        END LOOP;
+        -- llamando al Modulo de Observaciones
+        FOR cli_ale IN (SELECT * FROM CLIENTE) LOOP
+            MODULO_OBSERVACION.GENERAR_OBSERVACION(cli_ale.id_cliente,fecha_inicio_sim,fecha_inicio_sim+6);
+        END LOOP;
+        FOR cli_ale IN (SELECT * FROM CLIENTE) LOOP
+            MODULO_OBSERVACION.GENERAR_OBSERVACION(cli_ale.id_cliente,fecha_inicio_sim,fecha_inicio_sim+6);
+        END LOOP;
         fecha_inicio_sim := fecha_inicio_sim + 7;
         contador_meses := contador_meses + 1;
+        IF (contador_meses=3) THEN
+            contador_meses:=0;
+        END IF;
     END LOOP;
 END;

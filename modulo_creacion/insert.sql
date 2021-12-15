@@ -739,3 +739,145 @@ INSERT INTO METODOS_PAGO VALUES(
     3,
     'Criptomonedas'
 );
+
+-- INSERTAR MANTENIMIENTOS 
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+10,
+    DBMS_RANDOM.VALUE (40, 50),
+    1
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento Preventivo',
+    SYSDATE+20,
+    DBMS_RANDOM.VALUE (40, 50),
+    2
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Popa',
+    SYSDATE+4,
+    DBMS_RANDOM.VALUE (40, 50),
+    3
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+12,
+    DBMS_RANDOM.VALUE (40, 50),
+    4
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento',
+    SYSDATE+30,
+    DBMS_RANDOM.VALUE (40, 50),
+    5
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+80,
+    DBMS_RANDOM.VALUE (40, 50),
+    6
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+6,
+    DBMS_RANDOM.VALUE (40, 50),
+    7
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+47,
+    DBMS_RANDOM.VALUE (40, 50),
+    8
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+9,
+    DBMS_RANDOM.VALUE (40, 50),
+    9
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+12,
+    DBMS_RANDOM.VALUE (40, 50),
+    10
+);
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+4,
+    DBMS_RANDOM.VALUE (40, 50),
+    11
+);
+
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+14,
+    DBMS_RANDOM.VALUE (40, 50),
+    12
+);
+
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+17,
+    DBMS_RANDOM.VALUE (40, 50),
+    13
+);
+
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+24,
+    DBMS_RANDOM.VALUE (40, 50),
+    14
+);
+
+
+INSERT INTO MANTENIMIENTO VALUES (
+    id_mantenimiento_s.nextVal,
+    FECHA_RANGO(SYSDATE-1,SYSDATE+1),
+    'Mantenimiento de la Proa',
+    SYSDATE+28,
+    DBMS_RANDOM.VALUE (40, 50),
+    15
+);
+
