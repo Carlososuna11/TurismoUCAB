@@ -47,7 +47,7 @@ BEGIN
             dbms_output.put_line(' ');
             dbms_output.put_line(' ');
             MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,1,50);
-            MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,NULL,25);
+            MODULO_SERVICIO.GENERAR_DISPONIBILIDAD(fecha_inicio_sim+15,fecha_inicio_sim,NULL,50);
             dbms_output.put_line(' ');
             dbms_output.put_line(' ');
             dbms_output.put_line('Generando Paquetes de Servicios');

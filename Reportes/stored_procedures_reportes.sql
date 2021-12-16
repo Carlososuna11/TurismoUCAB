@@ -12,8 +12,8 @@ BEGIN
     ON disp.id_servicio = serv.id_servicio
     INNER JOIN DESTINO dest
     ON dest.id_destino = serv.destino_id
-    WHERE (disp.fecha.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
-    ( disp.fecha.fechaFin <= fechaFin OR fechaFin IS NULL) AND
+    WHERE (TO_DATE(disp.fecha.fechaInicio,'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY') OR fechaInicio IS NULL) AND 
+    ( TO_DATE(disp.fecha.fechaFin,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL) AND
     ( dest.nombre = destino_nombre OR destino_nombre IS NULL) AND
     (serv.destino_id = destinoID OR destinoID IS NULL)
     GROUP BY serv.destino_id;
@@ -42,8 +42,8 @@ BEGIN
         ON disp.id_servicio = serv.id_servicio
         GROUP BY dest.id_destino
     ) aux ON aux.id_destino =  dest.id_destino
-    WHERE (aux.fechaDesde >= fechaInicio OR fechaInicio IS NULL) AND 
-        ( aux.fechaHasta <= fechaFin OR fechaFin IS NULL);
+    WHERE (TO_DATE(aux.fechaDesde,'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY') OR fechaInicio IS NULL) AND 
+        (TO_DATE(aux.fechaHasta,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL);
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_3 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, destino_nombre VARCHAR2, destinoID NUMBER) 
@@ -77,8 +77,8 @@ begin
         GROUP BY dest.id_destino, paq.id_paquete 
     ) aux
     ON aux.id_paquete = paq.id_paquete
-    WHERE (paq.fechas.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
-    ( paq.fechas.fechaFin <= fechaFin OR fechaFin IS NULL) AND
+    WHERE (TO_DATE(paq.fechas.fechaInicio,'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY') OR fechaInicio IS NULL) AND 
+    ( TO_DATE(paq.fechas.fechaFin,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL) AND
     ( dest.nombre = destino_nombre OR destino_nombre IS NULL) AND
     (dest.id_destino = destinoID OR destinoID IS NULL);
 end;
@@ -139,7 +139,7 @@ BEGIN
     ON prop.paquete_id = paq.id_paquete
     INNER JOIN CLIENTE cli
     ON cli.id_cliente = prop.cliente_id
-    WHERE (paq.fechas.fechaInicio >= fechaInicio OR fechaInicio IS NULL) AND 
-    ( paq.fechas.fechaFin <= fechaFin OR fechaFin IS NULL) AND
+    WHERE (TO_DATE(paq.fechas.fechaInicio,'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY') OR fechaInicio IS NULL) AND 
+    ( TO_DATE(paq.fechas.fechaFin,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL) AND
     ( fac.dispositivo = dispositivo_compra OR dispositivo_compra IS NULL);
 END;
