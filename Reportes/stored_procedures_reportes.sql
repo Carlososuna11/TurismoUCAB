@@ -143,3 +143,135 @@ BEGIN
     ( TO_DATE(paq.fechas.fechaFin,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL) AND
     ( fac.dispositivo = dispositivo_compra OR dispositivo_compra IS NULL);
 END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_5 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, fechaProx IN DATE)
+AS /* TODO: LISTO, CREO */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT cru.id "ID Crucero",
+    cru.foto "Foto",
+    mant.fecha.fechaInicio "Fecha Mantenimiento",
+    mant.descripcion "Descripcion Mantenimiento",
+    mant.fecha_prox "Fecha de próximo mantenimiento",
+    mant.costo "Costo"
+    FROM CRUCERO cru
+    INNER JOIN MANTENIMIENTO mant
+    ON cru.id = mant.crucero_id
+    WHERE (TO_DATE(mant.fecha.fechaInicio,'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY') OR fechaInicio IS NULL) AND 
+    ( TO_DATE(mant.fecha.fechaFin,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL)
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_6 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
+AS /* TODO: NO SUPE HACER NADA XD */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT 
+    FROM SERVICIO serv
+    WHERE serv.id == categoriaServicio
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
+AS /* TODO: UNIR LOS QUERY Y CALCULAR GANANCIA Y GRAFICOS */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT mant.costo "Costo"
+    FROM MANTENIMIENTO mant
+    INNER JOIN (
+        SELECT cru.id,
+        FROM SERVICIO serv
+        INNER JOIN CRUCERO cru
+        ON cru.id = serv.crucero_id
+        WHERE serv.id == categoriaServicio
+    ) aux ON aux.id =  mant.crucero_id
+    INNER JOIN CRUCERO cru
+    ON aux.id = mant.crucero_id
+    WHERE (TO_DATE(mant.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY mant.id
+
+    SELECT detFact.precio "Precio"
+    FROM DETFACTURA detFact
+    INNER JOIN PAQUETE paq
+    ON paq.id = detFact.paquete_id
+    INNER JOIN (
+        SELECT dest.id,
+        FROM SERVICIO serv
+        INNER JOIN DESTINO dest
+        ON dest.id = serv.destino_id
+        WHERE serv.id == categoriaServicio
+    ) aux ON aux.id =  paq.destino_id
+    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY detFact.id
+
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_8 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
+AS /* TODO: SUMAR LOS MEDIOS DE PAGO Y SACAR % Y GRAFICA */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT paq_medio.canal "Canal",
+    paq.fecha.fechaInicio "Mes"
+    FROM DETFACTURA det
+    INNER JOIN FACTURA fac
+    ON fac.id_factura = det.factura_id
+    INNER JOIN PAQUETE paq
+    ON paq.id_paquete = det.paquete_id
+    INNER JOIN MEDIO paq_medio
+    ON paq_medio.id_medio = fac.medio_id
+    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY paq_medio.canal
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_9 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE)
+AS /* TODO: LISTO, CREO */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT ali.fecha.fechaInicio "Fecha inicio de Alianza",
+    prov.nombre "Nombre Proveedor",
+    prov.logo "Logo",
+    prov.foto "Foto",
+    FROM ALIANZA ali
+    INNER JOIN PROVEEDOR prov
+    ON ali.proveedor_id = prov.id
+    WHERE (TO_DATE(ali.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY')  OR fechaInicio IS NULL)
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_10 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
+AS /* TODO: UNIR LOS QUERYS Y HACER LA SUMA DE CANTIDAD DE PAQUETES DE ESTRELLA CARIBEÑA */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT 
+    FROM DETFACTURA det
+    INNER JOIN PAQUETE paq
+    ON paq.id = det.paquete_id
+    INNER JOIN FACTURA fac
+    ON fac.id = det.factura_id
+    WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL)
+
+    SELECT venta.cantidad "Cantidad Competencia",
+    veta.fechaMes "Fecha de ventas",
+    comp.foto "Foto Logo",
+    comp.nombre "Competencia"
+    FROM VENTA venta
+    INNER JOIN COMPETENCIA comp
+    ON venta.competencia_id = comp.id
+    WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL)
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_11 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, pais IN VARCHAR2)
+AS /* TODO: HACER LA SUMA DE LA CANTIDAD DE PAQUETES */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT pais.nombre "País",
+    pais.foto "Foto País",
+    paq.fecha.fechaInicio "Fecha",
+    FROM PROPIETARIO pro
+    INNER JOIN PAQUETE paq
+    ON pro.paquete_id = paq.id
+    INNER JOIN CLIENTE cli
+    ON pro.cliente_id = cli.id
+    INNER JOIN PAIS pais
+    ON pais.id = cli.pais_id
+    WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL) AND pais.nombre == pais
+    GROUP BY pais.nombre, paq.fecha.fechaInicio
+END;
+/
