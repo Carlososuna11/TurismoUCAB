@@ -881,3 +881,96 @@ INSERT INTO MANTENIMIENTO VALUES (
     15
 );
 
+-- INSERTAR COMPETENCIA
+begin
+    --1
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Hovertours',
+        'hovertours.png'
+    );
+    --2
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Quo Vadis',
+        'quovadis.jpg'
+    );
+    --3
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Drumtrips',
+        'drumtrips.png'
+    );
+    --4
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Mega Tours',
+        'megatours.png'
+    );
+    --5
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Mega Venezuela',
+        'megavenezuela.jpeg'
+    );
+    --6
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'D Mundo Travels',
+        'dmundo.png'
+    );
+    --7
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Mundo Travel',
+        'mundotravel.png'
+    );
+    --8
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Elite Tours Venezuela',
+        'elitetours.png'
+    );
+    --9
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Tom Tours',
+        'tomtours.jpeg'
+    );
+    --10
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Turaser',
+        'turaser.jpeg'
+    );
+    --11
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Venezuela Travel International',
+        'vti.png'
+    );
+    --12
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Turismo Maso Internacional',
+        'turismomaso.png'
+    );
+    --13
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Atom Travel',
+        'atomtravel.jpeg'
+    );
+    --14
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Mega Travel',
+        'megatravel.jpg'
+    );
+    --15
+    INSERTAR_COMPETENCIA(
+        id_competencia.nextVal,
+        'Italviajes',
+        'italviajes.jpeg'
+    );
+end;

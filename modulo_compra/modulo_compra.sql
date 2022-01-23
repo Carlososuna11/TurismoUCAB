@@ -2,6 +2,7 @@ CREATE OR REPLACE PACKAGE MODULO_COMPRA IS
     PROCEDURE INICIO_MODULO_COMPRA;
     FUNCTION  GENERAR_PCR(id_cliente_pcr NUMBER,fecha_pcr DATE) RETURN NUMBER;
     PROCEDURE COMPRAR_PAQUETE(id_cliente_paq NUMBER, fecha_compra DATE);
+    PROCEDURE GENERAR_VENTAS_COMPETENCIA(mes DATE);
 END;
 /
 CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
@@ -190,6 +191,20 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
             dbms_output.put_line('Total Factura '||ROUND(precio_total_factura,2));   
             UPDATE FACTURA fact SET fact.total = precio_total_factura WHERE fact.id_factura = id_fact_temp;     
         END IF;
+    END;
+
+    PROCEDURE GENERAR_VENTAS_COMPETENCIA(mes DATE) IS
+    BEGIN
+        FOR comp IN (SELECT * FROM COMPETENCIA) LOOP
+            -- TODO: SABER CUANTOS PAQUETE HA VENDIDO ESTRELLA CARIBENA (PROMEDIO)
+            unidades_vendidas := ROUND(DBMS_RANDOM.VALUE (100, 200));
+            INSERT INTO VENTA VALUES (
+                TO_DATE(mes, 'MM/YYYY'),
+                0,
+                unidades_vendidas,
+                comp.id_competencia
+            );
+        END LOOP;
     END;
 
     PROCEDURE INICIO_MODULO_COMPRA IS
