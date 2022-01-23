@@ -85,7 +85,7 @@ END;
 CREATE OR REPLACE PROCEDURE INSERTAR_COMPETENCIA(
     id NUMBER,
     nombre VARCHAR2,
-    logo VARCHAR2,
+    logo VARCHAR2
 )
 IS 
     V_bfile_logo BFILE;

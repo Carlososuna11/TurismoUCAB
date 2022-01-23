@@ -923,7 +923,7 @@ begin
     INSERTAR_COMPETENCIA(
         id_competencia.nextVal,
         'Mundo Travel',
-        'mundotravel.png'
+        'mundotravel.jpg'
     );
     --8
     INSERTAR_COMPETENCIA(
