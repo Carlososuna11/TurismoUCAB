@@ -82,6 +82,24 @@ BEGIN
     COMMIT;
 END;
 /
+CREATE OR REPLACE PROCEDURE INSERTAR_COMPETENCIA(
+    id NUMBER,
+    nombre VARCHAR2,
+    logo VARCHAR2,
+)
+IS 
+    V_bfile_logo BFILE;
+    V_blob_logo BLOB;
+BEGIN
+    DBMS_OUTPUT.enable;
+    INSERT INTO COMPETENCIA VALUES (id, nombre, EMPTY_BLOB()) RETURNING logo INTO V_blob_logo;
+    V_bfile_logo := BFILENAME('ORACLECLRDIR', logo);
+    DBMS_LOB.OPEN(V_bfile_logo, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob_logo, V_bfile_logo, DBMS_LOB.GETLENGTH(V_bfile_logo));
+    DBMS_LOB.CLOSE(V_bfile_logo);
+    COMMIT;
+END;
+/
 CREATE OR REPLACE FUNCTION aceptar_o_rechazar(probabilidadSi NUMBER) RETURN BOOLEAN
 IS
 BEGIN
