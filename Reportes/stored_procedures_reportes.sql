@@ -208,17 +208,15 @@ CREATE OR REPLACE PROCEDURE REPORTE_8 (cursorMemoria OUT SYS_REFCURSOR, fechaMes
 AS /* TODO: SUMAR LOS MEDIOS DE PAGO Y SACAR % Y GRAFICA */
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT paq_medio.canal "Canal",
+    SELECT mpago.forma "Medio de pago",
     paq.fecha.fechaInicio "Mes"
     FROM DETFACTURA det
-    INNER JOIN FACTURA fac
-    ON fac.id_factura = det.factura_id
     INNER JOIN PAQUETE paq
     ON paq.id_paquete = det.paquete_id
-    INNER JOIN MEDIO paq_medio
-    ON paq_medio.id_medio = fac.medio_id
+    INNER JOIN MPAGO mpago
+    ON mpago.detFactura_id = det.id
     WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY paq_medio.canal
+    GROUP BY mpago.forma
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_9 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE)
@@ -273,5 +271,40 @@ BEGIN
     ON pais.id = cli.pais_id
     WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL) AND pais.nombre == pais
     GROUP BY pais.nombre, paq.fecha.fechaInicio
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_12 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
+AS /* TODO: SACAR LOS % Y GRAFICA */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT pago_medio.canal "Canal utilizado",
+    paq.fecha.fechaInicio "Mes"
+    FROM DETFACTURA det
+    INNER JOIN FACTURA fact
+    ON fact.id = det.factura_id
+    INNER JOIN PAQUETE paq
+    ON paq.id_paquete = det.paquete_id
+    INNER JOIN MEDIO pago_medio
+    ON pago_medio.id = fact.medio_id
+    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY pago_medio.canal
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_13 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
+AS /* TODO: SACAR PROMEDIO DE LAS OBSERVACIONES Y AGRUPAR COMENTARIOS POR SERVICIO */
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT obs.escala "Puntaje",
+    obs.descripcion "Comentario",
+    serv.nombre "Servicio",
+    FROM SERVICIO serv
+    INNER JOIN OBSERVACION obs
+    ON serv.id = obs.servicio_id
+    INNER JOIN DESTINO dest
+    ON dest.id = serv.destino_id
+    INNER JOIN PAQUETE paq
+    ON dest.id = paq.destino_id
+    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY serv.id
 END;
 /
