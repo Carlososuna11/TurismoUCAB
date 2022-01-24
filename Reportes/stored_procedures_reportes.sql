@@ -162,13 +162,17 @@ BEGIN
     (TO_DATE(mant.fecha_prox,'dd/MM/YYYY') = TO_DATE(fechaProx,'dd/MM/YYYY') OR fechaProx IS NULL);
 END;
 /
-CREATE OR REPLACE PROCEDURE REPORTE_6 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
+CREATE OR REPLACE PROCEDURE REPORTE_6 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN VARCHAR2)
 AS /* TODO: NO SUPE HACER NADA XD */
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
+    serv.nombre "Categoria de Servicio",
+    SUM(disp.balance.existencia) "Cantidad Disponible"
     FROM SERVICIO serv
-    WHERE serv.id == categoriaServicio
+    INNER JOIN DISPONIBILIDAD disp
+    ON disp.id_servicio = serv.id_servicio
+    GROUP BY serv.nombre;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
