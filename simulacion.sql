@@ -36,10 +36,10 @@ BEGIN
     dbms_output.put_line(' ');
     dbms_output.put_line('Inicio de la Simulacion!');
     WHILE fecha_inicio_sim <= fecha_fin_sim LOOP
-        -- IF (TO_DATE(fecha_inicio_sim,'MM')=TO_DATE(mes,'MM')) THEN
-        --     MODULO_COMPRA.GENERAR_VENTAS_COMPETENCIA(fecha_inicio_sim);
-        --     mes := ADD_MONTHS(mes,1);
-        -- END IF;
+        IF (TO_CHAR(fecha_inicio_sim,'MM/YYYY')=TO_CHAR(mes,'MM/YYYY')) THEN
+            MODULO_COMPRA.GENERAR_VENTAS_COMPETENCIA(fecha_inicio_sim);
+            mes := ADD_MONTHS(mes,1);
+        END IF;
         dbms_output.put_line(' ');
         dbms_output.put_line(' ');
         dbms_output.put_line('Fecha de Simulacion: '||fecha_inicio_sim);

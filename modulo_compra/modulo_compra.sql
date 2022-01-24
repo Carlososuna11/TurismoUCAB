@@ -194,12 +194,14 @@ CREATE OR REPLACE PACKAGE BODY MODULO_COMPRA AS
     END;
 
     PROCEDURE GENERAR_VENTAS_COMPETENCIA(mes DATE) IS
+        unidades_vendidas NUMBER;
     BEGIN
         FOR comp IN (SELECT * FROM COMPETENCIA) LOOP
             -- TODO: SABER CUANTOS PAQUETE HA VENDIDO ESTRELLA CARIBENA (PROMEDIO)
+            -- TODO: TRUNC
             unidades_vendidas := ROUND(DBMS_RANDOM.VALUE (100, 200));
             INSERT INTO VENTA VALUES (
-                TO_DATE(mes, 'MM/YYYY'),
+                to_date(TO_CHAR(mes, 'MON-YYYY'), 'MON-YYYY'),
                 0,
                 unidades_vendidas,
                 comp.id_competencia
