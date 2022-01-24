@@ -145,20 +145,21 @@ BEGIN
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_5 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE, fechaProx IN DATE)
-AS /* TODO: LISTO, CREO */
+AS /*TODO: FechaProx es = o =>*/
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT cru.id "ID Crucero",
+    SELECT cru.id_crucero "ID Crucero",
     cru.foto "Foto",
-    mant.fecha.fechaInicio "Fecha Mantenimiento",
+    TO_CHAR(mant.fecha.fechaInicio,'dd/MM/YYYY') "Fecha Mantenimiento",
+    TO_CHAR(mant.fecha_prox,'dd/MM/YYYY') "Fecha de próximo mantenimiento",
     mant.descripcion "Descripcion Mantenimiento",
-    mant.fecha_prox "Fecha de próximo mantenimiento",
-    mant.costo "Costo"
+    CONCAT('$ ',mant.costo) "Costo"
     FROM CRUCERO cru
     INNER JOIN MANTENIMIENTO mant
-    ON cru.id = mant.crucero_id
+    ON cru.id_crucero = mant.crucero_id
     WHERE (TO_DATE(mant.fecha.fechaInicio,'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY') OR fechaInicio IS NULL) AND 
-    ( TO_DATE(mant.fecha.fechaFin,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL)
+    ( TO_DATE(mant.fecha.fechaInicio,'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY') OR fechaFin IS NULL) AND
+    (TO_DATE(mant.fecha_prox,'dd/MM/YYYY') = TO_DATE(fechaProx,'dd/MM/YYYY') OR fechaProx IS NULL);
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_6 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
