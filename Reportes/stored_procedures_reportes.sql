@@ -167,7 +167,7 @@ AS
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
-    to_char(disp.fecha.fechaInicio, 'MM/YYYY') "Mes",
+    to_char(disp.fecha.fechaInicio, 'MONTH YYYY') "Mes",
     serv.nombre "Categoria de Servicio",
     CONCAT(ROUND((SUM(disp.balance.numeroVentas) / SUM(disp.balance.existencia))*100,2), ' %')  "% Demanda del Servicio",
     SUM(disp.balance.numeroVentas) "Cantidad de clientes que lo han solicitado"
@@ -177,7 +177,7 @@ BEGIN
     WHERE disp.balance.existencia > 0 AND
     (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
     (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY to_char(disp.fecha.fechaInicio, 'MM/YYYY'),serv.nombre;
+    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
@@ -225,7 +225,7 @@ BEGIN
     ON paq.id_paquete = det.paquete_id
     INNER JOIN MPAGO mpago
     ON mpago.detFactura_id = det.id
-    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
+    WHERE (TO_CHAR(paq.fecha.fechaInicio,'MM/YYYY') == TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
     GROUP BY mpago.forma
 END;
 /
