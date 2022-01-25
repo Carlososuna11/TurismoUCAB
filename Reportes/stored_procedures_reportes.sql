@@ -180,38 +180,23 @@ BEGIN
     GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre;
 END;
 /
-CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
-AS /* TODO: UNIR LOS QUERY Y CALCULAR GANANCIA Y GRAFICOS */
+CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN VARCHAR2)
+AS
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT mant.costo "Costo"
-    FROM MANTENIMIENTO mant
-    INNER JOIN (
-        SELECT cru.id,
-        FROM SERVICIO serv
-        INNER JOIN CRUCERO cru
-        ON cru.id = serv.crucero_id
-        WHERE serv.id == categoriaServicio
-    ) aux ON aux.id =  mant.crucero_id
-    INNER JOIN CRUCERO cru
-    ON aux.id = mant.crucero_id
-    WHERE (TO_DATE(mant.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY mant.id
-
-    SELECT detFact.precio "Precio"
-    FROM DETFACTURA detFact
-    INNER JOIN PAQUETE paq
-    ON paq.id = detFact.paquete_id
-    INNER JOIN (
-        SELECT dest.id,
-        FROM SERVICIO serv
-        INNER JOIN DESTINO dest
-        ON dest.id = serv.destino_id
-        WHERE serv.id == categoriaServicio
-    ) aux ON aux.id =  paq.destino_id
-    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY detFact.id
-
+    SELECT
+    to_char(disp.fecha.fechaInicio, 'MONTH YYYY') "Mes",
+    serv.nombre "Categoria de Servicio",
+    CONCAT('$ ',ROUND(SUM(disp.balance.egreso),2)) "Costos directos e Indirectos" ,
+    CONCAT('$ ',ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2)) "Ingresos recibidos por el servicio",
+    CONCAT('$ ',ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario))-SUM(disp.balance.egreso),2)) "Ganancia"
+    FROM SERVICIO serv
+    INNER JOIN DISPONIBILIDAD disp
+    ON disp.id_servicio = serv.id_servicio
+    WHERE disp.balance.existencia > 0 AND
+    (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
+    (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_8 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
