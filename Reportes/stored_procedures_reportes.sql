@@ -163,16 +163,21 @@ BEGIN
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_6 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN VARCHAR2)
-AS /* TODO: NO SUPE HACER NADA XD */
+AS
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
+    to_char(disp.fecha.fechaInicio, 'MM/YYYY') "Mes",
     serv.nombre "Categoria de Servicio",
-    SUM(disp.balance.existencia) "Cantidad Disponible"
+    CONCAT(ROUND((SUM(disp.balance.numeroVentas) / SUM(disp.balance.existencia))*100,2), ' %')  "% Demanda del Servicio",
+    SUM(disp.balance.numeroVentas) "Cantidad de clientes que lo han solicitado"
     FROM SERVICIO serv
     INNER JOIN DISPONIBILIDAD disp
     ON disp.id_servicio = serv.id_servicio
-    GROUP BY serv.nombre;
+    WHERE disp.balance.existencia > 0 AND
+    (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
+    (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY to_char(disp.fecha.fechaInicio, 'MM/YYYY'),serv.nombre;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN INT)
