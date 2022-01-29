@@ -258,25 +258,31 @@ BEGIN
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_10 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
-AS /* TODO: UNIR LOS QUERYS Y HACER LA SUMA DE CANTIDAD DE PAQUETES DE ESTRELLA CARIBEÑA */
+AS 
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
-    FROM DETFACTURA det
-    INNER JOIN PAQUETE paq
-    ON paq.id = det.paquete_id
-    INNER JOIN FACTURA fac
-    ON fac.id = det.factura_id
-    WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL)
-
-    SELECT venta.cantidad "Cantidad Competencia",
-    veta.fechaMes "Fecha de ventas",
-    comp.foto "Foto Logo",
-    comp.nombre "Competencia"
+    to_char(venta.fecha_mes, 'MONTH YYYY') "Mes",
+    comp.nombre "Competencia",
+    comp.logo "Foto Logo",
+    venta.cantidad "Ventas Competencia",
+    venta_ec.cantidad "Ventas Estrella Caribeña"
     FROM VENTA venta
     INNER JOIN COMPETENCIA comp
-    ON venta.competencia_id = comp.id
-    WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL)
+    ON venta.competencia_id = comp.id_competencia
+    INNER JOIN (
+        SELECT 
+        to_char(fact.fecha, 'MONTH YYYY') as fecha_mes,
+        COUNT(detf.paquete_id) as cantidad
+        FROM DETFACTURA detf
+        INNER JOIN FACTURA fact
+        ON detf.factura_id = fact.id_factura
+        GROUP BY to_char(fact.fecha, 'MONTH YYYY')
+    )
+    venta_ec
+    ON  to_char(venta.fecha_mes, 'MONTH YYYY') = venta_ec.fecha_mes
+    WHERE (to_char(venta.fecha_mes, 'MONTH YYYY') = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL)
+    ORDER BY TO_DATE(venta.fecha_mes, 'dd/MM/YYYY') ASC;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_11 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, pais IN VARCHAR2)
