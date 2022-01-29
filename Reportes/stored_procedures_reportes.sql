@@ -177,7 +177,8 @@ BEGIN
     WHERE disp.balance.existencia > 0 AND
     (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
     (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre;
+    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
+    ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN VARCHAR2)
@@ -196,36 +197,64 @@ BEGIN
     WHERE disp.balance.existencia > 0 AND
     (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
     (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre;
+    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
+    ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_8 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
-AS /* TODO: SUMAR LOS MEDIOS DE PAGO Y SACAR % Y GRAFICA */
+AS /* TODO: VER COMO COÑO HACER LA GRÁFICA */
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT mpago.forma "Medio de pago",
-    paq.fecha.fechaInicio "Mes"
-    FROM DETFACTURA det
-    INNER JOIN PAQUETE paq
-    ON paq.id_paquete = det.paquete_id
-    INNER JOIN MPAGO mpago
-    ON mpago.detFactura_id = det.id
-    WHERE (TO_CHAR(paq.fecha.fechaInicio,'MM/YYYY') == TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY mpago.forma
+    SELECT 
+    to_char(fact.fecha, 'MONTH YYYY') "Mes",
+    ROUND((COUNT(tdc.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2) "TDC",
+    ROUND((COUNT(wallet.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2)  "WALLET",
+    ROUND((COUNT(cripto.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2) "CRIPTOMONEDAS"
+    FROM FACTURA fact
+    LEFT JOIN (
+        SELECT
+        mp.id_mpago,
+        mp.detFactura_factura_id
+        FROM MPAGO mp
+        WHERE mp.forma = 'TDC'
+    ) tdc
+    ON fact.id_factura = tdc.detFactura_factura_id
+    LEFT JOIN (
+        SELECT
+        mp.id_mpago,
+        mp.detFactura_factura_id
+        FROM MPAGO mp
+        WHERE mp.forma = 'Wallet'
+    ) wallet
+    ON fact.id_factura = wallet.detFactura_factura_id
+    LEFT JOIN (
+        SELECT
+        mp.id_mpago,
+        mp.detFactura_factura_id
+        FROM MPAGO mp
+        WHERE mp.forma = 'Criptomonedas'
+    ) cripto
+    ON fact.id_factura = cripto.detFactura_factura_id
+    WHERE (TO_CHAR(fact.fecha, 'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY to_char(fact.fecha, 'MONTH YYYY')
+    ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY') ASC;
 END;
 /
-CREATE OR REPLACE PROCEDURE REPORTE_9 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE)
-AS /* TODO: LISTO, CREO */
+CREATE OR REPLACE PROCEDURE REPORTE_9 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE)
+AS 
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT ali.fecha.fechaInicio "Fecha inicio de Alianza",
+    SELECT 
+    TO_CHAR(ali.fecha.fechaInicio,'dd/MM/YYYY') "Fecha inicio de Alianza",
     prov.nombre "Nombre Proveedor",
     prov.logo "Logo",
-    prov.foto "Foto",
+    prov.foto "Foto"
     FROM ALIANZA ali
     INNER JOIN PROVEEDOR prov
-    ON ali.proveedor_id = prov.id
+    ON ali.proveedor_id = prov.id_proveedor
     WHERE (TO_DATE(ali.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaInicio,'dd/MM/YYYY')  OR fechaInicio IS NULL)
+    AND (TO_DATE(ali.fecha.fechaInicio, 'dd/MM/YYYY') <= TO_DATE(fechaFin,'dd/MM/YYYY')  OR fechaFin IS NULL)
+    ORDER BY TO_DATE(ali.fecha.fechaInicio, 'dd/MM/YYYY') ASC;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_10 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
