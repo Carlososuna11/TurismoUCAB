@@ -285,22 +285,34 @@ BEGIN
     ORDER BY TO_DATE(venta.fecha_mes, 'dd/MM/YYYY') ASC;
 END;
 /
-CREATE OR REPLACE PROCEDURE REPORTE_11 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, pais IN VARCHAR2)
-AS /* TODO: HACER LA SUMA DE LA CANTIDAD DE PAQUETES */
+CREATE OR REPLACE PROCEDURE REPORTE_11 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, paisnombre IN VARCHAR2)
+AS 
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT pais.nombre "País",
-    pais.foto "Foto País",
-    paq.fecha.fechaInicio "Fecha",
-    FROM PROPIETARIO pro
-    INNER JOIN PAQUETE paq
-    ON pro.paquete_id = paq.id
-    INNER JOIN CLIENTE cli
-    ON pro.cliente_id = cli.id
-    INNER JOIN PAIS pais
-    ON pais.id = cli.pais_id
-    WHERE (TO_DATE(paq.fecha.fechaInicio, 'dd/MM/YYYY') >= TO_DATE(fechaMes,'dd/MM/YYYY')  OR fechaMes IS NULL) AND pais.nombre == pais
-    GROUP BY pais.nombre, paq.fecha.fechaInicio
+    SELECT 
+    aux.fecha_mes "Mes",
+    pa.foto "Foto Pais",
+    pa.nombre "Pais",
+    aux.cantidad "Unidades Compradas"
+    FROM PAIS pa
+    INNER JOIN (
+        SELECT 
+        TO_CHAR(fact.fecha, 'MONTH YYYY') as fecha_mes,
+        pa.id_pais,
+        COUNT(detf.id_detFactura) as cantidad
+        FROM PAIS pa
+        INNER JOIN CLIENTE cli
+        ON pa.id_pais = cli.pais_id
+        INNER JOIN FACTURA fact
+        ON cli.id_cliente = fact.cliente_id
+        INNER JOIN DETFACTURA detf
+        ON fact.id_factura = detf.factura_id
+        GROUP BY TO_CHAR(fact.fecha, 'MONTH YYYY'), pa.id_pais
+    ) aux
+    ON pa.id_pais = aux.id_pais
+    WHERE (aux.fecha_mes = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL) 
+    AND (pa.nombre = paisnombre OR paisnombre IS NULL)
+    ORDER BY TO_DATE(aux.fecha_mes, 'MONTH YYYY') ASC;
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_12 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
