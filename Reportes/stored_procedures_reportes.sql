@@ -319,17 +319,58 @@ CREATE OR REPLACE PROCEDURE REPORTE_12 (cursorMemoria OUT SYS_REFCURSOR, fechaMe
 AS /* TODO: SACAR LOS % Y GRAFICA */
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT pago_medio.canal "Canal utilizado",
-    paq.fecha.fechaInicio "Mes"
-    FROM DETFACTURA det
-    INNER JOIN FACTURA fact
-    ON fact.id = det.factura_id
-    INNER JOIN PAQUETE paq
-    ON paq.id_paquete = det.paquete_id
-    INNER JOIN MEDIO pago_medio
-    ON pago_medio.id = fact.medio_id
-    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY pago_medio.canal
+    SELECT 
+    to_char(fact.fecha, 'MONTH YYYY') "Mes",
+    ROUND((COUNT(agencia.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Agencia Fisica",
+    ROUND((COUNT(aplicacion.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Aplicacion Movil",
+    ROUND((COUNT(paginaweb.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Pagina Web",
+    ROUND((COUNT(whatsapp.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Whatsapp",
+    ROUND((COUNT(instagram.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Instagram"
+    FROM FACTURA fact
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Agencia Fisica'
+    ) agencia
+    ON fact.medio_id = agencia.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Aplicacion Movil'
+    ) aplicacion
+    ON fact.medio_id = aplicacion.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Pagina Web'
+    ) paginaweb
+    ON fact.medio_id = paginaweb.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Whatsapp'
+    ) whatsapp
+    ON fact.medio_id = whatsapp.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Instagram'
+    ) instagram
+    ON fact.medio_id = instagram.id_medio
+    WHERE (to_char(fact.fecha, 'MONTH YYYY') = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL)
+    GROUP BY to_char(fact.fecha, 'MONTH YYYY')
+    ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY') ASC;
+
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_13 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
