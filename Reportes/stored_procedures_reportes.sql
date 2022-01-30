@@ -373,21 +373,20 @@ BEGIN
 
 END;
 /
-CREATE OR REPLACE PROCEDURE REPORTE_13 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
-AS /* TODO: SACAR PROMEDIO DE LAS OBSERVACIONES Y AGRUPAR COMENTARIOS POR SERVICIO */
+CREATE OR REPLACE PROCEDURE REPORTE_13 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE,escala IN NUMBER)
+AS
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT obs.escala "Puntaje",
-    obs.descripcion "Comentario",
+    SELECT
+    TO_CHAR(obs.fechaCreacion, 'MONTH YYYY') "Mes",
     serv.nombre "Servicio",
-    FROM SERVICIO serv
-    INNER JOIN OBSERVACION obs
-    ON serv.id = obs.servicio_id
-    INNER JOIN DESTINO dest
-    ON dest.id = serv.destino_id
-    INNER JOIN PAQUETE paq
-    ON dest.id = paq.destino_id
-    WHERE (TO_DATE(paq.fecha.fechaInicio,'dd/MM/YYYY') == TO_DATE(fechaMes,'dd/MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY serv.id
+    ROUND(AVG(obs.escala)) "Escala",
+    LISTAGG('- ' || obs.descripcion,chr(13) || chr(10)) WITHIN GROUP (ORDER BY obs.fechaCreacion) "Observaciones"
+    FROM OBSERVACION obs
+    INNER JOIN SERVICIO serv
+    ON serv.id_servicio = obs.servicio_id
+    WHERE (TO_CHAR(obs.fechaCreacion, 'MONTH YYYY') = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL)
+    GROUP BY TO_CHAR(obs.fechaCreacion, 'MONTH YYYY'), serv.nombre
+    ORDER BY TO_DATE(TO_CHAR(obs.fechaCreacion, 'MONTH YYYY'), 'MONTH YYYY') ASC;
 END;
 /
