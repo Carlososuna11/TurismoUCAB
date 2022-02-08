@@ -4,6 +4,7 @@ alter session set "_ORACLE_SCRIPT"=true;
 CREATE ROLE administrador;
 CREATE ROLE gerente_ventas;
 CREATE ROLE empleado;
+CREATE ROLE cliente;
 /
 
 -- Asignación de permisos
@@ -11,6 +12,7 @@ CREATE ROLE empleado;
 GRANT ALL PRIVILEGES TO administrador;
 GRANT CREATE SESSION TO gerente_ventas;
 GRANT CREATE SESSION TO empleado;
+GRANT CREATE SESSION TO cliente;
 /
 
 -- Permisos para administrador
@@ -30,42 +32,51 @@ GRANT ALL ON MANTENIMIENTO TO administrador;
 -- Permisos para gerente_ventas
 
 GRANT INSERT, SELECT, UPDATE ON FACTURA TO gerente_ventas;
-GRANT INSERT, SELECT, UPDATE ON SERVICIO TO gerente_ventas;
+GRANT INSERT, SELECT, UPDATE ON PAQUETE TO gerente_ventas;
 GRANT INSERT, SELECT, UPDATE ON PROVEEDOR TO gerente_ventas;
-GRANT INSERT, SELECT, UPDATE ON MPAGO TO gerente_ventas;
-GRANT INSERT, SELECT, UPDATE ON MEDIO TO gerente_ventas;
 GRANT INSERT, SELECT, UPDATE ON DESTINO TO gerente_ventas;
+GRANT INSERT, SELECT, UPDATE ON MEDIO TO gerente_ventas;
 GRANT INSERT, SELECT, UPDATE ON MPAGO TO gerente_ventas;
 GRANT INSERT, SELECT, UPDATE ON DISPONIBILIDAD TO gerente_ventas;
+GRANT INSERT, SELECT, UPDATE ON SERVICIO TO gerente_ventas;
 GRANT SELECT ON CRUCERO TO gerente_ventas;
 GRANT SELECT ON MANTENIMIENTO TO gerente_ventas;
 
 
 -- Permisos para empleado
 
-GRANT SELECT ON CLIENTE TO empleado;
 GRANT SELECT ON FACTURA TO empleado;
 GRANT SELECT ON SERVICIO TO empleado;
 GRANT SELECT ON PROVEEDOR TO empleado;
 GRANT SELECT ON MPAGO TO empleado;
 GRANT SELECT ON MEDIO TO empleado;
 GRANT SELECT ON DESTINO TO empleado;
-GRANT SELECT ON MPAGO TO empleado;
+GRANT SELECT ON PAQUETE TO empleado;
 GRANT SELECT ON DISPONIBILIDAD TO empleado;
 GRANT SELECT ON CRUCERO TO empleado;
 GRANT SELECT ON MANTENIMIENTO TO empleado;
+
+-- Permisos para cliente
+
+GRANT SELECT ON PAQUETE TO cliente;
+GRANT SELECT ON DESTINO TO cliente;
+GRANT SELECT ON DISPONIBILIDAD TO cliente;
+GRANT SELECT ON SERVICIO TO cliente;
 
 -- Usuarios
 CREATE USER administrador1 IDENTIFIED BY administrador1 default tablespace USERS;
 CREATE USER gerente1 IDENTIFIED BY gerente1 default tablespace USERS;
 CREATE USER empleado1 IDENTIFIED BY empleado1 default tablespace USERS;
+CREATE USER cliente1 IDENTIFIED BY cliente1 default tablespace USERS;
 
 ALTER USER administrador1 QUOTA UNLIMITED ON USERS;
 ALTER USER gerente1 QUOTA UNLIMITED ON USERS;
 ALTER USER empleado1 QUOTA UNLIMITED ON USERS;
+ALTER USER cliente1 QUOTA UNLIMITED ON USERS;
 
 
 -- Roles para los usuarios
 GRANT administrador TO administrador1;
 GRANT gerente_ventas TO gerente1;
 GRANT empleado TO empleado1;
+GRANT cliente TO cliente1;
