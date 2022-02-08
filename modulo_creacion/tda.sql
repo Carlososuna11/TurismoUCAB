@@ -165,7 +165,7 @@ IS
         SELF.egreso := egreso;
         SELF.existencia := existencia;
         SELF.numeroVentas := 0;
-        SELF.precio_unitario := egreso / existencia;
+        SELF.precio_unitario := (egreso / existencia) * 10;
         RETURN;
     END;
 END;

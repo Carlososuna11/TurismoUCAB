@@ -22,6 +22,7 @@
     <file url="file://$PROJECT_DIR$/modulo_paquetes/modulo_paquete.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/modulo_servicios/drop.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/modulo_servicios/modulo_servicios.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/seguridad/seguridad_roles.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/simulacion.sql" dialect="Oracle" />
   </component>
 </project>

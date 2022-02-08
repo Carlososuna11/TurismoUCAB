@@ -201,6 +201,7 @@ BEGIN
         (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
         (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
         GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
+        HAVING ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2) > 0
         ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC;
 END;
 /
@@ -224,6 +225,7 @@ BEGIN
         (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
         (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
         GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
+        HAVING ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2) > 0
         ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC)
         unpivot( quantity  -- unpivot_clause
         FOR tipo --  unpivot_for_clause
