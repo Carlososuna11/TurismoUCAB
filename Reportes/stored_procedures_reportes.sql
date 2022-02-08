@@ -185,28 +185,62 @@ CREATE OR REPLACE PROCEDURE REPORTE_7 (cursorMemoria OUT SYS_REFCURSOR, fechaMes
 AS
 BEGIN
     OPEN cursorMemoria FOR 
-    SELECT
-    to_char(disp.fecha.fechaInicio, 'MONTH YYYY') "Mes",
-    serv.nombre "Categoria de Servicio",
-    CONCAT('$ ',ROUND(SUM(disp.balance.egreso),2)) "Costos directos e Indirectos" ,
-    CONCAT('$ ',ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2)) "Ingresos recibidos por el servicio",
-    CONCAT('$ ',ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario))-SUM(disp.balance.egreso),2)) "Ganancia"
-    FROM SERVICIO serv
-    INNER JOIN DISPONIBILIDAD disp
-    ON disp.id_servicio = serv.id_servicio
-    WHERE disp.balance.existencia > 0 AND
-    (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
-    (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
-    GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
-    ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC;
+        SELECT 
+        to_char(disp.fecha.fechaInicio, 'MONTH YYYY') "Mes",
+        'Gastos' as Gastos,
+        'Ingresos' as Ingresos,
+        ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
+        serv.nombre "Categoria de Servicio",
+        ROUND(SUM(disp.balance.egreso),2) "Costos directos e Indirectos" ,
+        ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2) "Ingresos recibidos por el servicio",
+        ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario))-SUM(disp.balance.egreso),2) "Ganancia"
+        FROM SERVICIO serv
+        INNER JOIN DISPONIBILIDAD disp
+        ON disp.id_servicio = serv.id_servicio
+        WHERE disp.balance.existencia > 0 AND
+        (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
+        (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
+        GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
+        ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC;
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_7_G (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, categoriaServicio IN VARCHAR2, filax IN NUMBER)
+AS
+BEGIN
+    OPEN cursorMemoria FOR 
+        SELECT* FROM (SELECT 
+        to_char(disp.fecha.fechaInicio, 'MONTH YYYY') "Mes",
+        'Gastos' as Gastos,
+        'Ingresos' as Ingresos,
+        ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
+        serv.nombre "Categoria de Servicio",
+        ROUND(SUM(disp.balance.egreso),2) "Costos directos e Indirectos" ,
+        ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2) "Ingresos recibidos por el servicio",
+        ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario))-SUM(disp.balance.egreso),2) "Ganancia"
+        FROM SERVICIO serv
+        INNER JOIN DISPONIBILIDAD disp
+        ON disp.id_servicio = serv.id_servicio
+        WHERE disp.balance.existencia > 0 AND
+        (serv.nombre = categoriaServicio OR categoriaServicio IS NULL) AND
+        (TO_CHAR(disp.fecha.fechaInicio,'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
+        GROUP BY to_char(disp.fecha.fechaInicio, 'MONTH YYYY'),serv.nombre
+        ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY') ASC)
+        unpivot( quantity  -- unpivot_clause
+        FOR tipo --  unpivot_for_clause
+        IN ( -- unpivot_in_clause
+            "Ingresos recibidos por el servicio" AS 'INGRESOS',
+            "Costos directos e Indirectos" AS 'GASTOS'
+        ))
+        WHERE (trunc(Fila) = trunc(filax));
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_8 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
-AS /* TODO: VER COMO COÑO HACER LA GRÁFICA */
+AS 
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
     to_char(fact.fecha, 'MONTH YYYY') "Mes",
+    ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
     ROUND((COUNT(tdc.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2) "TDC",
     ROUND((COUNT(wallet.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2)  "WALLET",
     ROUND((COUNT(cripto.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2) "CRIPTOMONEDAS"
@@ -238,6 +272,55 @@ BEGIN
     WHERE (TO_CHAR(fact.fecha, 'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
     GROUP BY to_char(fact.fecha, 'MONTH YYYY')
     ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY') ASC;
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_8_G (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, filax IN NUMBER)
+AS 
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT * FROM (
+    SELECT 
+    to_char(fact.fecha, 'MONTH YYYY') "Mes",
+    ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
+    ROUND((COUNT(tdc.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2) "TDC",
+    ROUND((COUNT(wallet.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2)  "WALLET",
+    ROUND((COUNT(cripto.id_mpago)*100)/(COUNT(tdc.id_mpago)+ COUNT(wallet.id_mpago)+COUNT(cripto.id_mpago)),2) "CRIPTOMONEDAS"
+    FROM FACTURA fact
+    LEFT JOIN (
+        SELECT
+        mp.id_mpago,
+        mp.detFactura_factura_id
+        FROM MPAGO mp
+        WHERE mp.forma = 'TDC'
+    ) tdc
+    ON fact.id_factura = tdc.detFactura_factura_id
+    LEFT JOIN (
+        SELECT
+        mp.id_mpago,
+        mp.detFactura_factura_id
+        FROM MPAGO mp
+        WHERE mp.forma = 'Wallet'
+    ) wallet
+    ON fact.id_factura = wallet.detFactura_factura_id
+    LEFT JOIN (
+        SELECT
+        mp.id_mpago,
+        mp.detFactura_factura_id
+        FROM MPAGO mp
+        WHERE mp.forma = 'Criptomonedas'
+    ) cripto
+    ON fact.id_factura = cripto.detFactura_factura_id
+    WHERE (TO_CHAR(fact.fecha, 'MM/YYYY') = TO_CHAR(fechaMes,'MM/YYYY') OR fechaMes IS NULL)
+    GROUP BY to_char(fact.fecha, 'MONTH YYYY')
+    ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY') ASC)
+    unpivot( quantity  -- unpivot_clause
+        FOR tipo --  unpivot_for_clause
+        IN ( -- unpivot_in_clause
+            "TDC" AS 'TDC',
+            "WALLET" AS 'WALLET',
+            "CRIPTOMONEDAS" AS 'CRIPTOMONEDAS'
+        ))
+        WHERE (trunc(Fila) = trunc(filax));
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_9 (cursorMemoria OUT SYS_REFCURSOR, fechaInicio IN DATE, fechaFin IN DATE)
@@ -316,11 +399,12 @@ BEGIN
 END;
 /
 CREATE OR REPLACE PROCEDURE REPORTE_12 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE)
-AS /* TODO: SACAR LOS % Y GRAFICA */
+AS 
 BEGIN
     OPEN cursorMemoria FOR 
     SELECT 
     to_char(fact.fecha, 'MONTH YYYY') "Mes",
+    ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
     ROUND((COUNT(agencia.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Agencia Fisica",
     ROUND((COUNT(aplicacion.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Aplicacion Movil",
     ROUND((COUNT(paginaweb.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Pagina Web",
@@ -370,23 +454,104 @@ BEGIN
     WHERE (to_char(fact.fecha, 'MONTH YYYY') = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL)
     GROUP BY to_char(fact.fecha, 'MONTH YYYY')
     ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY') ASC;
+END;
+/
+CREATE OR REPLACE PROCEDURE REPORTE_12_G (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE, filax IN NUMBER)
+AS 
+BEGIN
+    OPEN cursorMemoria FOR 
+    SELECT * FROM (
+    SELECT 
+    to_char(fact.fecha, 'MONTH YYYY') "Mes",
+    ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
+    ROUND((COUNT(agencia.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Agencia Fisica",
+    ROUND((COUNT(aplicacion.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Aplicacion Movil",
+    ROUND((COUNT(paginaweb.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Pagina Web",
+    ROUND((COUNT(whatsapp.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Whatsapp",
+    ROUND((COUNT(instagram.canal)*100)/(COUNT(agencia.canal)+COUNT(aplicacion.canal)+COUNT(paginaweb.canal)+COUNT(whatsapp.canal)+COUNT(instagram.canal)),2) "Instagram"
+    FROM FACTURA fact
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Agencia Fisica'
+    ) agencia
+    ON fact.medio_id = agencia.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Aplicacion Movil'
+    ) aplicacion
+    ON fact.medio_id = aplicacion.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Pagina Web'
+    ) paginaweb
+    ON fact.medio_id = paginaweb.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Whatsapp'
+    ) whatsapp
+    ON fact.medio_id = whatsapp.id_medio
+    LEFT JOIN (
+        SELECT
+        m.id_medio,
+        m.canal
+        FROM MEDIO m
+        WHERE m.canal = 'Instagram'
+    ) instagram
+    ON fact.medio_id = instagram.id_medio
+    WHERE (to_char(fact.fecha, 'MONTH YYYY') = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL)
+    GROUP BY to_char(fact.fecha, 'MONTH YYYY')
+    ORDER BY TO_DATE(to_char(fact.fecha, 'MONTH YYYY'), 'MONTH YYYY') ASC)
+    unpivot( quantity  -- unpivot_clause
+        FOR tipo --  unpivot_for_clause
+        IN ( -- unpivot_in_clause
+            "Agencia Fisica" AS 'Agencia Fisica',
+            "Aplicacion Movil" AS 'Aplicacion Movil',
+            "Pagina Web" AS 'Pagina Web',
+            "Whatsapp" AS 'Whatsapp',
+            "Instagram" AS 'Instagram'
+        ))
+    WHERE (trunc(Fila) = trunc(filax));
 
 END;
 /
-CREATE OR REPLACE PROCEDURE REPORTE_13 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE,escala IN NUMBER)
+CREATE OR REPLACE PROCEDURE REPORTE_13 (cursorMemoria OUT SYS_REFCURSOR, fechaMes IN DATE,escala IN VARCHAR2)
 AS
 BEGIN
     OPEN cursorMemoria FOR 
+    SELECT * FROM (
     SELECT
     TO_CHAR(obs.fechaCreacion, 'MONTH YYYY') "Mes",
     serv.nombre "Servicio",
     ROUND(AVG(obs.escala)) "Escala",
+    CASE
+        WHEN ROUND(AVG(obs.escala)) > 2 AND ROUND(AVG(obs.escala)) < 4  THEN 'Neutral'
+        WHEN ROUND(AVG(obs.escala)) >= 4 THEN 'Muy Satisfecho'
+        ELSE 'Insatisfecho'
+    END AS valoracion,
+    CASE
+        WHEN ROUND(AVG(obs.escala)) > 2 AND ROUND(AVG(obs.escala)) < 4  THEN ':|'
+        WHEN ROUND(AVG(obs.escala)) >= 4 THEN '<style forecolor="green">:-)</style>'
+        ELSE '<style forecolor="red">:(</style>'
+    END AS carita,
     LISTAGG('- ' || obs.descripcion,chr(13) || chr(10)) WITHIN GROUP (ORDER BY obs.fechaCreacion) "Observaciones"
     FROM OBSERVACION obs
     INNER JOIN SERVICIO serv
     ON serv.id_servicio = obs.servicio_id
     WHERE (TO_CHAR(obs.fechaCreacion, 'MONTH YYYY') = to_char(fechaMes,'MONTH YYYY')  OR fechaMes IS NULL)
     GROUP BY TO_CHAR(obs.fechaCreacion, 'MONTH YYYY'), serv.nombre
-    ORDER BY TO_DATE(TO_CHAR(obs.fechaCreacion, 'MONTH YYYY'), 'MONTH YYYY') ASC;
+    ORDER BY TO_DATE(TO_CHAR(obs.fechaCreacion, 'MONTH YYYY'), 'MONTH YYYY') ASC)
+    WHERE (valoracion = escala OR escala IS NULL);
 END;
 /
