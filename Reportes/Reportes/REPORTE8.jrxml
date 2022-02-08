@@ -192,15 +192,17 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="200">
 							<pieChart>
-								<chart theme="default">
-									<reportElement x="0" y="0" width="463" height="200" uuid="4ef5be3f-88be-41e1-adb4-752c797f15cf"/>
-									<chartTitle/>
+								<chart>
+									<reportElement x="0" y="0" width="463" height="200" uuid="1255d385-6b08-4ff6-a8dd-eb5aa4694b65"/>
+									<chartTitle>
+										<titleExpression><![CDATA["Plataformas de Pago"]]></titleExpression>
+									</chartTitle>
 									<chartSubtitle/>
 									<chartLegend/>
 								</chart>
 								<pieDataset maxCount="4">
 									<dataset resetType="Report">
-										<datasetRun subDataset="Grafico" uuid="e8a14bdb-69d8-45e5-8255-2275cfbdc070">
+										<datasetRun subDataset="Grafico" uuid="0a586665-1c4b-4ddd-875e-860185b11528">
 											<datasetParameter name="FILA">
 												<datasetParameterExpression><![CDATA[$F{FILA}]]></datasetParameterExpression>
 											</datasetParameter>
@@ -212,7 +214,7 @@
 									</dataset>
 									<keyExpression><![CDATA[$F{TIPO}]]></keyExpression>
 									<valueExpression><![CDATA[$F{QUANTITY}]]></valueExpression>
-									<labelExpression><![CDATA[$F{TIPO}]]></labelExpression>
+									<labelExpression><![CDATA[$F{QUANTITY}.toString() + " %"]]></labelExpression>
 								</pieDataset>
 								<piePlot>
 									<plot/>

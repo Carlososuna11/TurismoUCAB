@@ -285,29 +285,28 @@
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<pieChart>
 								<chart>
-									<reportElement x="0" y="0" width="384" height="200" uuid="28eea315-6553-4346-8b31-2642a0153280"/>
-									<chartTitle/>
+									<reportElement x="0" y="0" width="384" height="200" uuid="ba538c82-a084-4ab1-a200-0fdb1e7a0623"/>
+									<chartTitle>
+										<titleExpression><![CDATA["Relación Gastos vs Ingresos"]]></titleExpression>
+									</chartTitle>
 									<chartSubtitle/>
 									<chartLegend/>
 								</chart>
-								<pieDataset maxCount="3">
+								<pieDataset maxCount="5">
 									<dataset resetType="Report">
-										<datasetRun subDataset="Grafico" uuid="ebdd9818-8fe2-4b04-a106-cbbf320684da">
-											<datasetParameter name="FECHA_MES">
-												<datasetParameterExpression><![CDATA[$P{FECHA_MES}]]></datasetParameterExpression>
-											</datasetParameter>
+										<datasetRun subDataset="Grafico" uuid="073966ee-476e-4cd0-a3c9-93065f888d0e">
 											<datasetParameter name="FILA">
 												<datasetParameterExpression><![CDATA[$F{FILA}]]></datasetParameterExpression>
 											</datasetParameter>
-											<datasetParameter name="SERVICIO">
-												<datasetParameterExpression><![CDATA[$P{SERVICIO}]]></datasetParameterExpression>
+											<datasetParameter name="FECHA_MES">
+												<datasetParameterExpression><![CDATA[$P{FECHA_MES}]]></datasetParameterExpression>
 											</datasetParameter>
 											<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 										</datasetRun>
 									</dataset>
 									<keyExpression><![CDATA[$F{TIPO}]]></keyExpression>
 									<valueExpression><![CDATA[$F{QUANTITY}]]></valueExpression>
-									<labelExpression><![CDATA[$F{TIPO}]]></labelExpression>
+									<labelExpression><![CDATA[$F{QUANTITY}.toString() + " %"]]></labelExpression>
 								</pieDataset>
 								<piePlot>
 									<plot/>

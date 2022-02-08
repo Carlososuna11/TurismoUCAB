@@ -200,7 +200,9 @@
 								<chart>
 									<reportElement x="0" y="0" width="403" height="200" uuid="75ee41ff-2d28-4479-a8b2-55391db7b0c7"/>
 									<box padding="5"/>
-									<chartTitle/>
+									<chartTitle>
+										<titleExpression><![CDATA["Distribución de Ventas por Canales %"]]></titleExpression>
+									</chartTitle>
 									<chartSubtitle/>
 									<chartLegend/>
 								</chart>
@@ -223,8 +225,8 @@
 										<labelExpression><![CDATA[$F{TIPO}]]></labelExpression>
 									</categorySeries>
 								</categoryDataset>
-								<barPlot>
-									<plot/>
+								<barPlot isShowTickLabels="true">
+									<plot orientation="Horizontal"/>
 									<itemLabel/>
 									<categoryAxisFormat>
 										<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>

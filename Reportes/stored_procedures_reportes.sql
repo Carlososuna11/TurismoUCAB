@@ -214,8 +214,8 @@ BEGIN
         'Ingresos' as Ingresos,
         ROW_NUMBER() OVER (ORDER BY TO_DATE(to_char(disp.fecha.fechaInicio, 'MONTH YYYY'), 'MONTH YYYY')) as Fila,
         serv.nombre "Categoria de Servicio",
-        ROUND(SUM(disp.balance.egreso),2) "Costos directos e Indirectos" ,
-        ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2) "Ingresos recibidos por el servicio",
+        ROUND(((ROUND(SUM(disp.balance.egreso),2)*100)/(ROUND(SUM(disp.balance.egreso),2)+ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2))),2) "Costos directos e Indirectos",
+        ROUND(((ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2)*100)/(ROUND(SUM(disp.balance.egreso),2)+ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario)),2))),2) "Ingresos recibidos por el servicio",
         ROUND(SUM(BALANCE.calcularIngreso(disp.balance.numeroVentas,disp.balance.precio_unitario))-SUM(disp.balance.egreso),2) "Ganancia"
         FROM SERVICIO serv
         INNER JOIN DISPONIBILIDAD disp
